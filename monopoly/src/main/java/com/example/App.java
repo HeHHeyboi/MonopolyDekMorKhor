@@ -17,8 +17,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("primary"), 640, 480);
+        scene = new Scene(loadFXML("Monopoly DekmorKhor"), 1280, 840);
         stage.setScene(scene);
+        stage.setTitle("This is a test app");
         stage.show();
     }
 
