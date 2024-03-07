@@ -10,7 +10,7 @@
    <children>
       <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="610.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="C:\GitHub\JavaProject\monopoly\pic\kkbs.png" />
+            <Image url="@../../../../../pic/kkbs.png" />
          </image>
       </ImageView>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#617486" height="120.0" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="120.0">
