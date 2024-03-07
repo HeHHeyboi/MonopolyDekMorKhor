@@ -38,7 +38,6 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="690.0" layoutY="400.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="110.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="690.0" layoutY="470.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="110.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="690.0" layoutY="540.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="110.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="690.0" layoutY="610.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="110.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#617486" height="120.0" layoutX="680.0" layoutY="680.0" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="120.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="110.0" layoutX="120.0" layoutY="690.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="70.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="110.0" layoutX="190.0" layoutY="690.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="70.0" />
@@ -54,6 +53,11 @@
       <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="610.0" layoutY="689.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../../../../pic/็Huso.jpg" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="709.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+         <image>
+            <Image url="@../../../../../pic/Cp.png" />
          </image>
       </ImageView>
    </children>
