@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Point3D?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Rectangle?>
@@ -44,8 +45,17 @@
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="110.0" layoutX="400.0" layoutY="690.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="70.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="110.0" layoutX="330.0" layoutY="690.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="70.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="110.0" layoutX="470.0" layoutY="690.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="70.0" />
-      <ImageView fitHeight="111.0" fitWidth="70.0" layoutX="540.0" layoutY="689.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="610.0" layoutY="689.0" pickOnBounds="true" preserveRatio="true" />
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="709.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0" />
+      <ImageView fitHeight="111.0" fitWidth="70.0" layoutX="540.0" layoutY="689.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../pic/kkbs.jpg" />
+         </image></ImageView>
+      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="610.0" layoutY="689.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../pic/huso%20(1).png" />
+         </image></ImageView>
+      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="709.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+         <image>
+            <Image url="@../../pic/En%20(1).png" />
+         </image></ImageView>
    </children>
 </Pane>

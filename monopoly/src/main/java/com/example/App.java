@@ -2,15 +2,10 @@ package com.example;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
-
 import java.io.IOException;
-import java.io.InputStream;
 
 /**
  * JavaFX App
@@ -30,16 +25,15 @@ public class App extends Application {
     // root.getChildren().add(imageView);
     
     // Scene scene = new Scene(root, 400, 300);
-    scene = new Scene(loadFXML("Monopoly DekmorKhor"),1706,1000);
+    scene = new Scene(loadFXML("PlayerScene"),600,400);
     stage.setX(10);
     stage.setY(10);
+    //init();
     //scene.setRoot(loadFXML("ImageTest"));
     stage.setScene(scene);
-    stage.setTitle("This is a test app");
+    stage.setTitle("PlayerScene");
     stage.show();
-}
-
-
+    }
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }

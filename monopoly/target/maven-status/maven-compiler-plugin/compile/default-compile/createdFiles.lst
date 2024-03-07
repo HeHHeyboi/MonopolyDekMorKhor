@@ -1,4 +1,6 @@
 com\example\PrimaryController.class
+com\example\Player.class
+com\example\Monopoly.class
 com\example\SecondaryController.class
 module-info.class
 com\example\App.class
