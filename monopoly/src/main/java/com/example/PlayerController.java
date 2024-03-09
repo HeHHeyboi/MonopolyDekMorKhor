@@ -15,7 +15,6 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
-
 public class PlayerController implements Initializable{
     @FXML
     private Text nameDisplay;
@@ -29,7 +28,9 @@ public class PlayerController implements Initializable{
     private Circle playCircle;
     @FXML
     private Pane pane;
-
+    //#region Rectangle Var
+    
+    //#endregion
     private List<Rectangle> tile = new ArrayList<>();
     private Player player1 = new Player(1000, "Jame");
     Random random = new Random();
@@ -105,7 +106,6 @@ public class PlayerController implements Initializable{
             
             playCircle.setLayoutX(posX);
             playCircle.setLayoutY(posY);
-            System.out.println(i);
         }
     }
     public void WaitTurn(){

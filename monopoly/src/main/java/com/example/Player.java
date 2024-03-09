@@ -1,6 +1,9 @@
 package com.example;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.beans.property.IntegerProperty;
 
 import javafx.beans.property.SimpleIntegerProperty;
@@ -11,6 +14,7 @@ public class Player {
     private final IntegerProperty money = new SimpleIntegerProperty();
     private final IntegerProperty step = new SimpleIntegerProperty(0);
     private final String name;
+    private List<Location> location = new ArrayList<>();
 
     public Player(int money, String name) {
         this.money.set(money);
@@ -38,7 +42,9 @@ public class Player {
         return step;
     }
 
-
+    public List<Location> getList(){
+        return this.location;
+    }
     public String getName() {
         return name;
     }
