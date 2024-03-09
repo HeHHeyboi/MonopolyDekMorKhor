@@ -1,9 +1,13 @@
 package com.example;
 
+
 import javafx.beans.property.IntegerProperty;
+
 import javafx.beans.property.SimpleIntegerProperty;
 
+
 public class Player {
+    
     private final IntegerProperty money = new SimpleIntegerProperty();
     private final IntegerProperty step = new SimpleIntegerProperty(0);
     private final String name;
@@ -22,6 +26,8 @@ public class Player {
     public IntegerProperty moneyProperty() {
         return money;
     }
+
+
     public int getStep(){
         return step.get();
     }
@@ -31,6 +37,7 @@ public class Player {
     public IntegerProperty stepProp(){
         return step;
     }
+
 
     public String getName() {
         return name;
