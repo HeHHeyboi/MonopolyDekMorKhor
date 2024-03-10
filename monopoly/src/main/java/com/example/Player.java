@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.beans.property.IntegerProperty;
 
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.shape.Circle;
 
 
 public class Player {
@@ -14,7 +15,9 @@ public class Player {
     private final IntegerProperty money = new SimpleIntegerProperty();
     private final IntegerProperty step = new SimpleIntegerProperty(0);
     private final String name;
+    private Player nextPlayer;
     private List<Location> location = new ArrayList<>();
+    private Circle circle;
 
     public Player(int money, String name) {
         this.money.set(money);
@@ -30,8 +33,6 @@ public class Player {
     public IntegerProperty moneyProperty() {
         return money;
     }
-
-
     public int getStep(){
         return step.get();
     }
@@ -41,12 +42,23 @@ public class Player {
     public IntegerProperty stepProp(){
         return step;
     }
-
+    public void setCircle(Circle c){
+        this.circle = c;
+    }
+    public Circle getCircle(){
+        return circle;
+    }
     public List<Location> getList(){
         return this.location;
     }
     public String getName() {
         return name;
+    }
+    public void setPlayer(Player n){
+        this.nextPlayer = n;
+    }
+    public Player getNextPlayer(){
+        return nextPlayer;
     }
 
     
