@@ -3,5 +3,6 @@ com\example\Player.class
 com\example\PlayerController.class
 com\example\Monopoly.class
 com\example\SecondaryController.class
+com\example\Location.class
 module-info.class
 com\example\App.class

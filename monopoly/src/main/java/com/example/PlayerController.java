@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -16,6 +18,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 public class PlayerController implements Initializable{
     @FXML
     private Text nameDisplay;
@@ -31,15 +34,14 @@ public class PlayerController implements Initializable{
     @FXML Text player2MoneyDisplay;
     //@FXML Text player2StepDisplay;
     @FXML Circle player2Circle;
-    @FXML
-    private Pane pane;
+    @FXML private Pane pane;
     private List<Rectangle> tile = new ArrayList<>();
     private Player player1;
     private Player player2;
     private static Player curPlayer;
 
     Random random = new Random();
-    static int count = 0;
+    //static int count = 0;// need to Fix
 
     IntegerProperty Money = player1.moneyProperty();
     IntegerProperty Money2 = player2.moneyProperty();
@@ -54,17 +56,18 @@ public class PlayerController implements Initializable{
         
     }
     public void init(){
-        player1 = new Player(1000, "Jame");
-        player2 = new Player(500,"Billy");
-        player1.setPlayer(player2);
-        player2.setPlayer(player1);
+        player1 = new Player(1000, "Jame",player2,playCircle);
+        player2 = new Player(500,"Billy",player1,player2Circle);
+        player1.setNextPlayer(player2);
+        player2.setNextPlayer(player1);
+        curPlayer = player1;
+        
         nameDisplay.setText(player1.getName());
         moneyDisplay.setText(""+player1.getMoney());
-        stepDisplay.setText(""+Step.getValue());
-
         player2NameDisplay.setText(player2.getName());
         player2MoneyDisplay.setText(""+player2.getMoney());
-        //player2StepDisplay.setText(""+player2StepDisplay);
+
+        stepDisplay.setText(""+Step.getValue());
         //#region Add rectangle to list
         List<Node> nodes = pane.getChildren();
         for(Node node:nodes){
@@ -80,7 +83,7 @@ public class PlayerController implements Initializable{
         playCircle.setLayoutX(posX);
         playCircle.setLayoutY(posY);
         player2Circle.setLayoutX(posX);
-        player2Circle.setLayoutY(posY);//count++;
+        player2Circle.setLayoutY(posY);
     }
     public void update(){
 
@@ -94,10 +97,6 @@ public class PlayerController implements Initializable{
             stepDisplay.setText(String.valueOf(newval.intValue()));
 
         });
-        // Step2.addListener((obs,oldval,newval) ->{
-        //     player2StepDisplay.setText(String.valueOf(newval.intValue()));
-
-        // });
     }
 //#endregion
    
@@ -111,36 +110,30 @@ public class PlayerController implements Initializable{
         player1.setMoney(player1.getMoney() - 500);
     }
     //#endregion
+    // Need to fix
     public void TossDice(){
         int dice1 = random.nextInt(6)+1;
         int dice2 = random.nextInt(6)+1;
         Step.set(dice1+dice2);
-        curPlayer = player1;
-        boolean sameFace = dice1==dice2;
-        if(!sameFace){
-            tossButton.setDisable(true);
-        }
-        else{
-            tossButton.setDisable(false);
+
+        moveCircle(dice1+dice2);
+        if(dice1!=dice2){
             curPlayer = curPlayer.getNextPlayer();
         }
-        moveCircle();
-        Rectangle rect = tile.get(count);
-        double posX = rect.getWidth()/2+rect.getLayoutX();
-        double posY = rect.getHeight()/2+rect.getLayoutY();
-            
-        curPlayer.getCircle().setLayoutX(posX);
-        curPlayer.getCircle().setLayoutY(posY);
     }
-    public void moveCircle() {
-        for (int i = 0;i < curPlayer.getStep();i++) // or (int i = 1;i<=player1.getStep();i++)/for (int i = 0;i < player1.getStep();i++)
-        {
-            count++;
-            if (count >= tile.size()) {
-                count = 0;
-            }
-        }
-       
+    public void moveCircle(int Sumdice) {
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),event ->{
+            curPlayer.PlayerPos(curPlayer.PlayerPos()+1);
+            Rectangle rect = tile.get(curPlayer.PlayerPos());
+            double posX = rect.getWidth()/2+rect.getLayoutX();
+            double posY = rect.getHeight()/2+rect.getLayoutY();
+            curPlayer.getCircle().setLayoutX(posX);
+            curPlayer.getCircle().setLayoutY(posY);
+        }) 
+        );
+        timeline.setCycleCount(Sumdice);
+        timeline.play();
     }
     public void WaitTurn(){
         tossButton.setDisable(false);

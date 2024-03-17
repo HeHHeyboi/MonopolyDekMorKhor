@@ -13,13 +13,15 @@ import javafx.scene.shape.Circle;
 public class Player {
     
     private final IntegerProperty money = new SimpleIntegerProperty();
-    private final IntegerProperty step = new SimpleIntegerProperty(0);
+    //private final IntegerProperty step = new SimpleIntegerProperty(0);
     private final String name;
     private Player nextPlayer;
     private List<Location> location = new ArrayList<>();
     private Circle circle;
+    private int playerPos = 0;
+    private int maxTile = 8;
 
-    public Player(int money, String name) {
+    public Player(int money, String name,Player player,Circle circle) {
         this.money.set(money);
         this.name = name;
     }
@@ -33,15 +35,12 @@ public class Player {
     public IntegerProperty moneyProperty() {
         return money;
     }
-    public int getStep(){
-        return step.get();
-    }
-    public void setStep(int step){
-        this.step.set(step);
-    }
-    public IntegerProperty stepProp(){
-        return step;
-    }
+    // public void setStep(int step){
+    //     this.step.set(step);
+    // }
+    // public IntegerProperty stepProp(){
+    //     return step;
+    // }
     public void setCircle(Circle c){
         this.circle = c;
     }
@@ -54,12 +53,20 @@ public class Player {
     public String getName() {
         return name;
     }
-    public void setPlayer(Player n){
+    public void setNextPlayer(Player n){
         this.nextPlayer = n;
     }
     public Player getNextPlayer(){
         return nextPlayer;
     }
-
-    
+    public int PlayerPos(){
+        return this.playerPos;
+    }
+    public void PlayerPos(int i){
+        
+        this.playerPos = i;
+        if(playerPos > maxTile){
+            this.playerPos = 0;
+        }
+    }
 }
