@@ -96,7 +96,6 @@ public class PlayerController implements Initializable{
         });
         Step.addListener((obs,oldval,newval) ->{
             stepDisplay.setText(String.valueOf(newval.intValue()));
-
         });
     }
 //#endregion
