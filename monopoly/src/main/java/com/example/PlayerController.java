@@ -36,6 +36,7 @@ public class PlayerController implements Initializable{
     @FXML Circle player2Circle;
     @FXML private Pane pane;
     private List<Rectangle> tile = new ArrayList<>();
+    private List<Location> locations = new ArrayList<>();
     private Player player1;
     private Player player2;
     private static Player curPlayer;
@@ -117,12 +118,18 @@ public class PlayerController implements Initializable{
         Step.set(dice1+dice2);
 
         moveCircle(dice1+dice2);
+        locations.get(curPlayer.PlayerPos());
+        /* task สร้างพื้นที่โชคดีกับจ่ายตังเมื่อหยุด และต้องสร้าง class Property
+         * Property | ต้องมี id,price: ราคาเมื่อซื้อ,paid: ราคาเมื่อผู้เล่นอื่นมาตก, owner: Player ที่เป็นเจ้าของ
+         *           ,upgrade: ต้องเช็คเมื่อ owner ตกลงในพื้นที่นี้และ สามารถ upgrade ได้กี่ครั้ง ราคาที่ต้องใช้ upgrade จนถึง landmark
+        */
         if(dice1!=dice2){
             curPlayer = curPlayer.getNextPlayer();
         }
     }
     public void moveCircle(int Sumdice) {
 
+        
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),event ->{
             curPlayer.PlayerPos(curPlayer.PlayerPos()+1);
             Rectangle rect = tile.get(curPlayer.PlayerPos());
@@ -135,8 +142,8 @@ public class PlayerController implements Initializable{
         timeline.setCycleCount(Sumdice);
         timeline.play();
     }
-    public void WaitTurn(){
-        tossButton.setDisable(false);
-    }
+    // public void WaitTurn(){
+    //     tossButton.setDisable(false);
+    // }
     
 }
