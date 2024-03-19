@@ -1,6 +1,5 @@
 package com.example;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -69,5 +68,8 @@ public class Player {
         if(playerPos >= maxTile){
             this.playerPos = 0;
         }
+    }
+    public void setMaxTile(int max){
+        this.maxTile = max;
     }
 }

@@ -35,14 +35,17 @@ public class PlayerController implements Initializable{
     //@FXML Text player2StepDisplay;
     @FXML Circle player2Circle;
     @FXML private Pane pane;
+    @FXML private Pane popUpPane;
+    @FXML private Button popButton;
+    @FXML private Text popText;
     public List<Rectangle> tile = new ArrayList<>();
-    //private List<Location> locations = new ArrayList<>();
+    private List<Location> locations = new ArrayList<>();
     private Player player1;
     private Player player2;
     private static Player curPlayer;
     Random random = new Random();
     static int count = 0;// need to Fix
-
+    App app;
     IntegerProperty Money;
     //IntegerProperty Money2 = player2.moneyProperty();
     IntegerProperty Step = new SimpleIntegerProperty();
@@ -62,7 +65,6 @@ public class PlayerController implements Initializable{
         player2.setNextPlayer(player1);
         player2.setCircle(player2Circle);
         curPlayer = player1;
-        
         nameDisplay.setText(player1.getName());
         moneyDisplay.setText(""+player1.getMoney());
         //player2NameDisplay.setText(player2.getName());
@@ -78,6 +80,11 @@ public class PlayerController implements Initializable{
                 tile.add(rectangle);
             }
         }//#endregion
+        
+        for(int i =0;i <= tile.size();i++){
+            locations.add(new Property(i));
+        }
+
         Rectangle rect = tile.get(0);
         double posX = rect.getWidth()/2+rect.getLayoutX();
         double posY = rect.getHeight()/2+rect.getLayoutY();
@@ -141,12 +148,21 @@ public class PlayerController implements Initializable{
             count++;
             tossButton.setDisable(true);
             if(count == Sumdice){
-                count = 0;
                 tossButton.setDisable(false);
+                popText.setText(curPlayer.getName()+" at the "+locations.get(curPlayer.PlayerPos()).getID()+ "tile");
+                popUpwindow();
+                count = 0;
             }
         }));
         timeline.setCycleCount(Sumdice);
         timeline.play();
     
+    }
+    
+    public void popUpwindow(){
+        popUpPane.setVisible(true);
+    }
+    public void Exit(){
+        popUpPane.setVisible(false);
     }
 }

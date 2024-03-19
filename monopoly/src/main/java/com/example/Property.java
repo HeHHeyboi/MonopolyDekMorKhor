@@ -12,6 +12,12 @@ public class Property extends Location{
         this.paid = paid;
         this.owner = null;    
     }
+    public Property(int id){
+        super(id);
+        this.paid = 0;
+        this.price = 0;
+        this.owner = null;
+    }
 
     public void setPrice(int price){
         this.price = price;
