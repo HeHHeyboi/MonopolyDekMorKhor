@@ -24,7 +24,7 @@ public class App extends Application {
     // Group root = new Group();
     // root.getChildren().add(imageView);
     
-    // Scene scene = new Scene(root, 400, 300);
+    // Scene scene = new Scene(root, 400, 3c00);
     scene = new Scene(loadFXML("PlayerScene"),600,400);
     stage.setX(10);
     stage.setY(10);

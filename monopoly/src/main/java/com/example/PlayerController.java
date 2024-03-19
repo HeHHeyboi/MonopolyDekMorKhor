@@ -36,7 +36,7 @@ public class PlayerController implements Initializable{
     @FXML Circle player2Circle;
     @FXML private Pane pane;
     private List<Rectangle> tile = new ArrayList<>();
-    private List<Location> locations = new ArrayList<>();
+    //private List<Location> locations = new ArrayList<>();
     private Player player1;
     private Player player2;
     private static Player curPlayer;
@@ -44,8 +44,8 @@ public class PlayerController implements Initializable{
     Random random = new Random();
     //static int count = 0;// need to Fix
 
-    IntegerProperty Money = player1.moneyProperty();
-    IntegerProperty Money2 = player2.moneyProperty();
+    IntegerProperty Money;
+    //IntegerProperty Money2 = player2.moneyProperty();
     IntegerProperty Step = new SimpleIntegerProperty();
     //IntegerProperty Step2 = player2.stepProp();
     
@@ -54,19 +54,20 @@ public class PlayerController implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         init();
         update();
-        
     }
     public void init(){
-        player1 = new Player(1000, "Jame",player2,playCircle);
-        player2 = new Player(500,"Billy",player1,player2Circle);
+        player1 = new Player(1000, "Jame",playCircle);
+        player2 = new Player(500,"Billy",player2Circle);
         player1.setNextPlayer(player2);
+        player1.setCircle(playCircle);
         player2.setNextPlayer(player1);
+        player2.setCircle(player2Circle);
         curPlayer = player1;
-        
+        Money = player1.moneyProperty();
         nameDisplay.setText(player1.getName());
         moneyDisplay.setText(""+player1.getMoney());
-        player2NameDisplay.setText(player2.getName());
-        player2MoneyDisplay.setText(""+player2.getMoney());
+        //player2NameDisplay.setText(player2.getName());
+        //player2MoneyDisplay.setText(""+player2.getMoney());
 
         stepDisplay.setText(""+Step.getValue());
         //#region Add rectangle to list
@@ -89,11 +90,11 @@ public class PlayerController implements Initializable{
     public void update(){
 
         Money.addListener((observer,oldval,newval) ->{
-            moneyDisplay.setText(String.valueOf(newval.intValue()));
+           moneyDisplay.setText(String.valueOf(newval.intValue()));
         });
-        Money2.addListener((observer,oldval,newval) ->{
-            player2MoneyDisplay.setText(String.valueOf(newval.intValue()));
-        });
+        // Money2.addListener((observer,oldval,newval) ->{
+        //     player2MoneyDisplay.setText(String.valueOf(newval.intValue()));
+        // });
         Step.addListener((obs,oldval,newval) ->{
             stepDisplay.setText(String.valueOf(newval.intValue()));
         });
@@ -117,19 +118,16 @@ public class PlayerController implements Initializable{
         Step.set(dice1+dice2);
 
         moveCircle(dice1+dice2);
-        locations.get(curPlayer.PlayerPos());
-        /* task สร้างพื้นที่โชคดีกับจ่ายตังเมื่อหยุด และต้องสร้าง class Property
-         * Property | ต้องมี id,price: ราคาเมื่อซื้อ,paid: ราคาเมื่อผู้เล่นอื่นมาตก, owner: Player ที่เป็นเจ้าของ
-         *           ,upgrade: ต้องเช็คเมื่อ owner ตกลงในพื้นที่นี้และ สามารถ upgrade ได้กี่ครั้ง ราคาที่ต้องใช้ upgrade จนถึง landmark
-        */
-        if(dice1!=dice2){
+
+        if(dice1 != dice2){
             curPlayer = curPlayer.getNextPlayer();
         }
     }
     public void moveCircle(int Sumdice) {
-
-        
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(1),event ->{
+        // for(int i = 0;i<Sumdice;i++){
+        //     player1.PlayerPos(player1.PlayerPos()+1);
+        // }
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
             curPlayer.PlayerPos(curPlayer.PlayerPos()+1);
             Rectangle rect = tile.get(curPlayer.PlayerPos());
             double posX = rect.getWidth()/2+rect.getLayoutX();
@@ -138,6 +136,7 @@ public class PlayerController implements Initializable{
             curPlayer.getCircle().setLayoutY(posY);
         }) 
         );
+        
         timeline.setCycleCount(Sumdice);
         timeline.play();
     }

@@ -20,6 +20,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="104.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
             <Circle fx:id="playCircle" fill="#ff481f" layoutX="176.0" layoutY="176.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
+            <Circle fx:id="player2Circle" fill="#21ff54" layoutX="176.0" layoutY="176.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
       <Text fx:id="moneyDisplay" layoutX="506.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Money">
@@ -40,6 +41,5 @@
          </font>
       </Text>
       <Button fx:id="tossButton" layoutX="378.0" layoutY="84.0" mnemonicParsing="false" onAction="#TossDice" text="Toss Dice" />
-      <Button layoutX="455.0" layoutY="275.0" mnemonicParsing="false" onAction="#WaitTurn" text="wait" />
    </children>
 </Pane>

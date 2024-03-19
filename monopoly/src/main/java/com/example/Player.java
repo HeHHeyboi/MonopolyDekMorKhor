@@ -21,7 +21,7 @@ public class Player {
     private int playerPos = 0;
     private int maxTile = 8;
 
-    public Player(int money, String name,Player player,Circle circle) {
+    public Player(int money, String name,Circle circle) {
         this.money.set(money);
         this.name = name;
     }
@@ -65,7 +65,7 @@ public class Player {
     public void PlayerPos(int i){
         
         this.playerPos = i;
-        if(playerPos > maxTile){
+        if(playerPos >= maxTile){
             this.playerPos = 0;
         }
     }
