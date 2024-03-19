@@ -56,8 +56,8 @@ public class PlayerController implements Initializable{
         update();
     }
     public void init(){
-        player1 = new Player(1000, "Jame",playCircle);
-        player2 = new Player(500,"Billy",player2Circle);
+        player1 = new Player(1000, "Jame");
+        player2 = new Player(500,"Billy");
         player1.setNextPlayer(player2);
         player1.setCircle(playCircle);
         player2.setNextPlayer(player1);

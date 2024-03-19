@@ -21,9 +21,10 @@ public class Player {
     private int playerPos = 0;
     private int maxTile = 8;
 
-    public Player(int money, String name,Circle circle) {
+    public Player(int money, String name) {
         this.money.set(money);
         this.name = name;
+        
     }
 
     public int getMoney() {
