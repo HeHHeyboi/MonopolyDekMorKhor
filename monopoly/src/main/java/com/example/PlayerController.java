@@ -8,7 +8,9 @@ import java.util.ResourceBundle;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,20 +37,19 @@ public class PlayerController implements Initializable{
     //@FXML Text player2StepDisplay;
     @FXML Circle player2Circle;
     @FXML private Pane pane;
-    private List<Rectangle> tile = new ArrayList<>();
+    public List<Rectangle> tile = new ArrayList<>();
     //private List<Location> locations = new ArrayList<>();
     private Player player1;
     private Player player2;
     private static Player curPlayer;
-
     Random random = new Random();
-    //static int count = 0;// need to Fix
+    static int count = 0;// need to Fix
 
     IntegerProperty Money;
     //IntegerProperty Money2 = player2.moneyProperty();
     IntegerProperty Step = new SimpleIntegerProperty();
     //IntegerProperty Step2 = player2.stepProp();
-    
+    //BooleanProperty tossButtonCheck = new SimpleBooleanProperty();
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -63,13 +64,14 @@ public class PlayerController implements Initializable{
         player2.setNextPlayer(player1);
         player2.setCircle(player2Circle);
         curPlayer = player1;
-        Money = player1.moneyProperty();
+        
         nameDisplay.setText(player1.getName());
         moneyDisplay.setText(""+player1.getMoney());
         //player2NameDisplay.setText(player2.getName());
         //player2MoneyDisplay.setText(""+player2.getMoney());
-
+        Money = player1.moneyProperty();
         stepDisplay.setText(""+Step.getValue());
+        //tossButtonCheck.set(false);
         //#region Add rectangle to list
         List<Node> nodes = pane.getChildren();
         for(Node node:nodes){
@@ -78,7 +80,6 @@ public class PlayerController implements Initializable{
                 tile.add(rectangle);
             }
         }//#endregion
-        
         Rectangle rect = tile.get(0);
         double posX = rect.getWidth()/2+rect.getLayoutX();
         double posY = rect.getHeight()/2+rect.getLayoutY();
@@ -98,6 +99,9 @@ public class PlayerController implements Initializable{
         Step.addListener((obs,oldval,newval) ->{
             stepDisplay.setText(String.valueOf(newval.intValue()));
         });
+        // tossButtonCheck.addListener((obs,oldval,newval)->{
+        //     tossButton.setDisable(newval);
+        // });
     }
 //#endregion
    
@@ -112,21 +116,23 @@ public class PlayerController implements Initializable{
     }
     //#endregion
     // Need to fix
-    public void TossDice(){
+    public void TossDice() throws InterruptedException{
         int dice1 = random.nextInt(6)+1;
         int dice2 = random.nextInt(6)+1;
         Step.set(dice1+dice2);
-
         moveCircle(dice1+dice2);
-
+        // Platform.runLater(()->{
+        //     movePlayer.run();
+        // });
         if(dice1 != dice2){
             curPlayer = curPlayer.getNextPlayer();
+            nameDisplay.setText(curPlayer.getName());
+            moneyDisplay.setText(""+curPlayer.getMoney());
         }
+        
+        
     }
-    public void moveCircle(int Sumdice) {
-        // for(int i = 0;i<Sumdice;i++){
-        //     player1.PlayerPos(player1.PlayerPos()+1);
-        // }
+    public void moveCircle(int Sumdice) throws InterruptedException {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
             curPlayer.PlayerPos(curPlayer.PlayerPos()+1);
             Rectangle rect = tile.get(curPlayer.PlayerPos());
@@ -134,14 +140,15 @@ public class PlayerController implements Initializable{
             double posY = rect.getHeight()/2+rect.getLayoutY();
             curPlayer.getCircle().setLayoutX(posX);
             curPlayer.getCircle().setLayoutY(posY);
-        }) 
-        );
-        
+            count++;
+            tossButton.setDisable(true);
+            if(count == Sumdice){
+                count = 0;
+                tossButton.setDisable(false);
+            }
+        }));
         timeline.setCycleCount(Sumdice);
         timeline.play();
-    }
-    // public void WaitTurn(){
-    //     tossButton.setDisable(false);
-    // }
     
+    }
 }
