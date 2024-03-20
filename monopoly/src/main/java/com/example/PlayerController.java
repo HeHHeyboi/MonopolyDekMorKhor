@@ -10,8 +10,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -46,14 +44,13 @@ public class PlayerController implements Initializable{
     private Player player2;
     private static Player curPlayer;
     Random random = new Random();
-    
+    static int count = 0;// need to Fix
+    App app;
     IntegerProperty Money;
+    //IntegerProperty Money2 = player2.moneyProperty();
     IntegerProperty Step = new SimpleIntegerProperty();
-    StringProperty curPlayerName = new SimpleStringProperty();
-    static int count = 0;
-    static int dice1;
-    static int dice2;
-
+    //IntegerProperty Step2 = player2.stepProp();
+    //BooleanProperty tossButtonCheck = new SimpleBooleanProperty();
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -107,10 +104,6 @@ public class PlayerController implements Initializable{
         Step.addListener((obs,oldval,newval) ->{
             stepDisplay.setText(String.valueOf(newval.intValue()));
         });
-        curPlayerName.addListener((observer,oldval,newval) ->{
-            nameDisplay.setText(newval);
-            
-        });
         // tossButtonCheck.addListener((obs,oldval,newval)->{
         //     tossButton.setDisable(newval);
         // });
@@ -129,18 +122,21 @@ public class PlayerController implements Initializable{
     //#endregion
     // Need to fix
     public void TossDice() throws InterruptedException{
-        dice1 = random.nextInt(6)+1;
-        dice2 = random.nextInt(6)+1;
+        int dice1 = random.nextInt(6)+1;
+        int dice2 = random.nextInt(6)+1;
         Step.set(dice1+dice2);
-        
-        // Platform.runLater(()->{
-            //     movePlayer.run();
-            // });
-        
         moveCircle(dice1+dice2);
+        // Platform.runLater(()->{
+        //     movePlayer.run();
+        // });
+        if(dice1 != dice2){
+            curPlayer = curPlayer.getNextPlayer();
+            nameDisplay.setText(curPlayer.getName());
+            moneyDisplay.setText(""+curPlayer.getMoney());
+        }
+        
         
     }
-    //move player circle with animation 'dice1 +dice' times
     public void moveCircle(int Sumdice) throws InterruptedException {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
             curPlayer.PlayerPos(curPlayer.PlayerPos()+1);
@@ -151,7 +147,6 @@ public class PlayerController implements Initializable{
             curPlayer.getCircle().setLayoutY(posY);
             count++;
             tossButton.setDisable(true);
-            //when count or animation finish reset tossbutton, reset count to 0, show popup window and change popwindow text
             if(count == Sumdice){
                 tossButton.setDisable(false);
                 popText.setText(curPlayer.getName()+" at the "+locations.get(curPlayer.PlayerPos()).getID()+ "tile");
@@ -161,20 +156,13 @@ public class PlayerController implements Initializable{
         }));
         timeline.setCycleCount(Sumdice);
         timeline.play();
-        
+    
     }
-    //show popup window
+    
     public void popUpwindow(){
         popUpPane.setVisible(true);
     }
-    //when click button to close popup window
     public void Exit(){
-        if(dice1!=dice2){
-            curPlayer = curPlayer.getNextPlayer();
-            curPlayerName.set(curPlayer.getName());
-            Money.set(curPlayer.getMoney());
-        }
         popUpPane.setVisible(false);
-        
     }
 }
