@@ -225,7 +225,6 @@ public class PlayerController implements Initializable{
         }
         else if(owner == curPlayer){
             popText.setText("You are the owner of this property");
-            setButton(0);
         }
         else{
             popText.setText("You paid "+((Property) l).getPaid() + " to the "+owner.getName());
