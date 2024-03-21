@@ -219,15 +219,18 @@ public class PlayerController implements Initializable{
     }
     public void checkOwner(Location los){
         // System.out.println(((Property) l).getOwner());
-        if(((Property) l).getOwner() == null){
+        Player owner = ((Property) l).getOwner();
+        if(owner == null){
             setButton(1);
         }
-        else if(((Property) l).getOwner() == curPlayer){
+        else if(owner == curPlayer){
             popText.setText("You are the owner of this property");
+            setButton(0);
         }
         else{
-            popText.setText("You paid "+((Property) l).getPaid() + " to the "+((Property) l).getOwner().getName());
+            popText.setText("You paid "+((Property) l).getPaid() + " to the "+owner.getName());
             curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPaid());
+            owner.setMoney(owner.getMoney()+((Property) l).getPaid());
             // System.out.println(((Property) l).getOwner());
             setButton(0);
         }
