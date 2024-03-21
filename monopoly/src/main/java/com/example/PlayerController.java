@@ -164,8 +164,19 @@ public class PlayerController implements Initializable{
             if(count == Sumdice){
                 tossButton.setDisable(false);
                 l = locations.get(curPlayer.PlayerPos());
-                popText.setText(""+l.getID()+" \nPrice is "+ ((Property) l).getPrice() +" baht Would you like to buy");                
                 checkOwner(l);
+                // if(((Property) l).getUpgradeC()==0){
+                //     popText.setText(curPlayer.PlayerPos()+"\nWould you like to buy \nPrice is "+ ((Property) l).getPrice() +" baht ");                
+                //     setButton(1);
+                // }
+                // else if(((Property) l).getUpgradeC()<=3){
+                //     popText.setText("Would you like to buy upgrade "+((Property) l).getUpgradeC()+"\n"+((Property) l).getPrice()+" baht");
+                //     setButton(1);
+                // }
+                // else{
+                //     popText.setText("upgrade is max can't not purchase");
+                //     setButton(0);
+                // }
                 popUpwindow();
                 count = 0;
             }
@@ -213,11 +224,13 @@ public class PlayerController implements Initializable{
         popUpPane.setVisible(false);
     }
     public void buyProperty(){
+        
         curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
         ((Property) l).setOwner(curPlayer);
         Rectangle rect = tile.get(curPlayer.PlayerPos());
         rect.setFill(curPlayer.getCircle().getFill());
-
+        ((Property) l).UgpradeProp();
+        
         if(dice1!=dice2){
             curPlayer = curPlayer.getNextPlayer();
             curPlayer.getCircle().toFront();
@@ -227,19 +240,33 @@ public class PlayerController implements Initializable{
         popUpPane.setVisible(false);
     }
     public void NextButton(){
-        popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht");
-        setButton(1);
+        if(((Property) l).getUpgradeC()<=3){    
+            popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht, with upgrade "+((Property)l).getUpgradeC());
+            setButton(1);
+        }
+        else{
+            popText.setText("upgrade is max can't not purchase");
+            setButton(0);
+        }
         
     }
     public void checkOwner(Location los){
         // System.out.println(((Property) l).getOwner());
         Player owner = ((Property) l).getOwner();
         if(owner == null){
+            popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht");
             setButton(1);
         }
         else if(owner == curPlayer){
-            popText.setText("You are the owner of this property");
-            setButton(0);
+            //popText.setText("You are the owner of this property");
+            if(((Property) l).getUpgradeC()<=3){
+                popText.setText("Would you like to buy upgrade "+((Property) l).getUpgradeC()+"\n"+((Property) l).getPrice()+" baht");
+                setButton(1);
+            }
+            else{
+                popText.setText("upgrade is max can't not purchase");
+                setButton(0);
+            }
         }
         else{
             popText.setText("You paid "+((Property) l).getPaid() + " to the "+owner.getName());
