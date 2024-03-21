@@ -23,7 +23,7 @@
             <Circle fx:id="player2Circle" fill="#21ff54" layoutX="176.0" layoutY="176.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
       </Pane>
-      <Text fx:id="moneyDisplay" layoutX="506.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Money">
+      <Text fx:id="moneyDisplay" layoutX="505.0" layoutY="237.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Money">
          <font>
             <Font size="26.0" />
          </font>
@@ -42,11 +42,23 @@
       </Text>
       <Button fx:id="tossButton" layoutX="378.0" layoutY="84.0" mnemonicParsing="false" onAction="#TossDice" text="Toss Dice" />
       <Button layoutX="375.0" layoutY="287.0" mnemonicParsing="false" onAction="#popUpwindow" text="PopWindow" />
+      <Text fx:id="player2MoneyDisplay" layoutX="505.0" layoutY="279.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Money">
+         <font>
+            <Font size="26.0" />
+         </font>
+      </Text>
       <Pane fx:id="popUpPane" layoutX="145.0" layoutY="127.0" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #00FFF0;" visible="false">
          <children>
             <Text fx:id="popText" fill="#ac1616" layoutX="107.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello" textAlignment="CENTER" wrappingWidth="186.838623046875" />
-            <Button fx:id="popButton" layoutX="187.0" layoutY="50.0" mnemonicParsing="false" onAction="#Exit" text="Ok" />
+            <Button fx:id="popCloseButton" layoutX="184.0" layoutY="63.0" mnemonicParsing="false" onAction="#Exit" text="Ok" />
+            <Button fx:id="popNoButton" layoutX="278.0" layoutY="63.0" mnemonicParsing="false" onAction="#Exit" text="No" visible="false" />
+            <Button fx:id="popYesButton" layoutX="91.0" layoutY="63.0" mnemonicParsing="false" onAction="#buyProperty" text="Yes" visible="false" />
          </children>
       </Pane>
+      <Text fx:id="player2NameDisplay" layoutX="488.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player">
+         <font>
+            <Font size="25.0" />
+         </font>
+      </Text>
    </children>
 </Pane>
