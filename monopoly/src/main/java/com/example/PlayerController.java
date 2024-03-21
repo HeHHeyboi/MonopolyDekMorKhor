@@ -165,18 +165,6 @@ public class PlayerController implements Initializable{
                 tossButton.setDisable(false);
                 l = locations.get(curPlayer.PlayerPos());
                 checkOwner(l);
-                // if(((Property) l).getUpgradeC()==0){
-                //     popText.setText(curPlayer.PlayerPos()+"\nWould you like to buy \nPrice is "+ ((Property) l).getPrice() +" baht ");                
-                //     setButton(1);
-                // }
-                // else if(((Property) l).getUpgradeC()<=3){
-                //     popText.setText("Would you like to buy upgrade "+((Property) l).getUpgradeC()+"\n"+((Property) l).getPrice()+" baht");
-                //     setButton(1);
-                // }
-                // else{
-                //     popText.setText("upgrade is max can't not purchase");
-                //     setButton(0);
-                // }
                 popUpwindow();
                 count = 0;
             }
