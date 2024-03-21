@@ -2,6 +2,7 @@ package com.example;
 
 public class Property extends Location{
 
+    private int name;
     private int price;
     private int paid;
     private Player owner;

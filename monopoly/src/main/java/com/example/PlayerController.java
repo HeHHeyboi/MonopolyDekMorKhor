@@ -21,6 +21,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
+
 public class PlayerController implements Initializable{
     @FXML
     private Text nameDisplay;
@@ -38,7 +39,9 @@ public class PlayerController implements Initializable{
     @FXML Circle player2Circle;
     @FXML private Pane pane;
     @FXML private Pane popUpPane;
-    @FXML private Button popButton;
+    @FXML private Button popCloseButton;
+    @FXML private Button popYesButton;
+    @FXML private Button popNoButton;
     @FXML private Text popText;
     public List<Rectangle> tile = new ArrayList<>();
     private List<Location> locations = new ArrayList<>();
@@ -47,13 +50,15 @@ public class PlayerController implements Initializable{
     private static Player curPlayer;
     Random random = new Random();
     
-    IntegerProperty Money;
+    IntegerProperty Money1;
+    IntegerProperty Money2;
     IntegerProperty Step = new SimpleIntegerProperty();
-    StringProperty curPlayerName = new SimpleStringProperty();
+    StringProperty Player1Name = new SimpleStringProperty();
+    StringProperty Player2Name = new SimpleStringProperty();
     static int count = 0;
     static int dice1;
     static int dice2;
-
+    static Location l;
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -61,8 +66,8 @@ public class PlayerController implements Initializable{
         update();
     }
     public void init(){
-        player1 = new Player(1000, "Jame");
-        player2 = new Player(500,"Billy");
+        player1 = new Player(10000, "Jame");
+        player2 = new Player(10000,"Billy");
         player1.setNextPlayer(player2);
         player1.setCircle(playCircle);
         player2.setNextPlayer(player1);
@@ -70,9 +75,10 @@ public class PlayerController implements Initializable{
         curPlayer = player1;
         nameDisplay.setText(player1.getName());
         moneyDisplay.setText(""+player1.getMoney());
-        //player2NameDisplay.setText(player2.getName());
-        //player2MoneyDisplay.setText(""+player2.getMoney());
-        Money = player1.moneyProperty();
+        player2NameDisplay.setText(player2.getName());
+        player2MoneyDisplay.setText(""+player2.getMoney());
+        Money1 = player1.moneyProperty();
+        Money2 = player2.moneyProperty();
         stepDisplay.setText(""+Step.getValue());
         //tossButtonCheck.set(false);
         //#region Add rectangle to list
@@ -84,10 +90,17 @@ public class PlayerController implements Initializable{
             }
         }//#endregion
         
-        for(int i =0;i <= tile.size();i++){
-            locations.add(new Property(i));
-        }
-
+        // for(int i =0;i <= tile.size();i++){
+        //     locations.add(new Property(i));
+        // }
+        locations.add(new Property(1, 100, 20));
+        locations.add(new Property(1, 150, 30));
+        locations.add(new Property(1, 200, 40));
+        locations.add(new Property(1, 250, 50));
+        locations.add(new Property(1, 300, 60));
+        locations.add(new Property(1, 350, 70));
+        locations.add(new Property(1, 400, 80));
+        locations.add(new Property(1, 450, 90));
         Rectangle rect = tile.get(0);
         double posX = rect.getWidth()/2+rect.getLayoutX();
         double posY = rect.getHeight()/2+rect.getLayoutY();
@@ -98,18 +111,14 @@ public class PlayerController implements Initializable{
     }
     public void update(){
 
-        Money.addListener((observer,oldval,newval) ->{
+        Money1.addListener((observer,oldval,newval) ->{
            moneyDisplay.setText(String.valueOf(newval.intValue()));
         });
-        // Money2.addListener((observer,oldval,newval) ->{
-        //     player2MoneyDisplay.setText(String.valueOf(newval.intValue()));
-        // });
+        Money2.addListener((observer,oldval,newval) ->{
+            player2MoneyDisplay.setText(String.valueOf(newval.intValue()));
+        });
         Step.addListener((obs,oldval,newval) ->{
             stepDisplay.setText(String.valueOf(newval.intValue()));
-        });
-        curPlayerName.addListener((observer,oldval,newval) ->{
-            nameDisplay.setText(newval);
-            
         });
         // tossButtonCheck.addListener((obs,oldval,newval)->{
         //     tossButton.setDisable(newval);
@@ -120,14 +129,13 @@ public class PlayerController implements Initializable{
 
     //#region Add and Minus money
     public void addMoney() {
-        player1.setMoney(player1.getMoney() + 1000);
+        curPlayer.setMoney(player1.getMoney() + 1000);
     }
 
     public void minusMoney() {
-        player1.setMoney(player1.getMoney() - 500);
+        curPlayer.setMoney(player1.getMoney() - 1000);
     }
     //#endregion
-    // Need to fix
     public void TossDice() throws InterruptedException{
         dice1 = random.nextInt(6)+1;
         dice2 = random.nextInt(6)+1;
@@ -154,7 +162,9 @@ public class PlayerController implements Initializable{
             //when count or animation finish reset tossbutton, reset count to 0, show popup window and change popwindow text
             if(count == Sumdice){
                 tossButton.setDisable(false);
-                popText.setText(curPlayer.getName()+" at the "+locations.get(curPlayer.PlayerPos()).getID()+ "tile");
+                l = locations.get(curPlayer.PlayerPos());
+                popText.setText(""+l.getID()+" \nPrice is "+ ((Property) l).getPrice() +" baht Would you like to buy");                
+                checkOwner(l);
                 popUpwindow();
                 count = 0;
             }
@@ -167,14 +177,62 @@ public class PlayerController implements Initializable{
     public void popUpwindow(){
         popUpPane.setVisible(true);
     }
+    public void setButton(int id){
+        switch (id) {
+            case 1:
+                popCloseButton.setVisible(false);
+                popYesButton.setVisible(true);
+                popNoButton.setVisible(true);
+                break;
+
+            case 0:
+                popCloseButton.setVisible(true);
+                popYesButton.setVisible(false);
+                popNoButton.setVisible(false);
+                break;
+        }
+    }
+    
     //when click button to close popup window
     public void Exit(){
         if(dice1!=dice2){
             curPlayer = curPlayer.getNextPlayer();
-            curPlayerName.set(curPlayer.getName());
-            Money.set(curPlayer.getMoney());
+            curPlayer.getCircle().toFront();
+            // curPlayerName.set(curPlayer.getName());
+            // Money.set(curPlayer.getMoney());
         }
         popUpPane.setVisible(false);
-        
+    }
+    public void buyProperty(){
+        curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
+        ((Property) l).setOwner(curPlayer);
+        Rectangle rect = tile.get(curPlayer.PlayerPos());
+        rect.setFill(curPlayer.getCircle().getFill());
+
+        if(dice1!=dice2){
+            curPlayer = curPlayer.getNextPlayer();
+            curPlayer.getCircle().toFront();
+            // curPlayerName.set(curPlayer.getName());
+            // Money.set(curPlayer.getMoney());
+        }
+        popUpPane.setVisible(false);
+    }
+    public void checkOwner(Location los){
+        // System.out.println(((Property) l).getOwner());
+        Player owner = ((Property) l).getOwner();
+        if(owner == null){
+            setButton(1);
+        }
+        else if(owner == curPlayer){
+            popText.setText("You are the owner of this property");
+            setButton(0);
+        }
+        else{
+            popText.setText("You paid "+((Property) l).getPaid() + " to the "+owner.getName());
+            curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPaid());
+            owner.setMoney(owner.getMoney()+((Property) l).getPaid());
+            // System.out.println(((Property) l).getOwner());
+            setButton(0);
+        }
     }
 }
