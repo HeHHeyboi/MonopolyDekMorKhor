@@ -42,6 +42,7 @@ public class PlayerController implements Initializable{
     @FXML private Button popCloseButton;
     @FXML private Button popYesButton;
     @FXML private Button popNoButton;
+    @FXML private Button popNextButton;
     @FXML private Text popText;
     public List<Rectangle> tile = new ArrayList<>();
     private List<Location> locations = new ArrayList<>();
@@ -183,12 +184,20 @@ public class PlayerController implements Initializable{
                 popCloseButton.setVisible(false);
                 popYesButton.setVisible(true);
                 popNoButton.setVisible(true);
+                popNextButton.setVisible(false);
                 break;
 
+            case 2: 
+                popCloseButton.setVisible(false);
+                popYesButton.setVisible(false);
+                popNoButton.setVisible(false);
+                popNextButton.setVisible(true);
+                break;
             case 0:
                 popCloseButton.setVisible(true);
                 popYesButton.setVisible(false);
                 popNoButton.setVisible(false);
+                popNextButton.setVisible(false);
                 break;
         }
     }
@@ -217,6 +226,11 @@ public class PlayerController implements Initializable{
         }
         popUpPane.setVisible(false);
     }
+    public void NextButton(){
+        popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht");
+        setButton(1);
+        
+    }
     public void checkOwner(Location los){
         // System.out.println(((Property) l).getOwner());
         Player owner = ((Property) l).getOwner();
@@ -225,13 +239,14 @@ public class PlayerController implements Initializable{
         }
         else if(owner == curPlayer){
             popText.setText("You are the owner of this property");
+            setButton(0);
         }
         else{
             popText.setText("You paid "+((Property) l).getPaid() + " to the "+owner.getName());
             curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPaid());
             owner.setMoney(owner.getMoney()+((Property) l).getPaid());
             // System.out.println(((Property) l).getOwner());
-            setButton(0);
+            setButton(2);
         }
     }
 }
