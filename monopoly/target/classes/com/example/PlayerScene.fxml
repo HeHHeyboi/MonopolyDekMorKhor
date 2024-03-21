@@ -53,6 +53,7 @@
             <Button fx:id="popCloseButton" layoutX="184.0" layoutY="63.0" mnemonicParsing="false" onAction="#Exit" text="Ok" />
             <Button fx:id="popNoButton" layoutX="278.0" layoutY="63.0" mnemonicParsing="false" onAction="#Exit" text="No" visible="false" />
             <Button fx:id="popYesButton" layoutX="91.0" layoutY="63.0" mnemonicParsing="false" onAction="#buyProperty" text="Yes" visible="false" />
+            <Button fx:id="popNextButton" layoutX="178.0" layoutY="63.0" mnemonicParsing="false" onAction="#NextButton" text="Next" visible="false" />
          </children>
       </Pane>
       <Text fx:id="player2NameDisplay" layoutX="488.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player">

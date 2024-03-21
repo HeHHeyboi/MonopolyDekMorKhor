@@ -26,6 +26,7 @@ public class App extends Application {
     
     // Scene scene = new Scene(root, 400, 3c00);
     scene = new Scene(loadFXML("PlayerScene"),600,400);
+    //Scene scene = new Scene(loadFXML("Monopoly DekmorKhor"),1280,800);
     stage.setX(10);
     stage.setY(10);
     //init();

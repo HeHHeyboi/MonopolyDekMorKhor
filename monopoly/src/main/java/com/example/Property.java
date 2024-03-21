@@ -2,7 +2,7 @@ package com.example;
 
 public class Property extends Location{
 
-    private int name;
+    private String name;
     private int price;
     private int paid;
     private Player owner;
@@ -19,7 +19,17 @@ public class Property extends Location{
         this.price = 0;
         this.owner = null;
     }
-
+    public Property(String name,int id,int price,int paid) {
+        super(id);
+        this.name = name;
+        this.price = price;
+        this.paid = paid;
+        this.owner = null;    
+    }
+    public void UgpradeProp(){    
+        price += (int)price*0.2;
+        upgradeCount++;
+    }
     public void setPrice(int price){
         this.price = price;
     }
@@ -34,5 +44,14 @@ public class Property extends Location{
     }
     public Player getOwner(){
         return this.owner;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
+    public String getName(){
+        return this.name;
+    }
+    public int getUpgradeC(){
+        return this.upgradeCount;
     }
 }
