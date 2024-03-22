@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -59,13 +60,15 @@ public class PlayerController implements Initializable{
     StringProperty Player1Name = new SimpleStringProperty();
     StringProperty Player2Name = new SimpleStringProperty();
     
-    static int count = 0;
-    static int dice1;
-    static int dice2;
-    static Location l;
-    static Rectangle rect;
-    static double posX;
-    static double posY;
+    int count = 0;
+    int dice1;
+    int dice2;
+    Location l;
+    Rectangle rect;
+    double posX;
+    double posY;
+    private double mouseX;
+    private double mouseY;
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -106,7 +109,7 @@ public class PlayerController implements Initializable{
         locations.add(new Property(1, 250, 50));
         locations.add(new EventTile(3));
         locations.add(new Property(1, 350, 70));
-        locations.add(new Property(1, 400, 80));
+        locations.add(new EventTile(4));
         locations.add(new Property(1, 450, 90));
         rect = tile.get(0);
         posX = rect.getWidth()/2+rect.getLayoutX();
@@ -314,6 +317,23 @@ public class PlayerController implements Initializable{
         }
         
     }
+    public void GotoClickTile() throws InterruptedException{
+        pane.addEventFilter(MouseEvent.MOUSE_MOVED, event ->{
+            mouseX = event.getX();
+            mouseY = event.getY();
+        });
+        int c = 0;
+        for(int i =0;i<tile.size();i++){
+            if((mouseX>tile.get(i).getLayoutX()&&mouseX<tile.get(i).getLayoutX()+tile.get(i).getWidth())&&(mouseY>tile.get(i).getLayoutY()&&mouseY<tile.get(i).getLayoutY()+tile.get(i).getHeight())){
+                break;
+            }
+            else{
+                c++;
+            }
+        }
+        moveCircle(Math.abs(c-curPlayer.PlayerPos()));
+        
+    }
     public void checkTile(Location los){
         switch (los.getID()) {
             case 2:
@@ -360,6 +380,8 @@ public class PlayerController implements Initializable{
                 System.out.println(curPlayer.getName()+" is in jailed");
                 curPlayer = curPlayer.getNextPlayer();
                 break;
+            case 4:
+                tossButton.setDisable(true);
             default:
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();

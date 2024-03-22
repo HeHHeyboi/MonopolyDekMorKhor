@@ -55,7 +55,7 @@
          </image></ImageView>
       <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="610.0" layoutY="689.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../pic/huso%20(1).png" />
+            <Image url="@../../pic/Artboard%201.png" />
          </image></ImageView>
       <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="709.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
          <image>

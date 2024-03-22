@@ -12,14 +12,14 @@
       <Button layoutX="378.0" layoutY="196.0" mnemonicParsing="false" onAction="#DoubleDice" text="Double dice" />
       <Pane fx:id="pane" layoutX="87.0" layoutY="89.0" prefHeight="198.0" prefWidth="202.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="102.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="104.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="102.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="104.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="152.0" onMouseClicked="#GotoClickTile" onMousePressed="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="102.0" layoutY="152.0" onMouseClicked="#GotoClickTile" onMousePressed="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="152.0" onMouseClicked="#GotoClickTile" onMouseMoved="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="104.0" onMouseClicked="#GotoClickTile" onMousePressed="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="56.0" onMouseClicked="#GotoClickTile" onMousePressed="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="102.0" layoutY="56.0" onMouseClicked="#GotoClickTile" onMousePressed="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="56.0" onMouseClicked="#GotoClickTile" onMousePressed="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="104.0" onMouseClicked="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
             <Circle fx:id="playCircle" fill="#ff481f" layoutX="176.0" layoutY="176.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="player2Circle" fill="#21ff54" layoutX="176.0" layoutY="176.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
          </children>
