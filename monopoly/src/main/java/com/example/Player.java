@@ -18,7 +18,7 @@ public class Player {
     private List<Location> location = new ArrayList<>();
     private Circle circle;
     private int playerPos = 0;
-    private int maxTile = 8;
+    private int maxTile = 7;
     private int Double_count = 0;
     private int waitInjailed = 0;
 
@@ -67,8 +67,11 @@ public class Player {
     public void PlayerPos(int i){
         
         this.playerPos = i;
-        if(playerPos >= maxTile){
+        if(playerPos >maxTile && playerPos>0){
             this.playerPos = 0;
+        }
+        else if(playerPos <0){
+            this.playerPos = maxTile;
         }
     }
     public boolean CheckDouble_count(){

@@ -31,6 +31,7 @@ public class App extends Application {
     stage.setY(10);
     //init();
     //scene.setRoot(loadFXML("ImageTest"));
+    //stage.setFullScreen(true);
     stage.setScene(scene);
     stage.setTitle("PlayerScene");
     stage.show();

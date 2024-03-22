@@ -471,7 +471,7 @@ public class PlayerController implements Initializable{
             }   
         }
     public void getLuck() throws InterruptedException{
-        int rand = random.nextInt(4);
+        int rand = random.nextInt(4)+1;
         switch (rand) {
             case 1:
                 curPlayer.setMoney(curPlayer.getMoney()+100);
@@ -489,9 +489,9 @@ public class PlayerController implements Initializable{
                 moveCircle(2);
                 break;
             case 4:
-                luckText.setText(curPlayer.getName()+" move backward 5 times");
+                luckText.setText(curPlayer.getName()+" move backward 2 times");
                 luckText.setVisible(true);
-                Goback(5);
+                Goback(2);
                 break;
             
         }
