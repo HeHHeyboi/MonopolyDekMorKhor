@@ -3,6 +3,7 @@ module com.example {
     requires transitive javafx.base;
     requires javafx.controls;
     requires transitive javafx.graphics;
+    requires javafx.media;
     
     
     opens com.example to javafx.fxml;

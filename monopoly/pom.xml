@@ -19,6 +19,23 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>13</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>javafx-controls</artifactId>
+                    <groupId>org.openjfx</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-media</artifactId>
+            <version>13</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>javafx-graphics</artifactId>
+                    <groupId>org.openjfx</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <build>

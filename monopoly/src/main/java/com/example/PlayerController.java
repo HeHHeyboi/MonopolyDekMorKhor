@@ -1,5 +1,6 @@
 package com.example;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
 public class PlayerController implements Initializable{
     @FXML
     private Text nameDisplay;
@@ -129,6 +131,19 @@ public class PlayerController implements Initializable{
         playCircle.setLayoutY(posY);
         player2Circle.setLayoutX(posX);
         player2Circle.setLayoutY(posY);
+        String audioFile = "path/to/your/audio/file.mp3";
+
+        // Create a Media object with the file path
+        Media media = new Media(new File(audioFile).toURI().toString());
+
+        // Create a MediaPlayer with the Media object
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+
+        // Set the MediaPlayer to loop
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
+
+        // Play the audio file
+        mediaPlayer.play();
     }
     public void update(){
 
@@ -436,7 +451,7 @@ public class PlayerController implements Initializable{
                 // setButton(0);
                 break;
             case 4:
-                popText.setText("Which tile do you want to go?");
+                popText.setText("How much tile do you want to go?");
                 tossButton.setDisable(true);
                 textField.setVisible(true);
                 popCloseButton.setDisable(true);
