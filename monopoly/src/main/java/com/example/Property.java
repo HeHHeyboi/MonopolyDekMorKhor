@@ -1,5 +1,7 @@
 package com.example;
 
+import javafx.scene.shape.Rectangle;
+
 public class Property extends Location{
 
     private String name;
@@ -7,11 +9,13 @@ public class Property extends Location{
     private int paid;
     private Player owner;
     private int upgradeCount = 0;
+    private Rectangle rectangle;
     public Property(int id,int price,int paid) {
         super(id);
         this.price = price;
         this.paid = paid;
-        this.owner = null;    
+        this.owner = null;
+        rectangle = null;
     }
     public Property(int id){
         super(id);
@@ -55,4 +59,8 @@ public class Property extends Location{
     public int getUpgradeC(){
         return this.upgradeCount;
     }
+    public Rectangle getRectangle(){
+        return this.rectangle;
+    }
+    
 }
