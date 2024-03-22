@@ -65,5 +65,11 @@
             <Font size="25.0" />
          </font>
       </Text>
+      <Text fx:id="luckText" layoutX="113.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LuckText" textAlignment="CENTER" wrappingWidth="186.838623046875">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Text>
+      <Button fx:id="getLuckButton" layoutX="385.0" layoutY="338.0" mnemonicParsing="false" onAction="#getLuck" text="GetLuck" />
    </children>
 </Pane>
