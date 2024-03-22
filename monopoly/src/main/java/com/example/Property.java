@@ -28,6 +28,7 @@ public class Property extends Location{
     }
     public void UgpradeProp(){    
         price += (int)price*0.2;
+        paid += (int)paid*0.2;
         upgradeCount++;
     }
     public void setPrice(int price){

@@ -1,5 +1,6 @@
 com\example\PrimaryController.class
 com\example\Player.class
+com\example\EventTile.class
 com\example\PlayerController.class
 com\example\Monopoly.class
 com\example\SecondaryController.class
