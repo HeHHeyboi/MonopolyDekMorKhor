@@ -18,7 +18,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.TextField;
+
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
@@ -36,6 +37,7 @@ public class PlayerController implements Initializable{
     private Button tossButton;
     @FXML 
     private Circle playCircle;
+    @FXML TextField textField;
     @FXML Text player2NameDisplay;
     @FXML Text player2MoneyDisplay;
     //@FXML Text player2StepDisplay;
@@ -46,6 +48,7 @@ public class PlayerController implements Initializable{
     @FXML private Button popYesButton;
     @FXML private Button popNoButton;
     @FXML private Button popNextButton;
+    @FXML private Button popGoButton;
     @FXML private Text popText;
     public List<Rectangle> tile = new ArrayList<>();
     private List<Location> locations = new ArrayList<>();
@@ -67,8 +70,7 @@ public class PlayerController implements Initializable{
     Rectangle rect;
     double posX;
     double posY;
-    private double mouseX;
-    private double mouseY;
+
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -96,6 +98,7 @@ public class PlayerController implements Initializable{
         for(Node node:nodes){
             if(node instanceof Rectangle){
                 Rectangle rectangle = (Rectangle) node;
+                //rectangle.setDisable(true);
                 tile.add(rectangle);
             }
         }//#endregion
@@ -259,6 +262,7 @@ public class PlayerController implements Initializable{
                 popYesButton.setVisible(true);
                 popNoButton.setVisible(true);
                 popNextButton.setVisible(false);
+                popGoButton.setVisible(false);
                 break;
 
             case 2: 
@@ -266,12 +270,21 @@ public class PlayerController implements Initializable{
                 popYesButton.setVisible(false);
                 popNoButton.setVisible(false);
                 popNextButton.setVisible(true);
+                popGoButton.setVisible(false);
+                break;
+            case 3:
+                popCloseButton.setVisible(false);
+                popYesButton.setVisible(false);
+                popNoButton.setVisible(false);
+                popNextButton.setVisible(false);
+                popGoButton.setVisible(true);
                 break;
             case 0:
                 popCloseButton.setVisible(true);
                 popYesButton.setVisible(false);
                 popNoButton.setVisible(false);
                 popNextButton.setVisible(false);
+                popGoButton.setVisible(false);
                 break;
         }
     }
@@ -287,12 +300,12 @@ public class PlayerController implements Initializable{
     }
     public void buyProperty(){
         Player owner = ((Property)l).getOwner();
-        if(owner != null){
+        if(owner == null || owner== curPlayer){
             curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
-            owner.setMoney(owner.getMoney()+((Property)l).getPrice());
         }
         else{
             curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
+            owner.setMoney(owner.getMoney()+((Property)l).getPrice());
         }
         ((Property) l).setOwner(curPlayer);
         Rectangle rect = tile.get(curPlayer.PlayerPos());
@@ -306,6 +319,7 @@ public class PlayerController implements Initializable{
         }
         popUpPane.setVisible(false);
     }
+
     public void NextButton(){
         if(((Property) l).getUpgradeC()<=3){    
             popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht, with upgrade "+((Property)l).getUpgradeC());
@@ -318,21 +332,8 @@ public class PlayerController implements Initializable{
         
     }
     public void GotoClickTile() throws InterruptedException{
-        pane.addEventFilter(MouseEvent.MOUSE_MOVED, event ->{
-            mouseX = event.getX();
-            mouseY = event.getY();
-        });
-        int c = 0;
-        for(int i =0;i<tile.size();i++){
-            if((mouseX>tile.get(i).getLayoutX()&&mouseX<tile.get(i).getLayoutX()+tile.get(i).getWidth())&&(mouseY>tile.get(i).getLayoutY()&&mouseY<tile.get(i).getLayoutY()+tile.get(i).getHeight())){
-                break;
-            }
-            else{
-                c++;
-            }
-        }
-        moveCircle(Math.abs(c-curPlayer.PlayerPos()));
         
+
     }
     public void checkTile(Location los){
         switch (los.getID()) {
@@ -381,7 +382,10 @@ public class PlayerController implements Initializable{
                 curPlayer = curPlayer.getNextPlayer();
                 break;
             case 4:
+                popText.setText("Which tile do you want to go?");
                 tossButton.setDisable(true);
+                textField.setDisable(false);
+                setButton(0);
             default:
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
