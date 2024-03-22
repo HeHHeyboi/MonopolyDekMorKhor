@@ -19,6 +19,8 @@ public class Player {
     private Circle circle;
     private int playerPos = 0;
     private int maxTile = 8;
+    private int Double_count = 0;
+    private int waitInjailed = 0;
 
     public Player(int money, String name) {
         this.money.set(money);
@@ -69,7 +71,32 @@ public class Player {
             this.playerPos = 0;
         }
     }
+    public boolean CheckDouble_count(){
+        
+        if(this.Double_count>=3){
+            this.Double_count = 0;
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    public void Inc_DoubleC(){
+        this.Double_count++;
+    }
+    public int getDoubleCount(){
+        return this.Double_count;
+    }
+    public void setDouble_countToZero(){
+        this.Double_count = 0;
+    }
     public void setMaxTile(int max){
         this.maxTile = max;
+    }
+    public void setWaitinJail(int w){
+        this.waitInjailed = w;
+    }
+    public int getWaitInjaild(){
+        return this.waitInjailed;
     }
 }

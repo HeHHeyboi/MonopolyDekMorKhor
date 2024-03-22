@@ -9,6 +9,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.PlayerController">
    <children>
+      <Button layoutX="378.0" layoutY="196.0" mnemonicParsing="false" onAction="#DoubleDice" text="Double dice" />
       <Pane fx:id="pane" layoutX="87.0" layoutY="89.0" prefHeight="198.0" prefWidth="202.0">
          <children>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />

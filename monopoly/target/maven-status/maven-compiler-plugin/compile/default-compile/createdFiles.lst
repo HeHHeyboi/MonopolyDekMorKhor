@@ -1,9 +1,13 @@
-com\example\PrimaryController.class
 com\example\Player.class
 com\example\PlayerController.class
+com\example\StartTile.class
+com\example\GoToJail.class
+module-info.class
+com\example\App.class
+com\example\CityBus.class
+com\example\Jail.class
+com\example\PrimaryController.class
 com\example\Monopoly.class
 com\example\SecondaryController.class
 com\example\Location.class
 com\example\Property.class
-module-info.class
-com\example\App.class

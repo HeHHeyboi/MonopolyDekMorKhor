@@ -1,8 +1,8 @@
 package com.example;
 
-public class StartTile extends Location{
+public class EventTile extends Location{
 
-    public StartTile(int id) {
+    public EventTile(int id) {
         super(id);
         
     }
