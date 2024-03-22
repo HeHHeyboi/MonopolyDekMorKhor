@@ -131,18 +131,11 @@ public class PlayerController implements Initializable{
         playCircle.setLayoutY(posY);
         player2Circle.setLayoutX(posX);
         player2Circle.setLayoutY(posY);
-        String audioFile = "path/to/your/audio/file.mp3";
 
-        // Create a Media object with the file path
+        String audioFile = "monopoly/src/main/resources/BGMusic.mp3";
         Media media = new Media(new File(audioFile).toURI().toString());
-
-        // Create a MediaPlayer with the Media object
         MediaPlayer mediaPlayer = new MediaPlayer(media);
-
-        // Set the MediaPlayer to loop
         mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
-
-        // Play the audio file
         mediaPlayer.play();
     }
     public void update(){
