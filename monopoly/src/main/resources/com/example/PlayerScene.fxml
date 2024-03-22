@@ -13,13 +13,13 @@
       <Button layoutX="378.0" layoutY="196.0" mnemonicParsing="false" onAction="#DoubleDice" text="Double dice" />
       <Pane fx:id="pane" layoutX="87.0" layoutY="89.0" prefHeight="198.0" prefWidth="202.0">
          <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="152.0" onContextMenuRequested="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="102.0" layoutY="152.0" onContextMenuRequested="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="152.0" onMouseClicked="#GotoClickTile" onMouseMoved="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="104.0" onMouseClicked="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="56.0" onMouseClicked="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="102.0" layoutY="56.0" onMouseClicked="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="56.0" onMouseClicked="#GotoClickTile" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="102.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="152.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="104.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="51.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="102.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="56.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="48.0" layoutX="150.0" layoutY="104.0" stroke="BLACK" strokeType="INSIDE" width="51.0" />
             <Circle fx:id="playCircle" fill="#ff481f" layoutX="176.0" layoutY="176.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
             <Circle fx:id="player2Circle" fill="#21ff54" layoutX="176.0" layoutY="176.0" radius="13.0" stroke="BLACK" strokeType="INSIDE" />
@@ -49,15 +49,15 @@
             <Font size="26.0" />
          </font>
       </Text>
-      <Pane fx:id="popUpPane" layoutX="145.0" layoutY="127.0" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #00FFF0;">
+      <Pane fx:id="popUpPane" layoutX="145.0" layoutY="127.0" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #00FFF0;" visible="false">
          <children>
             <Text fx:id="popText" fill="#ac1616" layoutX="107.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hello" textAlignment="CENTER" wrappingWidth="186.838623046875" />
             <Button fx:id="popCloseButton" layoutX="184.0" layoutY="63.0" mnemonicParsing="false" onAction="#Exit" text="Ok" />
             <Button fx:id="popNoButton" layoutX="278.0" layoutY="63.0" mnemonicParsing="false" onAction="#Exit" text="No" visible="false" />
             <Button fx:id="popYesButton" layoutX="91.0" layoutY="63.0" mnemonicParsing="false" onAction="#buyProperty" text="Yes" visible="false" />
             <Button fx:id="popNextButton" layoutX="178.0" layoutY="63.0" mnemonicParsing="false" onAction="#NextButton" text="Next" visible="false" />
-            <TextField fx:id="textField" layoutX="183.0" layoutY="34.0" prefHeight="25.0" prefWidth="31.0" />
-            <Button fx:id="popGoButton" layoutX="182.0" layoutY="63.0" mnemonicParsing="false" onAction="#Exit" text="Go!" visible="false" />
+            <TextField fx:id="textField" layoutX="183.0" layoutY="34.0" prefHeight="25.0" prefWidth="31.0" visible="false" />
+            <Button fx:id="popGoButton" layoutX="182.0" layoutY="63.0" mnemonicParsing="false" onAction="#GotoSelectTile" text="Go!" visible="false" />
          </children>
       </Pane>
       <Text fx:id="player2NameDisplay" layoutX="488.0" layoutY="48.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Player">

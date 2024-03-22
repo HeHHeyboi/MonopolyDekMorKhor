@@ -7,13 +7,13 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -179,7 +179,7 @@ public class PlayerController implements Initializable{
 
         }
     }
-    public void TossDice() throws InterruptedException{
+    public void TossDice(ActionEvent event) throws InterruptedException{
         dice1 = random.nextInt(6)+1;
         dice2 = random.nextInt(6)+1;
         Step.set(dice1+dice2);
@@ -187,7 +187,7 @@ public class PlayerController implements Initializable{
         // Platform.runLater(()->{
             //     movePlayer.run();
             // });
-            if(curPlayer.CheckDouble_count() == true){
+            if(curPlayer.CheckDouble_count()){
                 curPlayer.PlayerPos(2);
                 rect = tile.get(curPlayer.PlayerPos());
                 posX = rect.getWidth()/2+rect.getLayoutX();
@@ -290,7 +290,7 @@ public class PlayerController implements Initializable{
     }
     
     //when click button to close popup window
-    public void Exit(){
+    public void Exit(ActionEvent event){
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
             curPlayer = curPlayer.getNextPlayer();
@@ -298,7 +298,7 @@ public class PlayerController implements Initializable{
         }
         popUpPane.setVisible(false);
     }
-    public void buyProperty(){
+    public void buyProperty(ActionEvent event){
         Player owner = ((Property)l).getOwner();
         if(owner == null || owner== curPlayer){
             curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
@@ -320,7 +320,7 @@ public class PlayerController implements Initializable{
         popUpPane.setVisible(false);
     }
 
-    public void NextButton(){
+    public void NextButton(ActionEvent event){
         if(((Property) l).getUpgradeC()<=3){    
             popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht, with upgrade "+((Property)l).getUpgradeC());
             setButton(1);
@@ -331,14 +331,19 @@ public class PlayerController implements Initializable{
         }
         
     }
-    public void GotoClickTile() throws InterruptedException{
-        
+    public void GotoSelectTile() throws InterruptedException{
+        int tileN = Integer.parseInt(textField.getText());
+        moveCircle(tileN);
+        textField.setVisible(false);
+        tossButton.setDisable(false);
+        popCloseButton.setDisable(false);
+        //checkTile(l);
+        popUpPane.setVisible(false);
 
     }
     public void checkTile(Location los){
         switch (los.getID()) {
             case 2:
-                ((EventTile) los).giveMoney(curPlayer);
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
                     curPlayer = curPlayer.getNextPlayer();
@@ -380,12 +385,15 @@ public class PlayerController implements Initializable{
                 curPlayer.setWaitinJail(3);
                 System.out.println(curPlayer.getName()+" is in jailed");
                 curPlayer = curPlayer.getNextPlayer();
+                curPlayer.getCircle().toFront();
                 break;
             case 4:
                 popText.setText("Which tile do you want to go?");
                 tossButton.setDisable(true);
-                textField.setDisable(false);
-                setButton(0);
+                textField.setVisible(true);
+                popCloseButton.setDisable(true);
+                setButton(3);
+                popUpwindow();
             default:
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
