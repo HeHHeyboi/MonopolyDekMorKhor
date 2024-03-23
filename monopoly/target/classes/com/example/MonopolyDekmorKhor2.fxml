@@ -215,10 +215,5 @@
       <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="400.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
       <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="540.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
       <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="610.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <ImageView fitHeight="800.0" fitWidth="480.0" layoutX="800.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../pic/ทอย/2player.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>

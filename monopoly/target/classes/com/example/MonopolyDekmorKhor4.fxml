@@ -253,10 +253,5 @@
             <Image url="@../../pic/ตาราง/F++.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="800.0" fitWidth="480.0" layoutX="800.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../pic/ทอย/4player.png" />
-         </image>
-      </ImageView>
    </children>
 </Pane>
