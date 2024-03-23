@@ -20,7 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -29,7 +29,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-public class PlayerController implements Initializable{
+public class Monopoly2 implements Initializable{
     @FXML
     private Text nameDisplay;
     @FXML
@@ -40,6 +40,7 @@ public class PlayerController implements Initializable{
     private Button tossButton;
     @FXML 
     private Circle playCircle;
+    @FXML private ImageView backgroud;
     @FXML Button getLuckButton;
     @FXML private Text luckText;
     @FXML TextField textField;
@@ -55,8 +56,9 @@ public class PlayerController implements Initializable{
     @FXML private Button popNextButton;
     @FXML private Button popGoButton;
     @FXML private Text popText;
-    public List<Rectangle> tile = new ArrayList<>();
+    public List<ImageView> tiles = new ArrayList<>();
     private List<Location> locations = new ArrayList<>();
+    private List<Rectangle> box = new ArrayList<>();
     private Player player1;
     private Player player2;
     private static Player curPlayer;
@@ -72,9 +74,10 @@ public class PlayerController implements Initializable{
     int dice1;
     int dice2;
     Location l;
-    Rectangle rect;
+    ImageView tile;
     double posX;
     double posY;
+    Rectangle rect;
 
     //#region initialize  
     @Override
@@ -89,6 +92,8 @@ public class PlayerController implements Initializable{
         player1.setCircle(playCircle);
         player2.setNextPlayer(player1);
         player2.setCircle(player2Circle);
+        player1.setMaxTile(36);
+        player2.setMaxTile(36);
         curPlayer = player1;
         p.add(player1);
         p.add(player2);
@@ -103,10 +108,12 @@ public class PlayerController implements Initializable{
         //#region Add rectangle to list
         List<Node> nodes = pane.getChildren();
         for(Node node:nodes){
-            if(node instanceof Rectangle){
-                Rectangle rectangle = (Rectangle) node;
-                //rectangle.setDisable(true);
-                tile.add(rectangle);
+            if(node instanceof ImageView){
+                if(node != backgroud){
+                    ImageView rectangle = (ImageView) node;
+                    tiles.add(rectangle);
+                }
+            
             }
         }//#endregion
         
@@ -118,18 +125,12 @@ public class PlayerController implements Initializable{
          * 3    GoToJail tile
          * 4    go to any tile
          * 5    Special property tile
+         * 6    luck
+         * 7    lose money tile
          */
-        locations.add(new EventTile(2));
-        locations.add(new Property(1, 150, 30));
-        locations.add(new EventTile(0));
-        locations.add(new Property(1, 250, 50));
-        locations.add(new EventTile(3));
-        locations.add(new Property(5, 350, 70));
-        locations.add(new EventTile(4));
-        locations.add(new Property(1, 450, 90));
-        rect = tile.get(0);
-        posX = rect.getWidth()/2+rect.getLayoutX();
-        posY = rect.getHeight()/2+rect.getLayoutY();
+        tile = tiles.get(0);
+        posX =  tile.getFitWidth()/2 + tile.getLayoutX();
+        posY =  tile.getFitHeight()/2 +tile.getLayoutY();
         playCircle.setLayoutX(posX);
         playCircle.setLayoutY(posY);
         player2Circle.setLayoutX(posX);
@@ -175,10 +176,10 @@ public class PlayerController implements Initializable{
         dice2 =2;
         Step.set(dice1+dice2);
         if(curPlayer.CheckDouble_count() == true){
-            curPlayer.PlayerPos(2);
-            rect = tile.get(curPlayer.PlayerPos());
-            posX = rect.getWidth()/2+rect.getLayoutX();
-            posY = rect.getHeight()/2+rect.getLayoutY();
+            curPlayer.PlayerPos(2);// Fix
+            tile = tiles.get(curPlayer.PlayerPos());
+            posX = tile.getFitWidth()/2+tile.getLayoutX();
+            posY = tile.getFitHeight()/2+tile.getLayoutY();
             curPlayer.getCircle().setLayoutX(posX);
             curPlayer.getCircle().setLayoutY(posY);
             //System.out.println(curPlayer.getName()+" is in jailed");
@@ -210,9 +211,9 @@ public class PlayerController implements Initializable{
             // });
             if(curPlayer.CheckDouble_count()){
                 curPlayer.PlayerPos(2);
-                rect = tile.get(curPlayer.PlayerPos());
-                posX = rect.getWidth()/2+rect.getLayoutX();
-                posY = rect.getHeight()/2+rect.getLayoutY();
+                tile = tiles.get(curPlayer.PlayerPos());
+                posX = tile.getFitWidth()/2+tile.getLayoutX();
+                posY = tile.getFitHeight()/2+tile.getLayoutY();
                 curPlayer.getCircle().setLayoutX(posX);
                 curPlayer.getCircle().setLayoutY(posY);
                 //System.out.println(curPlayer.getName()+" is in jailed");
@@ -240,9 +241,9 @@ public class PlayerController implements Initializable{
     public void moveCircle(int Sumdice) throws InterruptedException {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
             curPlayer.PlayerPos(curPlayer.PlayerPos()+1);
-            rect = tile.get(curPlayer.PlayerPos());
-            posX = rect.getWidth()/2+rect.getLayoutX();
-            posY = rect.getHeight()/2+rect.getLayoutY();
+            tile = tiles.get(curPlayer.PlayerPos());
+            posX = tile.getFitWidth()/2+tile.getLayoutX();
+            posY = tile.getFitHeight()/2+tile.getLayoutY();
             curPlayer.getCircle().setLayoutX(posX);
             curPlayer.getCircle().setLayoutY(posY);
             count++;
@@ -275,9 +276,9 @@ public class PlayerController implements Initializable{
     public void Goback(int Sumdice) throws InterruptedException {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
             curPlayer.PlayerPos(curPlayer.PlayerPos()-1);
-            rect = tile.get(curPlayer.PlayerPos());
-            posX = rect.getWidth()/2+rect.getLayoutX();
-            posY = rect.getHeight()/2+rect.getLayoutY();
+            tile = tiles.get(curPlayer.PlayerPos());
+            posX = tile.getFitWidth()/2+tile.getLayoutX();
+            posY = tile.getFitHeight()/2+tile.getLayoutY();
             curPlayer.getCircle().setLayoutX(posX);
             curPlayer.getCircle().setLayoutY(posY);
             count++;
@@ -348,6 +349,7 @@ public class PlayerController implements Initializable{
     
     //when click button to close popup window
     public void Exit(ActionEvent event){
+        checkBankrupt();
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
             curPlayer = curPlayer.getNextPlayer();
@@ -371,7 +373,7 @@ public class PlayerController implements Initializable{
             owner.setMoney(owner.getMoney()+((Property)l).getPrice());
         }
         ((Property) l).setOwner(curPlayer);
-        Rectangle rect = tile.get(curPlayer.PlayerPos());
+        Rectangle rect = box.get(curPlayer.PlayerPos());
         rect.setFill(curPlayer.getCircle().getFill());
         if(l.getID() ==1){
             ((Property)l).UgpradeProp();
@@ -382,10 +384,17 @@ public class PlayerController implements Initializable{
             curPlayer = curPlayer.getNextPlayer();
             curPlayer.getCircle().toFront();
         }
+        checkBankrupt();
         popUpPane.setVisible(false);
     }
 
     public void NextButton(ActionEvent event){
+        if(curPlayer.getMoney()<((Property)l).getPrice()){
+            popYesButton.setDisable(true);
+        }
+        else{
+            popYesButton.setDisable(false);
+        }
         if(((Property) l).getUpgradeC()<=3){    
             popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht, with upgrade "+((Property)l).getUpgradeC());
             setButton(1);
@@ -442,9 +451,9 @@ public class PlayerController implements Initializable{
                 break;
             case 3:
                 curPlayer.PlayerPos(2);
-                rect = tile.get(curPlayer.PlayerPos());
-                posX = rect.getWidth()/2+rect.getLayoutX();
-                posY = rect.getHeight()/2+rect.getLayoutY();
+                tile = tiles.get(curPlayer.PlayerPos());
+                posX = tile.getFitWidth()/2+tile.getLayoutX();
+                posY = tile.getFitHeight()/2+tile.getLayoutY();
                 curPlayer.getCircle().setLayoutX(posX);
                 curPlayer.getCircle().setLayoutY(posY);
                 curPlayer.setWaitinJail(3);
@@ -480,6 +489,23 @@ public class PlayerController implements Initializable{
                     popUpwindow();
                 }
                 break;
+            case 6:
+                getLuck();
+                if(dice1!= dice2){
+                    curPlayer.setDouble_countToZero();
+                    curPlayer = curPlayer.getNextPlayer();
+                    curPlayer.getCircle().toFront();
+                }
+                break;
+            case 7:
+                curPlayer.setMoney(curPlayer.getMoney()-200);
+                checkBankrupt();
+                if(dice1!= dice2){
+                    curPlayer.setDouble_countToZero();
+                    curPlayer = curPlayer.getNextPlayer();
+                    curPlayer.getCircle().toFront();
+                }
+                break;
             default:
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
@@ -489,7 +515,7 @@ public class PlayerController implements Initializable{
                 break;
             }   
         }
-    public void getLuck() throws InterruptedException{
+    public void getLuck() {
         int rand = random.nextInt(4)+1;
         switch (rand) {
             case 1:
@@ -501,16 +527,25 @@ public class PlayerController implements Initializable{
                 curPlayer.setMoney(curPlayer.getMoney()-50);
                 luckText.setText(curPlayer.getName()+" lose 50 baht");
                 luckText.setVisible(true);
+                checkBankrupt();
                 break;
             case 3:
                 luckText.setText(curPlayer.getName()+" move forward 2 times");
                 luckText.setVisible(true);
-                moveCircle(2);
+                try {
+                    moveCircle(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
             case 4:
                 luckText.setText(curPlayer.getName()+" move backward 2 times");
                 luckText.setVisible(true);
-                Goback(2);
+                try {
+                    Goback(2);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 break;
             
         }
@@ -522,12 +557,14 @@ public class PlayerController implements Initializable{
                 if(lo instanceof Property&&((Property)lo).getOwner()== curPlayer){
                     ///System.out.println(((Property)lo).getOwner());
                     ((Property)lo).setOwner(null);
-                    tile.get(locations.indexOf(lo)).setFill(Color.WHITE);;
+                    box.get(locations.indexOf(lo)).setFill(Color.WHITE);;
                     
                 }
             }
             for(Player o:p){
                 if(o.getNextPlayer()==curPlayer){
+                    curPlayer.getCircle().setVisible(false);
+                    player2MoneyDisplay.setText("Bankrupt");
                     o.setNextPlayer(curPlayer.getNextPlayer());
                     p.remove(curPlayer);
                     curPlayer = curPlayer.getNextPlayer();
