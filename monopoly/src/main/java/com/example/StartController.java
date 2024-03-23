@@ -6,15 +6,15 @@ import javafx.fxml.FXML;
 
 public class StartController {
     @FXML
-    private void twoPlayerButton() throws IOException {
+    private void switchTo2Player() throws IOException {
         App.setRoot("MonopolyDekmorKhor2");
     }
     @FXML
-    private void threePlayerButton() throws IOException {
+    private void switchTo3Player() throws IOException {
         App.setRoot("MonopolyDekmorkhor3");
     }
     @FXML
-    private void fourPlayerButton() throws IOException {
+    private void switchTo4Player() throws IOException {
         App.setRoot("MonopolyDekmorkhor4");
     }
 }
