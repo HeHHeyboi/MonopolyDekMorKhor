@@ -24,6 +24,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
@@ -160,12 +161,12 @@ public class PlayerController implements Initializable{
 
     //#region Add and Minus money
     public void addMoney() {
-        curPlayer.setMoney(player1.getMoney() + 1000);
+        curPlayer.setMoney(curPlayer.getMoney() + 1000);
         checkBankrupt();
     }
 
     public void minusMoney() {
-        curPlayer.setMoney(player1.getMoney() - 1000);
+        curPlayer.setMoney(curPlayer.getMoney() - 1000);
         checkBankrupt();
     }
     //#endregion
@@ -517,6 +518,14 @@ public class PlayerController implements Initializable{
     
     public void checkBankrupt(){
         if(curPlayer.getMoney()<=0){
+            for(Location lo:locations){
+                if(lo instanceof Property&&((Property)lo).getOwner()== curPlayer){
+                    ///System.out.println(((Property)lo).getOwner());
+                    ((Property)lo).setOwner(null);
+                    tile.get(locations.indexOf(lo)).setFill(Color.WHITE);;
+                    
+                }
+            }
             for(Player o:p){
                 if(o.getNextPlayer()==curPlayer){
                     o.setNextPlayer(curPlayer.getNextPlayer());
@@ -526,11 +535,9 @@ public class PlayerController implements Initializable{
                 }
             }
             if(p.size() == 1){
+                luckText.setVisible(true);
                 luckText.setText(p.get(0).getName() + " wins");
             }
-        }
-        else if (p.size() == 1) {
-            luckText.setText(p.get(0).getName() + " wins");
         }
     }
 }
