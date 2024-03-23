@@ -184,12 +184,6 @@ public class Monopoly3 implements Initializable{
             j++;
         }
     }
-        for (Location l : locations) {
-            if(l instanceof Property){
-                System.out.println(((Property) l).getRectangle());
-                
-            }
-        }
         //#endregion
         tile = tiles.get(0);
         posX =  tile.getFitWidth()/2 + tile.getLayoutX();
@@ -436,14 +430,14 @@ public class Monopoly3 implements Initializable{
         if(l.getID() ==1){
             ((Property)l).UgpradeProp();
         }
+        popUpPane.setVisible(false);
+        checkBankrupt();
         
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
             curPlayer = curPlayer.getNextPlayer();
             curPlayer.getCircle().toFront();
         }
-        popUpPane.setVisible(false);
-        checkBankrupt();
     }
 
     public void NextButton(ActionEvent event){
