@@ -1,5 +1,6 @@
 package com.example;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,11 +22,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-
 public class PlayerController implements Initializable{
     @FXML
     private Text nameDisplay;
@@ -58,7 +60,7 @@ public class PlayerController implements Initializable{
     private Player player2;
     private static Player curPlayer;
     Random random = new Random();
-    
+    private ArrayList<Player> p = new ArrayList<>();
     IntegerProperty Money1;
     IntegerProperty Money2;
     IntegerProperty Step = new SimpleIntegerProperty();
@@ -87,6 +89,8 @@ public class PlayerController implements Initializable{
         player2.setNextPlayer(player1);
         player2.setCircle(player2Circle);
         curPlayer = player1;
+        p.add(player1);
+        p.add(player2);
         nameDisplay.setText(player1.getName());
         moneyDisplay.setText(""+player1.getMoney());
         player2NameDisplay.setText(player2.getName());
@@ -129,6 +133,12 @@ public class PlayerController implements Initializable{
         playCircle.setLayoutY(posY);
         player2Circle.setLayoutX(posX);
         player2Circle.setLayoutY(posY);
+
+        String audioFile = "monopoly/src/main/resources/BGMusic.mp3";
+        Media media = new Media(new File(audioFile).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
+        mediaPlayer.play();
     }
     public void update(){
 
@@ -151,10 +161,12 @@ public class PlayerController implements Initializable{
     //#region Add and Minus money
     public void addMoney() {
         curPlayer.setMoney(player1.getMoney() + 1000);
+        checkBankrupt();
     }
 
     public void minusMoney() {
         curPlayer.setMoney(player1.getMoney() - 1000);
+        checkBankrupt();
     }
     //#endregion
     public void DoubleDice() throws InterruptedException{
@@ -343,6 +355,12 @@ public class PlayerController implements Initializable{
         popUpPane.setVisible(false);
     }
     public void buyProperty(ActionEvent event){
+        if(curPlayer.getMoney()<((Property)l).getPrice()){
+            popYesButton.setDisable(true);
+        }
+        else{
+            popYesButton.setDisable(false);
+        }
         Player owner = ((Property)l).getOwner();
         if(owner == null || owner== curPlayer){
             curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
@@ -436,7 +454,7 @@ public class PlayerController implements Initializable{
                 // setButton(0);
                 break;
             case 4:
-                popText.setText("Which tile do you want to go?");
+                popText.setText("How much tile do you want to go?");
                 tossButton.setDisable(true);
                 textField.setVisible(true);
                 popCloseButton.setDisable(true);
@@ -471,7 +489,7 @@ public class PlayerController implements Initializable{
             }   
         }
     public void getLuck() throws InterruptedException{
-        int rand = random.nextInt(4);
+        int rand = random.nextInt(4)+1;
         switch (rand) {
             case 1:
                 curPlayer.setMoney(curPlayer.getMoney()+100);
@@ -489,12 +507,30 @@ public class PlayerController implements Initializable{
                 moveCircle(2);
                 break;
             case 4:
-                luckText.setText(curPlayer.getName()+" move backward 5 times");
+                luckText.setText(curPlayer.getName()+" move backward 2 times");
                 luckText.setVisible(true);
-                Goback(5);
+                Goback(2);
                 break;
             
         }
     }
     
+    public void checkBankrupt(){
+        if(curPlayer.getMoney()<=0){
+            for(Player o:p){
+                if(o.getNextPlayer()==curPlayer){
+                    o.setNextPlayer(curPlayer.getNextPlayer());
+                    p.remove(curPlayer);
+                    curPlayer = curPlayer.getNextPlayer();
+                    break;
+                }
+            }
+            if(p.size() == 1){
+                luckText.setText(p.get(0).getName() + " wins");
+            }
+        }
+        else if (p.size() == 1) {
+            luckText.setText(p.get(0).getName() + " wins");
+        }
+    }
 }
