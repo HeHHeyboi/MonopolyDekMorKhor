@@ -7,14 +7,14 @@ import javafx.fxml.FXML;
 public class StartMenu{
     @FXML
     private void twoPlayerButton() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("MonopolyDekmorKhor2");
     }
     @FXML
     private void threePlayerButton() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("MonopolyDekmorkhor3");
     }
     @FXML
     private void fourPlayerButton() throws IOException {
-        App.setRoot("primary");
+        App.setRoot("MonopolyDekmorkhor4");
     }
 }
