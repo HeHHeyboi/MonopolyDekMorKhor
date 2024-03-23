@@ -62,5 +62,8 @@ public class Property extends Location{
     public Rectangle getRectangle(){
         return this.rectangle;
     }
+    public void setRectangle(Rectangle r){
+        this.rectangle = r;
+    }
     
 }

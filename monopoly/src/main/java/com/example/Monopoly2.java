@@ -31,15 +31,15 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 public class Monopoly2 implements Initializable{
     @FXML
-    private Text nameDisplay;
+    private Text player1NameDisplay;
     @FXML
-    private Text moneyDisplay;
+    private Text player1MoneyDisplay;
     @FXML 
     private Text stepDisplay;
     @FXML
     private Button tossButton;
     @FXML 
-    private Circle playCircle;
+    private Circle play1Circle;
     @FXML private ImageView backgroud;
     @FXML Button getLuckButton;
     @FXML private Text luckText;
@@ -58,7 +58,6 @@ public class Monopoly2 implements Initializable{
     @FXML private Text popText;
     public List<ImageView> tiles = new ArrayList<>();
     private List<Location> locations = new ArrayList<>();
-    private List<Rectangle> box = new ArrayList<>();
     private Player player1;
     private Player player2;
     private static Player curPlayer;
@@ -89,7 +88,7 @@ public class Monopoly2 implements Initializable{
         player1 = new Player(1000, "Jame");
         player2 = new Player(1000,"Billy");
         player1.setNextPlayer(player2);
-        player1.setCircle(playCircle);
+        player1.setCircle(play1Circle);
         player2.setNextPlayer(player1);
         player2.setCircle(player2Circle);
         player1.setMaxTile(36);
@@ -97,15 +96,64 @@ public class Monopoly2 implements Initializable{
         curPlayer = player1;
         p.add(player1);
         p.add(player2);
-        nameDisplay.setText(player1.getName());
-        moneyDisplay.setText(""+player1.getMoney());
+        player1NameDisplay.setText(player1.getName());
+        player1MoneyDisplay.setText(""+player1.getMoney());
         player2NameDisplay.setText(player2.getName());
         player2MoneyDisplay.setText(""+player2.getMoney());
         Money1 = player1.moneyProperty();
         Money2 = player2.moneyProperty();
-        stepDisplay.setText(""+Step.getValue());
+        //stepDisplay.setText(""+Step.getValue());
         //tossButtonCheck.set(false);
+        
+        /*
+        * id   mean
+        * 0    jail tile
+        * 1    property tile
+        * 2    start tile
+        * 3    GoToJail tile
+        * 4    go to any tile
+        * 5    Special property tile
+        * 6    luck
+        * 7    lose money tile
+        */
+        locations.add(new EventTile(2));
+        locations.add(new Property(1,50,25));
+        locations.add(new Property(1,75,35));
+        locations.add(new EventTile(6));
+        locations.add(new Property(5,85,45));
+        locations.add(new Property(1,100,55));
+        locations.add(new EventTile(6));
+        locations.add(new Property(1,115,75));
+        locations.add(new Property(1,130,85));
+        locations.add(new EventTile(0));
+        locations.add(new Property(1,150,95));
+        locations.add(new Property(1,175,115));
+        locations.add(new Property(1,200,130));
+        locations.add(new Property(1,225,150));
+        locations.add(new Property(1,250,160));
+        locations.add(new EventTile(7));
+        locations.add(new Property(5,275,175));
+        locations.add(new Property(1,300,190));
+        locations.add(new EventTile(4));
+        locations.add(new Property(1,325,200));
+        locations.add(new Property(1,350,210));
+        locations.add(new Property(1,375,230));
+        locations.add(new EventTile(6));
+        locations.add(new Property(1,400,250));
+        locations.add(new Property(1,425,275));
+        locations.add(new Property(1,450,300));
+        locations.add(new Property(1,475,315));
+        locations.add(new EventTile(4));
+        locations.add(new Property(1,500,340));
+        locations.add(new Property(1,530,360));
+        locations.add(new Property(1,560,380));
+        locations.add(new Property(1,580,400));
+        locations.add(new EventTile(6));
+        locations.add(new EventTile(7));
+        locations.add(new Property(5,600,420));
+        locations.add(new Property(1,650,460));
         //#region Add rectangle to list
+        int i = 0;
         List<Node> nodes = pane.getChildren();
         for(Node node:nodes){
             if(node instanceof ImageView){
@@ -113,26 +161,19 @@ public class Monopoly2 implements Initializable{
                     ImageView rectangle = (ImageView) node;
                     tiles.add(rectangle);
                 }
-            
+            else if(node instanceof Rectangle && locations.get(i) instanceof Property){
+                Rectangle rectangle = (Rectangle) node;
+                ((Property) locations.get(i)).setRectangle(rectangle);
+                System.out.println(((Property) locations.get(i)));
+                i++;
+            }
             }
         }//#endregion
-        
-        /*
-         * id   mean
-         * 0    jail tile
-         * 1    property tile
-         * 2    start tile
-         * 3    GoToJail tile
-         * 4    go to any tile
-         * 5    Special property tile
-         * 6    luck
-         * 7    lose money tile
-         */
         tile = tiles.get(0);
         posX =  tile.getFitWidth()/2 + tile.getLayoutX();
         posY =  tile.getFitHeight()/2 +tile.getLayoutY();
-        playCircle.setLayoutX(posX);
-        playCircle.setLayoutY(posY);
+        play1Circle.setLayoutX(posX);
+        play1Circle.setLayoutY(posY);
         player2Circle.setLayoutX(posX);
         player2Circle.setLayoutY(posY);
 
@@ -145,14 +186,14 @@ public class Monopoly2 implements Initializable{
     public void update(){
 
         Money1.addListener((observer,oldval,newval) ->{
-           moneyDisplay.setText(String.valueOf(newval.intValue()));
+           player1MoneyDisplay.setText(String.valueOf(newval.intValue()));
         });
         Money2.addListener((observer,oldval,newval) ->{
             player2MoneyDisplay.setText(String.valueOf(newval.intValue()));
         });
-        Step.addListener((obs,oldval,newval) ->{
-            stepDisplay.setText(String.valueOf(newval.intValue()));
-        });
+        // Step.addListener((obs,oldval,newval) ->{
+        //     stepDisplay.setText(String.valueOf(newval.intValue()));
+        // });
         // tossButtonCheck.addListener((obs,oldval,newval)->{
         //     tossButton.setDisable(newval);
         // });
@@ -160,17 +201,6 @@ public class Monopoly2 implements Initializable{
 //#endregion
    
 
-    //#region Add and Minus money
-    public void addMoney() {
-        curPlayer.setMoney(curPlayer.getMoney() + 1000);
-        checkBankrupt();
-    }
-
-    public void minusMoney() {
-        curPlayer.setMoney(curPlayer.getMoney() - 1000);
-        checkBankrupt();
-    }
-    //#endregion
     public void DoubleDice() throws InterruptedException{
         dice1 = 2;
         dice2 =2;
@@ -373,7 +403,8 @@ public class Monopoly2 implements Initializable{
             owner.setMoney(owner.getMoney()+((Property)l).getPrice());
         }
         ((Property) l).setOwner(curPlayer);
-        Rectangle rect = box.get(curPlayer.PlayerPos());
+        Rectangle rect = ((Property) l).getRectangle();
+        System.out.println(rect);
         rect.setFill(curPlayer.getCircle().getFill());
         if(l.getID() ==1){
             ((Property)l).UgpradeProp();
@@ -384,8 +415,8 @@ public class Monopoly2 implements Initializable{
             curPlayer = curPlayer.getNextPlayer();
             curPlayer.getCircle().toFront();
         }
-        checkBankrupt();
         popUpPane.setVisible(false);
+        checkBankrupt();
     }
 
     public void NextButton(ActionEvent event){
@@ -557,7 +588,7 @@ public class Monopoly2 implements Initializable{
                 if(lo instanceof Property&&((Property)lo).getOwner()== curPlayer){
                     ///System.out.println(((Property)lo).getOwner());
                     ((Property)lo).setOwner(null);
-                    box.get(locations.indexOf(lo)).setFill(Color.WHITE);;
+                    ((Property)lo).getRectangle().setFill(Color.WHITE);;
                     
                 }
             }

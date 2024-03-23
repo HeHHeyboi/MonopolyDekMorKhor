@@ -1,5 +1,7 @@
 package com.example;
 
+
+
 public abstract class Location {
     protected int id;
 
@@ -9,5 +11,6 @@ public abstract class Location {
     public int getID(){
         return this.id;
     }
+
     
 }
