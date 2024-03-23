@@ -16,22 +16,9 @@ public class App extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-    // // Load the image as a resource
-    // InputStream inputStream = getClass().getResourceAsStream("/pic/kkbs.jpg");
-    // Image image = new Image(inputStream);
-    
-    // ImageView imageView = new ImageView(image);
-    // Group root = new Group();
-    // root.getChildren().add(imageView);
-    
-    // Scene scene = new Scene(root, 400, 3c00);
-    scene = new Scene(loadFXML("PlayerScene"),600,400);
-    //Scene scene = new Scene(loadFXML("Monopoly DekmorKhor"),1280,800);
+    Scene scene = new Scene(loadFXML("MonopolyDekmorKhor2"),1280,800);
     stage.setX(10);
     stage.setY(10);
-    //init();
-    //scene.setRoot(loadFXML("ImageTest"));
-    //stage.setFullScreen(true);
     stage.setScene(scene);
     stage.setTitle("PlayerScene");
     stage.show();
