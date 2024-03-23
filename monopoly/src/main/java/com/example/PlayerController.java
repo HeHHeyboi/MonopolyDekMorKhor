@@ -60,7 +60,7 @@ public class PlayerController implements Initializable{
     private Player player2;
     private static Player curPlayer;
     Random random = new Random();
-    private List<Player> p = new ArrayList<>();
+    private ArrayList<Player> p = new ArrayList<>();
     IntegerProperty Money1;
     IntegerProperty Money2;
     IntegerProperty Step = new SimpleIntegerProperty();
@@ -161,10 +161,12 @@ public class PlayerController implements Initializable{
     //#region Add and Minus money
     public void addMoney() {
         curPlayer.setMoney(player1.getMoney() + 1000);
+        checkBankrupt();
     }
 
     public void minusMoney() {
         curPlayer.setMoney(player1.getMoney() - 1000);
+        checkBankrupt();
     }
     //#endregion
     public void DoubleDice() throws InterruptedException{
@@ -514,16 +516,21 @@ public class PlayerController implements Initializable{
     }
     
     public void checkBankrupt(){
-        if(curPlayer.getMoney()<0){
+        if(curPlayer.getMoney()<=0){
             for(Player o:p){
                 if(o.getNextPlayer()==curPlayer){
                     o.setNextPlayer(curPlayer.getNextPlayer());
                     p.remove(curPlayer);
+                    curPlayer = curPlayer.getNextPlayer();
+                    break;
                 }
             }
+            if(p.size() == 1){
+                luckText.setText(p.get(0).getName() + " wins");
+            }
         }
-        else if(p.size() == 1){
-            luckText.setText(p.get(0).getName()+" win");
+        else if (p.size() == 1) {
+            luckText.setText(p.get(0).getName() + " wins");
         }
     }
 }
