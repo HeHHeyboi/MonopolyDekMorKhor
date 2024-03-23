@@ -60,7 +60,7 @@ public class PlayerController implements Initializable{
     private Player player2;
     private static Player curPlayer;
     Random random = new Random();
-    
+    private List<Player> p = new ArrayList<>();
     IntegerProperty Money1;
     IntegerProperty Money2;
     IntegerProperty Step = new SimpleIntegerProperty();
@@ -89,6 +89,8 @@ public class PlayerController implements Initializable{
         player2.setNextPlayer(player1);
         player2.setCircle(player2Circle);
         curPlayer = player1;
+        p.add(player1);
+        p.add(player2);
         nameDisplay.setText(player1.getName());
         moneyDisplay.setText(""+player1.getMoney());
         player2NameDisplay.setText(player2.getName());
@@ -351,6 +353,12 @@ public class PlayerController implements Initializable{
         popUpPane.setVisible(false);
     }
     public void buyProperty(ActionEvent event){
+        if(curPlayer.getMoney()<((Property)l).getPrice()){
+            popYesButton.setDisable(true);
+        }
+        else{
+            popYesButton.setDisable(false);
+        }
         Player owner = ((Property)l).getOwner();
         if(owner == null || owner== curPlayer){
             curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
@@ -505,4 +513,17 @@ public class PlayerController implements Initializable{
         }
     }
     
+    public void checkBankrupt(){
+        if(curPlayer.getMoney()<0){
+            for(Player o:p){
+                if(o.getNextPlayer()==curPlayer){
+                    o.setNextPlayer(curPlayer.getNextPlayer());
+                    p.remove(curPlayer);
+                }
+            }
+        }
+        else if(p.size() == 1){
+            luckText.setText(p.get(0).getName()+" win");
+        }
+    }
 }
