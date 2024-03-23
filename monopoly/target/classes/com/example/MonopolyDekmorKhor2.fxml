@@ -14,7 +14,7 @@
    <children>
       <ImageView fx:id="backgroud" fitHeight="585.0" fitWidth="581.0" layoutX="110.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../pic/1112.png" />
+            <Image url="@../../pic/ตาราง/main%20screen.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="680.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
