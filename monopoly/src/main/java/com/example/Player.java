@@ -11,7 +11,7 @@ public class Player {
     
     private final IntegerProperty money = new SimpleIntegerProperty();
     //private final IntegerProperty step = new SimpleIntegerProperty(0);
-    private final String name;
+    private String name;
     private Player nextPlayer;
     private Circle circle;
     private int playerPos = 0;
@@ -39,6 +39,9 @@ public class Player {
     }
     public Circle getCircle(){
         return circle;
+    }
+    public void setName(String name){
+        this.name = name;
     }
     public String getName() {
         return name;

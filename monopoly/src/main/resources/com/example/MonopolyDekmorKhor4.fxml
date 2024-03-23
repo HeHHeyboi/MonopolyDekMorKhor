@@ -293,6 +293,6 @@
          </font>
       </Text>
       <Circle fx:id="player3Circle" fill="#2b30ff" layoutX="1117.0" layoutY="574.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Circle fx:id="player3Circle1" fill="#eeff00" layoutX="1198.0" layoutY="565.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Circle fx:id="player4Circle" fill="#eeff00" layoutX="1198.0" layoutY="565.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
    </children>
 </Pane>
