@@ -16,17 +16,17 @@
             <Image url="@../../pic/ตาราง/Sound%20Volume.png" />
          </image>
       </ImageView>
-      <ImageView accessibleRole="BUTTON" fitHeight="150.0" fitWidth="340.0" layoutX="132.0" layoutY="306.0" onMouseClicked="#twoPlayerButton" pickOnBounds="true" preserveRatio="true">
+      <ImageView accessibleRole="BUTTON" fitHeight="150.0" fitWidth="340.0" layoutX="132.0" layoutY="306.0" onMouseClicked="#switchTo2Player" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../pic/ตาราง/2P.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="340.0" layoutX="133.0" layoutY="401.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="340.0" layoutX="133.0" layoutY="401.0" onMouseClicked="#switchTo3Player" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../pic/ตาราง/3P.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="340.0" layoutX="133.0" layoutY="499.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="340.0" layoutX="133.0" layoutY="499.0" onMouseClicked="#switchTo4Player" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../pic/ตาราง/4P.png" />
          </image>
