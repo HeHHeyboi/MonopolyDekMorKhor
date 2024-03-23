@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import org.w3c.dom.css.Rect;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -58,6 +59,7 @@ public class Monopoly2 implements Initializable{
     @FXML private Text popText;
     public List<ImageView> tiles = new ArrayList<>();
     private List<Location> locations = new ArrayList<>();
+    private List<Rectangle> box = new ArrayList<>();
     private Player player1;
     private Player player2;
     private static Player curPlayer;
@@ -155,20 +157,18 @@ public class Monopoly2 implements Initializable{
         //#region Add rectangle to list
         int i = 0;
         List<Node> nodes = pane.getChildren();
-        for(Node node:nodes){
-            if(node instanceof ImageView){
-                if(node != backgroud){
-                    ImageView rectangle = (ImageView) node;
-                    tiles.add(rectangle);
-                }
-            else if(node instanceof Rectangle && locations.get(i) instanceof Property){
-                Rectangle rectangle = (Rectangle) node;
-                ((Property) locations.get(i)).setRectangle(rectangle);
-                System.out.println(((Property) locations.get(i)));
-                i++;
+        for (Node node : nodes) {
+        if (node instanceof ImageView) {
+            if (node != backgroud) {
+                ImageView imageView = (ImageView) node;
+                tiles.add(imageView);
             }
-            }
-        }//#endregion
+        } 
+        else if (node instanceof Rectangle) {
+            box.add((Rectangle) node);
+        }
+    }
+        //#endregion
         tile = tiles.get(0);
         posX =  tile.getFitWidth()/2 + tile.getLayoutX();
         posY =  tile.getFitHeight()/2 +tile.getLayoutY();
@@ -450,9 +450,9 @@ public class Monopoly2 implements Initializable{
         switch (los.getID()) {
             case 2:
                 if(dice1!= dice2){
-                curPlayer.setDouble_countToZero();
-                curPlayer = curPlayer.getNextPlayer();
-                curPlayer.getCircle().toFront();
+                    curPlayer.setDouble_countToZero();
+                    curPlayer = curPlayer.getNextPlayer();
+                    curPlayer.getCircle().toFront();
                 }
                 break;
             
