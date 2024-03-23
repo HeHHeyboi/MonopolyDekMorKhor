@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Point3D?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -41,13 +40,7 @@
             <Image url="@../../pic/1112.png" />
          </image>
       </ImageView>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#617486" height="120.0" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="120.0">
-         <rotationAxis>
-            <Point3D />
-         </rotationAxis>
-      </Rectangle>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#617486" height="120.0" layoutY="680.0" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="120.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#617486" height="120.0" layoutX="680.0" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="120.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="690.0" layoutY="120.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="110.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="690.0" layoutY="190.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="110.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="690.0" layoutY="260.0" opacity="0.7" stroke="BLACK" strokeMiterLimit="5.0" strokeType="INSIDE" width="110.0" />
@@ -246,5 +239,15 @@
       <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="470.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
       <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="540.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
       <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="610.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
+      <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../pic/ตาราง/F+.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="680.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../pic/ตาราง/sutterbus.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>
