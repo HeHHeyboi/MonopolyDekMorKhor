@@ -4,7 +4,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 
-public class StartMenu{
+public class StartController {
     @FXML
     private void twoPlayerButton() throws IOException {
         App.setRoot("MonopolyDekmorKhor2");
