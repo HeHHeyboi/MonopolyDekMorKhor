@@ -15,7 +15,6 @@ public class Player {
     //private final IntegerProperty step = new SimpleIntegerProperty(0);
     private final String name;
     private Player nextPlayer;
-    private List<Location> location = new ArrayList<>();
     private Circle circle;
     private int playerPos = 0;
     private int maxTile = 7;
@@ -37,20 +36,11 @@ public class Player {
     public IntegerProperty moneyProperty() {
         return money;
     }
-    // public void setStep(int step){
-    //     this.step.set(step);
-    // }
-    // public IntegerProperty stepProp(){
-    //     return step;
-    // }
     public void setCircle(Circle c){
         this.circle = c;
     }
     public Circle getCircle(){
         return circle;
-    }
-    public List<Location> getList(){
-        return this.location;
     }
     public String getName() {
         return name;
