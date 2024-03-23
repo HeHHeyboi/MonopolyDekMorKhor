@@ -133,7 +133,7 @@ public class Monopoly2 implements Initializable{
         locations.add(new EventTile(7));
         locations.add(new Property(5,275,175));
         locations.add(new Property(1,300,190));
-        locations.add(new EventTile(4));
+        locations.add(new EventTile(3));
         locations.add(new Property(1,325,200));
         locations.add(new Property(1,350,210));
         locations.add(new Property(1,375,230));
@@ -171,12 +171,6 @@ public class Monopoly2 implements Initializable{
             j++;
         }
     }
-        for (Location l : locations) {
-            if(l instanceof Property){
-                System.out.println(((Property) l).getRectangle());
-                
-            }
-        }
         //#endregion
         tile = tiles.get(0);
         posX =  tile.getFitWidth()/2 + tile.getLayoutX();
@@ -418,14 +412,14 @@ public class Monopoly2 implements Initializable{
         if(l.getID() ==1){
             ((Property)l).UgpradeProp();
         }
+        checkBankrupt();
+        popUpPane.setVisible(false);
         
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
             curPlayer = curPlayer.getNextPlayer();
             curPlayer.getCircle().toFront();
         }
-        popUpPane.setVisible(false);
-        checkBankrupt();
     }
 
     public void NextButton(ActionEvent event){

@@ -17,8 +17,8 @@ public class App extends Application {
     @Override
     public void start(Stage stage) throws IOException {
     Scene scene = new Scene(loadFXML("MonopolyDekmorKhor2"),1280,800);
-    stage.setX(10);
-    stage.setY(10);
+    stage.setX(0);
+    stage.setY(0);
     stage.setScene(scene);
     stage.setTitle("PlayerScene");
     stage.show();
