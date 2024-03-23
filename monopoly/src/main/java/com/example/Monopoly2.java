@@ -13,8 +13,6 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -69,8 +67,6 @@ public class Monopoly2 implements Initializable{
     IntegerProperty Money1;
     IntegerProperty Money2;
     IntegerProperty Step = new SimpleIntegerProperty();
-    StringProperty Player1Name = new SimpleStringProperty();
-    StringProperty Player2Name = new SimpleStringProperty();
     
     int count = 0;
     int dice1;
@@ -88,8 +84,8 @@ public class Monopoly2 implements Initializable{
         update();
     }
     public void init(){
-        player1 = new Player(1000, "Jame");
-        player2 = new Player(1000,"Billy");
+        player1 = new Player(1000, "Red");
+        player2 = new Player(1000,"Green");
         player1.setNextPlayer(player2);
         player1.setCircle(play1Circle);
         player2.setNextPlayer(player1);
