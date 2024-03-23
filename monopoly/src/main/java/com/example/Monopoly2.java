@@ -42,6 +42,7 @@ public class Monopoly2 implements Initializable{
     @FXML 
     private Circle play1Circle;
     @FXML private ImageView backgroud;
+    @FXML private ImageView backgroud2;
     @FXML Button getLuckButton;
     @FXML private Text luckText;
     @FXML TextField textField;
@@ -158,7 +159,7 @@ public class Monopoly2 implements Initializable{
         List<Node> nodes = pane.getChildren();
         for (Node node : nodes) {
         if (node instanceof ImageView) {
-            if (node != backgroud) {
+            if (node != backgroud&&node != backgroud2) {
                 ImageView imageView = (ImageView) node;
                 tiles.add(imageView);
             }
