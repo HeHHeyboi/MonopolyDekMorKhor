@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import org.w3c.dom.css.Rect;
+
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -155,7 +155,6 @@ public class Monopoly2 implements Initializable{
         locations.add(new Property(5,600,420));
         locations.add(new Property(1,650,460));
         //#region Add rectangle to list
-        int i = 0;
         List<Node> nodes = pane.getChildren();
         for (Node node : nodes) {
         if (node instanceof ImageView) {
@@ -168,6 +167,19 @@ public class Monopoly2 implements Initializable{
             box.add((Rectangle) node);
         }
     }
+    int j = 0;
+    for (int i = 0; i < locations.size(); i++) {
+        if (locations.get(i) instanceof Property) {
+            ((Property) locations.get(i)).setRectangle(box.get(j));
+            j++;
+        }
+    }
+        for (Location l : locations) {
+            if(l instanceof Property){
+                System.out.println(((Property) l).getRectangle());
+                
+            }
+        }
         //#endregion
         tile = tiles.get(0);
         posX =  tile.getFitWidth()/2 + tile.getLayoutX();
