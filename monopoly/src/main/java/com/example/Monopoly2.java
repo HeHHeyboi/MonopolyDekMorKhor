@@ -178,11 +178,16 @@ public class Monopoly2 implements Initializable{
         player2Circle.setLayoutX(posX);
         player2Circle.setLayoutY(posY);
 
-        String audioFile = "monopoly/src/main/resources/BGMusic.mp3";
-        Media media = new Media(new File(audioFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
-        mediaPlayer.play();
+        URL mediaUrl = getClass().getResource("/BGMusic.mp3");
+        try  {
+            Media media = new Media(mediaUrl.toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+            mediaPlayer.play();
+        } catch (Exception e) {
+			// TODO: handle exception
+        	System.err.println(e);
+		} 
     }
     public void update(){
 

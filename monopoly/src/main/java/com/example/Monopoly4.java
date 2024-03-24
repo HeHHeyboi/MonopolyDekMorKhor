@@ -97,10 +97,10 @@ public class Monopoly4 implements Initializable{
         update();
     }
     public void init(){
-        player1 = new Player(1000, "Red");
-        player2 = new Player(1000,"Green");
-        player3 = new Player(1000,"Blue");
-        player4 = new Player(1000,"Yellow");
+        player1 = new Player(1500, "Red");
+        player2 = new Player(1500,"Green");
+        player3 = new Player(1500,"Blue");
+        player4 = new Player(1500,"Yellow");
         player1.setNextPlayer(player2);
         player1.setCircle(play1Circle);
         player2.setNextPlayer(player3);
@@ -216,11 +216,16 @@ public class Monopoly4 implements Initializable{
         
         
 
-        String audioFile = "monopoly/src/main/resources/BGMusic.mp3";
-        Media media = new Media(new File(audioFile).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(media);
-        mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
-        mediaPlayer.play();
+        URL mediaUrl = getClass().getResource("/BGMusic.mp3");
+        try  {
+            Media media = new Media(mediaUrl.toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+            mediaPlayer.play();
+        } catch (Exception e) {
+			// TODO: handle exception
+        	System.err.println(e);
+		} 
     }
     public void update(){
 
