@@ -1,6 +1,5 @@
 package com.example;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -223,7 +222,6 @@ public class Monopoly4 implements Initializable{
             mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
             mediaPlayer.play();
         } catch (Exception e) {
-			// TODO: handle exception
         	System.err.println(e);
 		} 
     }
