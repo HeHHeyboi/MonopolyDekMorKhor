@@ -8,7 +8,6 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -84,8 +83,8 @@ public class Monopoly2 implements Initializable{
         update();
     }
     public void init(){
-        player1 = new Player(1000, "Red");
-        player2 = new Player(1000,"Green");
+        player1 = new Player(1500, "Red");
+        player2 = new Player(1500,"Green");
         player1.setNextPlayer(player2);
         player1.setCircle(play1Circle);
         player2.setNextPlayer(player1);
@@ -101,8 +100,7 @@ public class Monopoly2 implements Initializable{
         player2MoneyDisplay.setText(""+player2.getMoney());
         Money1 = player1.moneyProperty();
         Money2 = player2.moneyProperty();
-        //stepDisplay.setText(""+Step.getValue());
-        //tossButtonCheck.set(false);
+        stepDisplay.setText(""+Step.getValue());
         
         /*
         * id   mean
@@ -194,38 +192,45 @@ public class Monopoly2 implements Initializable{
         Money2.addListener((observer,oldval,newval) ->{
             player2MoneyDisplay.setText(String.valueOf(newval.intValue()));
         });
-        // Step.addListener((obs,oldval,newval) ->{
-        //     stepDisplay.setText(String.valueOf(newval.intValue()));
-        // });
+        Step.addListener((obs,oldval,newval) ->{
+            stepDisplay.setText(String.valueOf(newval.intValue()));
+        });
         // tossButtonCheck.addListener((obs,oldval,newval)->{
         //     tossButton.setDisable(newval);
         // });
     }
 //#endregion
-   
 
-    public void DoubleDice() throws InterruptedException{
-        dice1 = 2;
-        dice2 =2;
+    public void TossDice(ActionEvent event) throws InterruptedException{
+        dice1 = random.nextInt(6)+1;
+        dice2 = random.nextInt(6)+1;
         Step.set(dice1+dice2);
         if(curPlayer.CheckDouble_count() == true){
-            curPlayer.PlayerPos(2);// Fix
+            curPlayer.PlayerPos(9);
             tile = tiles.get(curPlayer.PlayerPos());
             posX = tile.getFitWidth()/2+tile.getLayoutX();
             posY = tile.getFitHeight()/2+tile.getLayoutY();
             curPlayer.getCircle().setLayoutX(posX);
             curPlayer.getCircle().setLayoutY(posY);
+            curPlayer.setWaitinJail(3);
+            curPlayer = curPlayer.getNextPlayer();
             //System.out.println(curPlayer.getName()+" is in jailed");
+            luckText.setText(curPlayer.getName()+" is in jailed by get double 3 times");
+            luckText.setVisible(true);
+
         }
         else if(curPlayer.getWaitInjaild()>0){
             boolean sameDice = dice1==dice2;
             if(sameDice){
                 //System.out.println(curPlayer.getName()+"is geted out of jail");
+                luckText.setText(curPlayer.getName()+"is geted out of jail");
+                luckText.setVisible(true);
+
                 moveCircle(dice1+dice2);
             }
             else{
-                luckText.setText("You didn't get double");
-                
+                luckText.setText(curPlayer.getName()+" didn't get double");
+                luckText.setVisible(true);
                 curPlayer.setWaitinJail(curPlayer.getWaitInjaild()-1);
                 curPlayer = curPlayer.getNextPlayer();
             }
@@ -234,38 +239,6 @@ public class Monopoly2 implements Initializable{
             moveCircle(dice1+dice2);
 
         }
-    }
-    public void TossDice(ActionEvent event) throws InterruptedException{
-        dice1 = random.nextInt(6)+1;
-        dice2 = random.nextInt(6)+1;
-        Step.set(dice1+dice2);
-        // Platform.runLater(()->{
-            //     movePlayer.run();
-            // });
-            if(curPlayer.CheckDouble_count()){
-                curPlayer.PlayerPos(9);
-                tile = tiles.get(curPlayer.PlayerPos());
-                posX = tile.getFitWidth()/2+tile.getLayoutX();
-                posY = tile.getFitHeight()/2+tile.getLayoutY();
-                curPlayer.getCircle().setLayoutX(posX);
-                curPlayer.getCircle().setLayoutY(posY);
-                curPlayer.setWaitinJail(3);
-            }
-            else if(curPlayer.getWaitInjaild()>0){
-                boolean sameDice = dice1==dice2;
-                if(sameDice){
-                    curPlayer.setDouble_countToZero();
-                    moveCircle(dice1+dice2);
-                }
-                else{
-                    curPlayer.setWaitinJail(curPlayer.getWaitInjaild()-1);
-                    curPlayer = curPlayer.getNextPlayer();
-                }
-            }
-            else{
-                moveCircle(dice1+dice2);
-    
-            }
         
     }
     //move player circle with animation 'dice1 +dice' times
@@ -294,7 +267,6 @@ public class Monopoly2 implements Initializable{
                     curPlayer.Inc_DoubleC();
                 }
                 tossButton.setDisable(false);
-                luckText.setVisible(false);
                 checkTile(l);
                 count = 0;
             }
@@ -328,7 +300,6 @@ public class Monopoly2 implements Initializable{
                     curPlayer.Inc_DoubleC();
                 }
                 tossButton.setDisable(false);
-                luckText.setVisible(false);
                 checkTile(l);
                 
                 count = 0;
@@ -385,6 +356,7 @@ public class Monopoly2 implements Initializable{
             curPlayer.getCircle().toFront();
         }
         popUpPane.setVisible(false);
+        luckText.setVisible(false);
     }
     public void buyProperty(ActionEvent event){
         Player owner = ((Property)l).getOwner();
@@ -403,6 +375,7 @@ public class Monopoly2 implements Initializable{
         }
         checkBankrupt();
         popUpPane.setVisible(false);
+        luckText.setVisible(false);
         
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
@@ -420,6 +393,7 @@ public class Monopoly2 implements Initializable{
             popText.setText("upgrade is max can't not purchase");
             setButton(0);
         }
+        luckText.setVisible(false);
         
     }
     public void GotoSelectTile() throws InterruptedException{
@@ -431,6 +405,7 @@ public class Monopoly2 implements Initializable{
         //checkTile(l);
         curPlayer.setDouble_countToZero();
         popUpPane.setVisible(false);
+        luckText.setVisible(false);
 
     }
     public void checkTile(Location los){
@@ -448,22 +423,31 @@ public class Monopoly2 implements Initializable{
                 if(owner == null){
                     popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht");
                     setButton(1);
+                    popUpwindow();
                 }
                 else if(owner == curPlayer){
                     if(((Property) l).getUpgradeC()<=3){
                         popText.setText("Would you like to buy upgrade "+((Property) l).getUpgradeC()+"\n"+((Property) l).getPrice()+" baht");
                         setButton(1);
+                        popUpwindow();
                     }
                     else{
                         popText.setText("upgrade is max can't not purchase");
                         setButton(0);
+                        popUpwindow();
                     }
                 }
                 else{
                     popText.setText("You paid "+((Property) l).getPaid() + " to the "+owner.getName());
                     curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPaid());
                     owner.setMoney(owner.getMoney()+((Property) l).getPaid());
-                    setButton(2);
+                    if(curPlayer.getMoney()<= 0){
+                        checkBankrupt();
+                    }
+                    else{
+                        setButton(2);
+                        popUpwindow();
+                    }
                 }
                 if(curPlayer.getMoney()<((Property)l).getPrice()){
                     popYesButton.setDisable(true);
@@ -471,7 +455,6 @@ public class Monopoly2 implements Initializable{
                 else{
                     popYesButton.setDisable(false);
                 }
-                popUpwindow();
                 break;
             case 3:
                 curPlayer.PlayerPos(9);
@@ -483,8 +466,8 @@ public class Monopoly2 implements Initializable{
                 curPlayer.setWaitinJail(3);
                 curPlayer = curPlayer.getNextPlayer();
                 curPlayer.getCircle().toFront();
-                popText.setText("You are going to F");
-                setButton(0);
+                luckText.setText("You are going to F");
+                luckText.setVisible(true);
                 break;
             case 4:
                 popText.setText("How much tile do you want to go?");
@@ -524,6 +507,8 @@ public class Monopoly2 implements Initializable{
                 break;
             case 7:
                 curPlayer.setMoney(curPlayer.getMoney()-200);
+                luckText.setText(curPlayer.getName()+" paid mhukhata 200 baht");
+                luckText.setVisible(true);
                 checkBankrupt();
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
@@ -542,6 +527,7 @@ public class Monopoly2 implements Initializable{
         }
         public void getLuck() {
             int rand = random.nextInt(4)+1;
+            int randMove;
             switch (rand) {
                 case 1:
                     curPlayer.setMoney(curPlayer.getMoney()+100);
@@ -565,19 +551,21 @@ public class Monopoly2 implements Initializable{
                     }
                     break;
                 case 3:
-                    luckText.setText(curPlayer.getName()+" move forward 2 times");
+                    randMove = random.nextInt(6)+1;
+                    luckText.setText(curPlayer.getName()+" move forward "+randMove+" times");
                     luckText.setVisible(true);
                     try {
-                        moveCircle(2);
+                        moveCircle(randMove);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                     break;
                 case 4:
-                    luckText.setText(curPlayer.getName()+" move backward 2 times");
+                    randMove = random.nextInt(6)+1;
+                    luckText.setText(curPlayer.getName()+" move backward "+randMove+" times");
                     luckText.setVisible(true);
                     try {
-                        Goback(2);
+                        Goback(randMove);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -592,7 +580,8 @@ public class Monopoly2 implements Initializable{
                     if(lo instanceof Property&&((Property)lo).getOwner()== curPlayer){
                         ///System.out.println(((Property)lo).getOwner());
                         ((Property)lo).setOwner(null);
-                        ((Property)lo).getRectangle().setFill(Color.WHITE);;
+                        ((Property)lo).getRectangle().setFill(Color.WHITE);
+                        ((Property)lo).resetUpgradeC();
                         
                     }
                 }
@@ -607,8 +596,8 @@ public class Monopoly2 implements Initializable{
                     }
                 }
                 if(p.size() == 1){
-                    luckText.setVisible(true);
                     luckText.setText(p.get(0).getName() + " wins");
+                    luckText.setVisible(true);
                 }
             }
         }

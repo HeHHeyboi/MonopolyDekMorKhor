@@ -2,6 +2,8 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -227,12 +229,12 @@
       <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="791.0" layoutY="610.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
       <Pane fx:id="popUpPane" layoutX="231.0" layoutY="439.0" prefHeight="154.0" prefWidth="339.0" style="-fx-background-color: #00FFB6;" visible="false">
          <children>
-            <Text fx:id="popText" layoutX="50.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="238.00515747070312">
+            <Text fx:id="popText" layoutX="6.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="324.40513610839844">
                <font>
-                  <Font size="18.0" />
+                  <Font name="Retro Gaming" size="16.0" />
                </font>
             </Text>
-            <TextField fx:id="textField" layoutX="143.0" layoutY="46.0" prefHeight="25.0" prefWidth="53.0" visible="false" />
+            <TextField fx:id="textField" layoutX="143.0" layoutY="45.0" prefHeight="25.0" prefWidth="53.0" visible="false" />
             <Button fx:id="popCloseButton" layoutX="153.0" layoutY="109.0" mnemonicParsing="false" onAction="#Exit" text="OK" visible="false" />
             <Button fx:id="popNextButton" layoutX="149.0" layoutY="109.0" mnemonicParsing="false" onAction="#NextButton" text="Next" visible="false" />
             <Button fx:id="popYesButton" layoutX="41.0" layoutY="109.0" mnemonicParsing="false" onAction="#buyProperty" text="Yes" visible="false" />
@@ -240,48 +242,60 @@
             <Button fx:id="popGoButton" layoutX="153.0" layoutY="77.0" mnemonicParsing="false" onAction="#GotoSelectTile" text="Go" visible="false" />
          </children>
       </Pane>
-      <Text fx:id="luckText" fill="#ff0303" layoutX="231.0" layoutY="451.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="339.0">
+      <Text fx:id="luckText" fill="#ff0303" layoutX="121.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="560.5999145507812">
          <font>
-            <Font size="30.0" />
+            <Font name="Retro Gaming" size="30.0" />
          </font>
       </Text>
-      <Text fx:id="player1NameDisplay" layoutX="882.0" layoutY="228.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="player1NameDisplay" layoutX="876.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font size="41.0" />
+            <Font name="Retro Gaming" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="player1MoneyDisplay" layoutX="1117.0" layoutY="220.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="player1MoneyDisplay" layoutX="1107.0" layoutY="222.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font size="40.0" />
+            <Font name="Retro Gaming" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="player2NameDisplay" layoutX="882.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="player2NameDisplay" layoutX="877.0" layoutY="316.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font size="41.0" />
+            <Font name="Retro Gaming" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="player2MoneyDisplay" layoutX="1116.0" layoutY="312.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="player2MoneyDisplay" layoutX="1107.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font size="41.0" />
+            <Font name="Retro Gaming" size="35.0" />
          </font>
       </Text>
-      <Button fx:id="tossButton" layoutX="957.0" layoutY="613.0" mnemonicParsing="false" onAction="#TossDice" prefHeight="71.0" prefWidth="171.0" text="Toss">
-         <font>
-            <Font size="28.0" />
-         </font>
-      </Button>
       <Circle fx:id="play1Circle" fill="#f70000" layoutX="938.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="player2Circle" fill="#29ff50" layoutX="1054.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text fx:id="player3NameDisplay" layoutX="882.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="player3NameDisplay" layoutX="878.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font size="41.0" />
+            <Font name="Retro Gaming" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="player3MoneyDisplay" layoutX="1116.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="player3MoneyDisplay" layoutX="1108.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
          <font>
-            <Font size="41.0" />
+            <Font name="Retro Gaming" size="35.0" />
          </font>
       </Text>
       <Circle fx:id="player3Circle" fill="#2000f5" layoutX="1148.0" layoutY="539.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
+      <Text fx:id="stepDisplay" layoutX="367.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Retro Gaming" size="60.0" />
+         </font>
+      </Text>
+      <Button fx:id="tossButton" layoutX="953.0" layoutY="612.0" mnemonicParsing="false" onAction="#TossDice" prefHeight="76.0" prefWidth="175.0" style="-fx-background-color: Red;" text="LOL" textAlignment="CENTER">
+         <font>
+            <Font name="Retro Gaming" size="45.0" />
+         </font>
+         <effect>
+            <Lighting bumpInput="$null" diffuseConstant="1.73" specularConstant="1.13" specularExponent="31.38" surfaceScale="2.33">
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
    </children>
 </Pane>

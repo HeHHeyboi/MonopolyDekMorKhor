@@ -59,6 +59,9 @@ public class Property extends Location{
     public int getUpgradeC(){
         return this.upgradeCount;
     }
+    public void resetUpgradeC(){
+        this.upgradeCount = 0;
+    }
     public Rectangle getRectangle(){
         return this.rectangle;
     }
