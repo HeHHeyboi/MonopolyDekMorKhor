@@ -209,28 +209,29 @@ public class Monopoly2 implements Initializable{
         dice1 = random.nextInt(6)+1;
         dice2 = random.nextInt(6)+1;
         Step.set(dice1+dice2);
-        if(curPlayer.CheckDouble_count() == true){
-            curPlayer.PlayerPos(9);
-            tile = tiles.get(curPlayer.PlayerPos());
-            posX = tile.getFitWidth()/2+tile.getLayoutX();
-            posY = tile.getFitHeight()/2+tile.getLayoutY();
-            curPlayer.getCircle().setLayoutX(posX);
-            curPlayer.getCircle().setLayoutY(posY);
-            curPlayer.setWaitinJail(3);
-            curPlayer = curPlayer.getNextPlayer();
-            //System.out.println(curPlayer.getName()+" is in jailed");
-            luckText.setText(curPlayer.getName()+" is in jailed by get double 3 times");
-            luckText.setVisible(true);
-
-        }
-        else if(curPlayer.getWaitInjaild()>0){
+        if(curPlayer.getWaitInjaild()>0){
             boolean sameDice = dice1==dice2;
             if(sameDice){
                 //System.out.println(curPlayer.getName()+"is geted out of jail");
                 luckText.setText(curPlayer.getName()+"is geted out of jail");
                 luckText.setVisible(true);
-
+                
                 moveCircle(dice1+dice2);
+            }
+            else if(curPlayer.CheckDouble_count() == true){
+                curPlayer.PlayerPos(9);
+                tile = tiles.get(curPlayer.PlayerPos());
+                posX = tile.getFitWidth()/2+tile.getLayoutX();
+                posY = tile.getFitHeight()/2+tile.getLayoutY();
+                curPlayer.getCircle().setLayoutX(posX);
+                curPlayer.getCircle().setLayoutY(posY);
+                curPlayer.setWaitinJail(3);
+                curPlayer.setDouble_countToZero();
+                curPlayer = curPlayer.getNextPlayer();
+                //System.out.println(curPlayer.getName()+" is in jailed");
+                luckText.setText(curPlayer.getName()+" is in jailed by get double 3 times");
+                luckText.setVisible(true);
+    
             }
             else{
                 luckText.setText(curPlayer.getName()+" didn't get double");
@@ -470,6 +471,7 @@ public class Monopoly2 implements Initializable{
                 curPlayer.setWaitinJail(3);
                 curPlayer = curPlayer.getNextPlayer();
                 curPlayer.getCircle().toFront();
+                curPlayer.setDouble_countToZero();
                 luckText.setText("You are going to F");
                 luckText.setVisible(true);
                 break;
