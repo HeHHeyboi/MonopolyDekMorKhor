@@ -623,7 +623,6 @@ public void checkTile(Location los){
         if(curPlayer.getMoney()<=0){
             for(Location lo:locations){
                 if(lo instanceof Property&&((Property)lo).getOwner()== curPlayer){
-                    ///System.out.println(((Property)lo).getOwner());
                     ((Property)lo).setOwner(null);
                     ((Property)lo).getRectangle().setFill(Color.WHITE);
                     ((Property)lo).resetUpgradeC();
