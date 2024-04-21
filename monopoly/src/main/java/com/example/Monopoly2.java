@@ -58,6 +58,7 @@ public class Monopoly2 implements Initializable{
     public List<ImageView> tiles = new ArrayList<>();
     private List<Location> locations = new ArrayList<>();
     private List<Rectangle> box = new ArrayList<>();
+    
     private Player player1;
     private Player player2;
     private static Player curPlayer;
@@ -219,12 +220,7 @@ public class Monopoly2 implements Initializable{
                 moveCircle(dice1+dice2);
             }
             else if(curPlayer.CheckDouble_count() == true){
-                curPlayer.PlayerPos(9);
-                tile = tiles.get(curPlayer.PlayerPos());
-                posX = tile.getFitWidth()/2+tile.getLayoutX();
-                posY = tile.getFitHeight()/2+tile.getLayoutY();
-                curPlayer.getCircle().setLayoutX(posX);
-                curPlayer.getCircle().setLayoutY(posY);
+                movePlayer(9);
                 curPlayer.setWaitinJail(3);
                 curPlayer.setDouble_countToZero();
                 curPlayer = curPlayer.getNextPlayer();
@@ -244,17 +240,19 @@ public class Monopoly2 implements Initializable{
             moveCircle(dice1+dice2);
 
         }
-        
+    }
+    public void movePlayer(int step){
+        curPlayer.PlayerPos(step);
+        tile = tiles.get(curPlayer.PlayerPos());
+        posX = tile.getFitWidth()/2+tile.getLayoutX();
+        posY = tile.getFitHeight()/2+tile.getLayoutY();
+        curPlayer.getCircle().setLayoutX(posX);
+        curPlayer.getCircle().setLayoutY(posY);
     }
     //move player circle with animation 'dice1 +dice' times
     public void moveCircle(int Sumdice) throws InterruptedException {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
-            curPlayer.PlayerPos(curPlayer.PlayerPos()+1);
-            tile = tiles.get(curPlayer.PlayerPos());
-            posX = tile.getFitWidth()/2+tile.getLayoutX();
-            posY = tile.getFitHeight()/2+tile.getLayoutY();
-            curPlayer.getCircle().setLayoutX(posX);
-            curPlayer.getCircle().setLayoutY(posY);
+            movePlayer(curPlayer.PlayerPos()+1);
             count++;
 
             l = locations.get(curPlayer.PlayerPos());
@@ -282,12 +280,7 @@ public class Monopoly2 implements Initializable{
     }
     public void Goback(int Sumdice) throws InterruptedException {
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
-            curPlayer.PlayerPos(curPlayer.PlayerPos()-1);
-            tile = tiles.get(curPlayer.PlayerPos());
-            posX = tile.getFitWidth()/2+tile.getLayoutX();
-            posY = tile.getFitHeight()/2+tile.getLayoutY();
-            curPlayer.getCircle().setLayoutX(posX);
-            curPlayer.getCircle().setLayoutY(posY);
+            movePlayer(curPlayer.PlayerPos()-1);
             count++;
 
             l = locations.get(curPlayer.PlayerPos());
@@ -462,12 +455,7 @@ public class Monopoly2 implements Initializable{
                 }
                 break;
             case 3:
-                curPlayer.PlayerPos(9);
-                tile = tiles.get(curPlayer.PlayerPos());
-                posX = tile.getFitWidth()/2+tile.getLayoutX();
-                posY = tile.getFitHeight()/2+tile.getLayoutY();
-                curPlayer.getCircle().setLayoutX(posX);
-                curPlayer.getCircle().setLayoutY(posY);
+                movePlayer(9);
                 curPlayer.setWaitinJail(3);
                 curPlayer = curPlayer.getNextPlayer();
                 curPlayer.getCircle().toFront();
