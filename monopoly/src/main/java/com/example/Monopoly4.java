@@ -89,6 +89,7 @@ public class Monopoly4 implements Initializable{
     double posY;
     Rectangle rect;
     static int index = 0;
+    int startMoney = 500;
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -96,10 +97,10 @@ public class Monopoly4 implements Initializable{
         update();
     }
     public void init(){
-        player1 = new Player(1500, "Red");
-        player2 = new Player(1500,"Green");
-        player3 = new Player(1500,"Blue");
-        player4 = new Player(1500,"Yellow");
+        player1 = new Player(startMoney, "Red");
+        player2 = new Player(startMoney,"Green");
+        player3 = new Player(startMoney,"Blue");
+        player4 = new Player(startMoney,"Yellow");
         player1.setNextPlayer(player2);
         player1.setCircle(play1Circle);
         player2.setNextPlayer(player3);
