@@ -76,7 +76,9 @@ public class Monopoly2 implements Initializable{
     double posX;
     double posY;
     Rectangle rect;
+    static int index = 0;
 
+    int startMoney = 500;
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -84,8 +86,8 @@ public class Monopoly2 implements Initializable{
         update();
     }
     public void init(){
-        player1 = new Player(1500, "Red");
-        player2 = new Player(1500,"Green");
+        player1 = new Player(startMoney, "Red");
+        player2 = new Player(startMoney,"Green");
         player1.setNextPlayer(player2);
         player1.setCircle(play1Circle);
         player2.setNextPlayer(player1);
@@ -205,6 +207,13 @@ public class Monopoly2 implements Initializable{
         // });
     }
 //#endregion
+    private int iteratorIndex(){
+        index++;
+        if(index >= p.size()){
+            index = 0;
+        }
+        return index;
+    }
 
     public void TossDice(ActionEvent event) throws InterruptedException{
         dice1 = random.nextInt(6)+1;
@@ -288,7 +297,6 @@ public class Monopoly2 implements Initializable{
             switch (l.id) {
                 case 2:
                     ((EventTile) l).giveMoney(curPlayer);
-                    
                     break;
             }
             
@@ -299,7 +307,6 @@ public class Monopoly2 implements Initializable{
                 }
                 tossButton.setDisable(false);
                 checkTile(l);
-                
                 count = 0;
             }
         }));
@@ -410,9 +417,7 @@ public class Monopoly2 implements Initializable{
         switch (los.getID()) {
             case 2:
                 if(dice1!= dice2){
-                    curPlayer.setDouble_countToZero();
-                    curPlayer = curPlayer.getNextPlayer();
-                    curPlayer.getCircle().toFront();
+                    curPlayer = p.get(iteratorIndex());
                 }
                 break;
             
@@ -457,7 +462,7 @@ public class Monopoly2 implements Initializable{
             case 3:
                 movePlayer(9);
                 curPlayer.setWaitinJail(3);
-                curPlayer = curPlayer.getNextPlayer();
+                curPlayer = p.get(iteratorIndex());
                 curPlayer.getCircle().toFront();
                 curPlayer.setDouble_countToZero();
                 luckText.setText("You are going to F");
@@ -506,14 +511,14 @@ public class Monopoly2 implements Initializable{
                 checkBankrupt();
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
-                    curPlayer = curPlayer.getNextPlayer();
+                    curPlayer = p.get(iteratorIndex());
                     curPlayer.getCircle().toFront();
                 }
                 break;
             default:
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
-                    curPlayer = curPlayer.getNextPlayer();
+                    curPlayer = p.get(iteratorIndex());
                     curPlayer.getCircle().toFront();
                 }
                 break;
@@ -529,7 +534,7 @@ public class Monopoly2 implements Initializable{
                     luckText.setVisible(true);
                     if(dice1!= dice2){
                         curPlayer.setDouble_countToZero();
-                        curPlayer = curPlayer.getNextPlayer();
+                        curPlayer = p.get(iteratorIndex());
                         curPlayer.getCircle().toFront();
                     }
                     break;
@@ -540,7 +545,7 @@ public class Monopoly2 implements Initializable{
                     checkBankrupt();
                     if(dice1!= dice2){
                         curPlayer.setDouble_countToZero();
-                        curPlayer = curPlayer.getNextPlayer();
+                        curPlayer = p.get(iteratorIndex());
                         curPlayer.getCircle().toFront();
                     }
                     break;
@@ -576,22 +581,22 @@ public class Monopoly2 implements Initializable{
                         ((Property)lo).setOwner(null);
                         ((Property)lo).getRectangle().setFill(Color.WHITE);
                         ((Property)lo).resetUpgradeC();
-                        
                     }
                 }
                 for(Player o:p){
-                    if(o.getNextPlayer()==curPlayer){
+                    if(o == curPlayer){
                         curPlayer.getCircle().setVisible(false);
                         curPlayer.setMoney(0);
-                        o.setNextPlayer(curPlayer.getNextPlayer());
                         p.remove(curPlayer);
-                        curPlayer = curPlayer.getNextPlayer();
                         break;
                     }
                 }
                 if(p.size() == 1){
                     luckText.setText(p.get(0).getName() + " wins");
                     luckText.setVisible(true);
+                }
+                else{
+                    curPlayer = p.get(iteratorIndex());
                 }
             }
         }

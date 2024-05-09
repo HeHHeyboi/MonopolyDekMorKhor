@@ -78,7 +78,7 @@ public class Monopoly3 implements Initializable{
     double posX;
     double posY;
     Rectangle rect;
-
+    static int index = 0;
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -222,407 +222,397 @@ public class Monopoly3 implements Initializable{
 //#endregion
    
 
-public void TossDice(ActionEvent event) throws InterruptedException{
-    dice1 = random.nextInt(6)+1;
-    dice2 = random.nextInt(6)+1;
-    Step.set(dice1+dice2);
-    if(curPlayer.getWaitInjaild()>0){
-        boolean sameDice = dice1==dice2;
-        if(sameDice){
-            //System.out.println(curPlayer.getName()+"is geted out of jail");
-            luckText.setText(curPlayer.getName()+"is geted out of jail");
-            luckText.setVisible(true);
-            
-            moveCircle(dice1+dice2);
+    private int iteratorIndex(){
+        index++;
+        if(index >= p.size()){
+            index = 0;
         }
-        else if(curPlayer.CheckDouble_count() == true){
-            curPlayer.PlayerPos(9);
-            tile = tiles.get(curPlayer.PlayerPos());
-            posX = tile.getFitWidth()/2+tile.getLayoutX();
-            posY = tile.getFitHeight()/2+tile.getLayoutY();
-            curPlayer.getCircle().setLayoutX(posX);
-            curPlayer.getCircle().setLayoutY(posY);
-            curPlayer.setWaitinJail(3);
-            curPlayer.setDouble_countToZero();
-            curPlayer = curPlayer.getNextPlayer();
-            //System.out.println(curPlayer.getName()+" is in jailed");
-            luckText.setText(curPlayer.getName()+" is in jailed by get double 3 times");
-            luckText.setVisible(true);
-
-        }
-        else{
-            luckText.setText(curPlayer.getName()+" didn't get double");
-            luckText.setVisible(true);
-            curPlayer.setWaitinJail(curPlayer.getWaitInjaild()-1);
-            curPlayer = curPlayer.getNextPlayer();
-        }
+        return index;
     }
-    else{
-        moveCircle(dice1+dice2);
 
-    }
-    
-}
-//move player circle with animation 'dice1 +dice' times
-public void moveCircle(int Sumdice) throws InterruptedException {
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
-        curPlayer.PlayerPos(curPlayer.PlayerPos()+1);
-        tile = tiles.get(curPlayer.PlayerPos());
-        posX = tile.getFitWidth()/2+tile.getLayoutX();
-        posY = tile.getFitHeight()/2+tile.getLayoutY();
-        curPlayer.getCircle().setLayoutX(posX);
-        curPlayer.getCircle().setLayoutY(posY);
-        count++;
-
-        l = locations.get(curPlayer.PlayerPos());
-        tossButton.setDisable(true);
-        switch (l.id) {
-            case 2:
-                ((EventTile) l).giveMoney(curPlayer);
+    public void TossDice(ActionEvent event) throws InterruptedException{
+        dice1 = random.nextInt(6)+1;
+        dice2 = random.nextInt(6)+1;
+        Step.set(dice1+dice2);
+        if(curPlayer.getWaitInjaild()>0){
+            boolean sameDice = dice1==dice2;
+            if(sameDice){
+                //System.out.println(curPlayer.getName()+"is geted out of jail");
+                luckText.setText(curPlayer.getName()+"is geted out of jail");
+                luckText.setVisible(true);
                 
-                break;
-        }
-        
-        //when count or animation finish reset tossbutton, reset count to 0, show popup window and change popwindow text
-        if(count == Sumdice){
-            if(dice1==dice2){
-                curPlayer.Inc_DoubleC();
+                moveCircle(dice1+dice2);
             }
-            tossButton.setDisable(false);
-            checkTile(l);
-            count = 0;
-        }
-    }));
-    timeline.setCycleCount(Sumdice);
-    timeline.play();
-    
-}
-public void Goback(int Sumdice) throws InterruptedException {
-    Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
-        curPlayer.PlayerPos(curPlayer.PlayerPos()-1);
-        tile = tiles.get(curPlayer.PlayerPos());
-        posX = tile.getFitWidth()/2+tile.getLayoutX();
-        posY = tile.getFitHeight()/2+tile.getLayoutY();
-        curPlayer.getCircle().setLayoutX(posX);
-        curPlayer.getCircle().setLayoutY(posY);
-        count++;
-
-        l = locations.get(curPlayer.PlayerPos());
-        tossButton.setDisable(true);
-        switch (l.id) {
-            case 2:
-                ((EventTile) l).giveMoney(curPlayer);
-                
-                break;
-        }
-        
-        //when count or animation finish reset tossbutton, reset count to 0, show popup window and change popwindow text
-        if(count == Sumdice){
-            if(dice1==dice2){
-                curPlayer.Inc_DoubleC();
-            }
-            tossButton.setDisable(false);
-            checkTile(l);
-            
-            count = 0;
-        }
-    }));
-    timeline.setCycleCount(Sumdice);
-    timeline.play();
-    
-}
-//show popup window
-public void popUpwindow(){
-    popUpPane.setVisible(true);
-}
-public void setButton(int id){
-    switch (id) {
-        case 1:
-            popCloseButton.setVisible(false);
-            popYesButton.setVisible(true);
-            popNoButton.setVisible(true);
-            popNextButton.setVisible(false);
-            popGoButton.setVisible(false);
-            break;
-
-        case 2: 
-            popCloseButton.setVisible(false);
-            popYesButton.setVisible(false);
-            popNoButton.setVisible(false);
-            popNextButton.setVisible(true);
-            popGoButton.setVisible(false);
-            break;
-        case 3:
-            popCloseButton.setVisible(false);
-            popYesButton.setVisible(false);
-            popNoButton.setVisible(false);
-            popNextButton.setVisible(false);
-            popGoButton.setVisible(true);
-            break;
-        case 0:
-            popCloseButton.setVisible(true);
-            popYesButton.setVisible(false);
-            popNoButton.setVisible(false);
-            popNextButton.setVisible(false);
-            popGoButton.setVisible(false);
-            break;
-    }
-}
-
-//when click button to close popup window
-public void Exit(ActionEvent event){
-    checkBankrupt();
-    if(dice1!=dice2){
-        curPlayer.setDouble_countToZero();
-        curPlayer = curPlayer.getNextPlayer();
-        curPlayer.getCircle().toFront();
-    }
-    popUpPane.setVisible(false);
-    luckText.setVisible(false);
-}
-public void buyProperty(ActionEvent event){
-    Player owner = ((Property)l).getOwner();
-    if(owner == null || owner== curPlayer){
-        curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
-    }
-    else{
-        curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
-        owner.setMoney(owner.getMoney()+((Property)l).getPrice());
-    }
-    ((Property) l).setOwner(curPlayer);
-    Rectangle rect = ((Property) l).getRectangle();
-    rect.setFill(curPlayer.getCircle().getFill());
-    if(l.getID() ==1){
-        ((Property)l).UgpradeProp();
-    }
-    checkBankrupt();
-    popUpPane.setVisible(false);
-    luckText.setVisible(false);
-    
-    if(dice1!=dice2){
-        curPlayer.setDouble_countToZero();
-        curPlayer = curPlayer.getNextPlayer();
-        curPlayer.getCircle().toFront();
-    }
-}
-
-public void NextButton(ActionEvent event){
-    if(((Property) l).getUpgradeC()<=3){    
-        popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht, with upgrade "+((Property)l).getUpgradeC());
-        setButton(1);
-    }
-    else{
-        popText.setText("upgrade is max can't not purchase");
-        setButton(0);
-    }
-    luckText.setVisible(false);
-    
-}
-public void GotoSelectTile() throws InterruptedException{
-    int tileN = Integer.parseInt(textField.getText());
-    moveCircle(tileN);
-    textField.setVisible(false);
-    tossButton.setDisable(false);
-    popCloseButton.setDisable(false);
-    //checkTile(l);
-    curPlayer.setDouble_countToZero();
-    popUpPane.setVisible(false);
-    luckText.setVisible(false);
-
-}
-public void checkTile(Location los){
-    switch (los.getID()) {
-        case 2:
-            if(dice1!= dice2){
+            else if(curPlayer.CheckDouble_count() == true){
+                movePlayer(9);
+                curPlayer.setWaitinJail(3);
                 curPlayer.setDouble_countToZero();
                 curPlayer = curPlayer.getNextPlayer();
-                curPlayer.getCircle().toFront();
+                //System.out.println(curPlayer.getName()+" is in jailed");
+                luckText.setText(curPlayer.getName()+" is in jailed by get double 3 times");
+                luckText.setVisible(true);
+    
             }
-            break;
+            else{
+                luckText.setText(curPlayer.getName()+" didn't get double");
+                luckText.setVisible(true);
+                curPlayer.setWaitinJail(curPlayer.getWaitInjaild()-1);
+                curPlayer = curPlayer.getNextPlayer();
+            }
+        }
+        else{
+            moveCircle(dice1+dice2);
+
+        }
+    }
+    public void movePlayer(int step){
+        curPlayer.PlayerPos(step);
+        tile = tiles.get(curPlayer.PlayerPos());
+        posX = tile.getFitWidth()/2+tile.getLayoutX();
+        posY = tile.getFitHeight()/2+tile.getLayoutY();
+        curPlayer.getCircle().setLayoutX(posX);
+        curPlayer.getCircle().setLayoutY(posY);
+    }
+    //move player circle with animation 'dice1 +dice' times
+    public void moveCircle(int Sumdice) throws InterruptedException {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
+            movePlayer(curPlayer.PlayerPos()+1);
+            count++;
+
+            l = locations.get(curPlayer.PlayerPos());
+            tossButton.setDisable(true);
+            switch (l.id) {
+                case 2:
+                    ((EventTile) l).giveMoney(curPlayer);
+                    
+                    break;
+            }
+            
+            //when count or animation finish reset tossbutton, reset count to 0, show popup window and change popwindow text
+            if(count == Sumdice){
+                if(dice1==dice2){
+                    curPlayer.Inc_DoubleC();
+                }
+                tossButton.setDisable(false);
+                checkTile(l);
+                count = 0;
+            }
+        }));
+        timeline.setCycleCount(Sumdice);
+        timeline.play();
         
-        case 1:
-            Player owner = ((Property) los).getOwner();
-            if(owner == null){
-                popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht");
-                setButton(1);
-                popUpwindow();
+    }
+    public void Goback(int Sumdice) throws InterruptedException {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25),event ->{
+            movePlayer(curPlayer.PlayerPos()-1);
+            count++;
+
+            l = locations.get(curPlayer.PlayerPos());
+            tossButton.setDisable(true);
+            switch (l.id) {
+                case 2:
+                    ((EventTile) l).giveMoney(curPlayer);
+                    break;
             }
-            else if(owner == curPlayer){
-                if(((Property) l).getUpgradeC()<=3){
-                    popText.setText("Would you like to buy upgrade "+((Property) l).getUpgradeC()+"\n"+((Property) l).getPrice()+" baht");
+            
+            //when count or animation finish reset tossbutton, reset count to 0, show popup window and change popwindow text
+            if(count == Sumdice){
+                if(dice1==dice2){
+                    curPlayer.Inc_DoubleC();
+                }
+                tossButton.setDisable(false);
+                checkTile(l);
+                count = 0;
+            }
+        }));
+        timeline.setCycleCount(Sumdice);
+        timeline.play();
+        
+    }
+    //show popup window
+    public void popUpwindow(){
+        popUpPane.setVisible(true);
+    }
+    public void setButton(int id){
+        switch (id) {
+            case 1:
+                popCloseButton.setVisible(false);
+                popYesButton.setVisible(true);
+                popNoButton.setVisible(true);
+                popNextButton.setVisible(false);
+                popGoButton.setVisible(false);
+                break;
+
+            case 2: 
+                popCloseButton.setVisible(false);
+                popYesButton.setVisible(false);
+                popNoButton.setVisible(false);
+                popNextButton.setVisible(true);
+                popGoButton.setVisible(false);
+                break;
+            case 3:
+                popCloseButton.setVisible(false);
+                popYesButton.setVisible(false);
+                popNoButton.setVisible(false);
+                popNextButton.setVisible(false);
+                popGoButton.setVisible(true);
+                break;
+            case 0:
+                popCloseButton.setVisible(true);
+                popYesButton.setVisible(false);
+                popNoButton.setVisible(false);
+                popNextButton.setVisible(false);
+                popGoButton.setVisible(false);
+                break;
+        }
+    }
+    
+    //when click button to close popup window
+    public void Exit(ActionEvent event){
+        checkBankrupt();
+        if(dice1!=dice2){
+            curPlayer.setDouble_countToZero();
+            curPlayer = curPlayer.getNextPlayer();
+            curPlayer.getCircle().toFront();
+        }
+        popUpPane.setVisible(false);
+        luckText.setVisible(false);
+    }
+    public void buyProperty(ActionEvent event){
+        Player owner = ((Property)l).getOwner();
+        if(owner == null || owner== curPlayer){
+            curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
+        }
+        else{
+            curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPrice());
+            owner.setMoney(owner.getMoney()+((Property)l).getPrice());
+        }
+        ((Property) l).setOwner(curPlayer);
+        Rectangle rect = ((Property) l).getRectangle();
+        rect.setFill(curPlayer.getCircle().getFill());
+        if(l.getID() ==1){
+            ((Property)l).UgpradeProp();
+        }
+        checkBankrupt();
+        popUpPane.setVisible(false);
+        luckText.setVisible(false);
+        
+        if(dice1!=dice2){
+            curPlayer.setDouble_countToZero();
+            curPlayer = curPlayer.getNextPlayer();
+            curPlayer.getCircle().toFront();
+        }
+    }
+
+    public void NextButton(ActionEvent event){
+        if(((Property) l).getUpgradeC()<=3){    
+            popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht, with upgrade "+((Property)l).getUpgradeC());
+            setButton(1);
+        }
+        else{
+            popText.setText("upgrade is max can't not purchase");
+            setButton(0);
+        }
+        luckText.setVisible(false);
+        
+    }
+    public void GotoSelectTile() throws InterruptedException{
+        int tileN = Integer.parseInt(textField.getText());
+        moveCircle(tileN);
+        textField.setVisible(false);
+        tossButton.setDisable(false);
+        popCloseButton.setDisable(false);
+        //checkTile(l);
+        curPlayer.setDouble_countToZero();
+        popUpPane.setVisible(false);
+        luckText.setVisible(false);
+
+    }
+    public void checkTile(Location los){
+        switch (los.getID()) {
+            case 2:
+                if(dice1!= dice2){
+                    curPlayer = p.get(iteratorIndex());
+                }
+                break;
+            
+            case 1:
+                Player owner = ((Property) los).getOwner();
+                if(owner == null){
+                    popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht");
                     setButton(1);
                     popUpwindow();
                 }
+                else if(owner == curPlayer){
+                    if(((Property) l).getUpgradeC()<=3){
+                        popText.setText("Would you like to buy upgrade "+((Property) l).getUpgradeC()+"\n"+((Property) l).getPrice()+" baht");
+                        setButton(1);
+                        popUpwindow();
+                    }
+                    else{
+                        popText.setText("upgrade is max can't not purchase");
+                        setButton(0);
+                        popUpwindow();
+                    }
+                }
                 else{
-                    popText.setText("upgrade is max can't not purchase");
+                    popText.setText("You paid "+((Property) l).getPaid() + " to the "+owner.getName());
+                    curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPaid());
+                    owner.setMoney(owner.getMoney()+((Property) l).getPaid());
+                    if(curPlayer.getMoney()<= 0){
+                        checkBankrupt();
+                    }
+                    else{
+                        setButton(2);
+                        popUpwindow();
+                    }
+                }
+                if(curPlayer.getMoney()<((Property)l).getPrice()){
+                    popYesButton.setDisable(true);
+                }
+                else{
+                    popYesButton.setDisable(false);
+                }
+                break;
+            case 3:
+                movePlayer(9);
+                curPlayer.setWaitinJail(3);
+                curPlayer = p.get(iteratorIndex());
+                curPlayer.getCircle().toFront();
+                curPlayer.setDouble_countToZero();
+                luckText.setText("You are going to F");
+                luckText.setVisible(true);
+                break;
+            case 4:
+                popText.setText("How much tile do you want to go?");
+                tossButton.setDisable(true);
+                textField.setVisible(true);
+                popCloseButton.setDisable(true);
+                setButton(3);
+                popUpwindow();
+                break;
+            case 5:
+                Player o = ((Property)los).getOwner();
+                if(o== null){
+                    popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht");
+                    setButton(1);
+                    popUpwindow();
+                }
+                else if(o==curPlayer){
+                    break;
+                }
+                else{
+                    popText.setText("You paid "+((Property) l).getPaid() + " to the "+o.getName());
+                    curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPaid());
+                    o.setMoney(o.getMoney()+((Property) l).getPaid());
                     setButton(0);
                     popUpwindow();
                 }
-            }
-            else{
-                popText.setText("You paid "+((Property) l).getPaid() + " to the "+owner.getName());
-                curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPaid());
-                owner.setMoney(owner.getMoney()+((Property) l).getPaid());
-                if(curPlayer.getMoney()<= 0){
-                    checkBankrupt();
+                if(curPlayer.getMoney()<((Property)l).getPrice()){
+                    popYesButton.setDisable(true);
                 }
                 else{
-                    setButton(2);
-                    popUpwindow();
+                    popYesButton.setDisable(false);
                 }
-            }
-            if(curPlayer.getMoney()<((Property)l).getPrice()){
-                popYesButton.setDisable(true);
-            }
-            else{
-                popYesButton.setDisable(false);
-            }
-            break;
-        case 3:
-            curPlayer.PlayerPos(9);
-            tile = tiles.get(curPlayer.PlayerPos());
-            posX = tile.getFitWidth()/2+tile.getLayoutX();
-            posY = tile.getFitHeight()/2+tile.getLayoutY();
-            curPlayer.getCircle().setLayoutX(posX);
-            curPlayer.getCircle().setLayoutY(posY);
-            curPlayer.setWaitinJail(3);
-            curPlayer = curPlayer.getNextPlayer();
-            curPlayer.getCircle().toFront();
-            curPlayer.setDouble_countToZero();
-            luckText.setText("You are going to F");
-            luckText.setVisible(true);
-            break;
-        case 4:
-            popText.setText("How much tile do you want to go?");
-            tossButton.setDisable(true);
-            textField.setVisible(true);
-            popCloseButton.setDisable(true);
-            setButton(3);
-            popUpwindow();
-            break;
-        case 5:
-            Player o = ((Property)los).getOwner();
-            if(o== null){
-                popText.setText("Would you like to buy?\n"+((Property) l).getPrice()+ " baht");
-                setButton(1);
-                popUpwindow();
-            }
-            else if(o==curPlayer){
                 break;
-            }
-            else{
-                popText.setText("You paid "+((Property) l).getPaid() + " to the "+o.getName());
-                curPlayer.setMoney(curPlayer.getMoney()-((Property) l).getPaid());
-                o.setMoney(o.getMoney()+((Property) l).getPaid());
-                setButton(0);
-                popUpwindow();
-            }
-            if(curPlayer.getMoney()<((Property)l).getPrice()){
-                popYesButton.setDisable(true);
-            }
-            else{
-                popYesButton.setDisable(false);
-            }
-            break;
-        case 6:
-            getLuck();
+            case 6:
+                getLuck();
 
-            break;
-        case 7:
-            curPlayer.setMoney(curPlayer.getMoney()-200);
-            luckText.setText(curPlayer.getName()+" paid mhukhata 200 baht");
-            luckText.setVisible(true);
-            checkBankrupt();
-            if(dice1!= dice2){
-                curPlayer.setDouble_countToZero();
-                curPlayer = curPlayer.getNextPlayer();
-                curPlayer.getCircle().toFront();
-            }
-            break;
-        default:
-            if(dice1!= dice2){
-                curPlayer.setDouble_countToZero();
-                curPlayer = curPlayer.getNextPlayer();
-                curPlayer.getCircle().toFront();
-            }
-            break;
-        }   
-    }
-    public void getLuck() {
-        int rand = random.nextInt(4)+1;
-        int randMove;
-        switch (rand) {
-            case 1:
-                curPlayer.setMoney(curPlayer.getMoney()+100);
-                luckText.setText(curPlayer.getName()+" get 100 baht");
-                luckText.setVisible(true);
-                if(dice1!= dice2){
-                    curPlayer.setDouble_countToZero();
-                    curPlayer = curPlayer.getNextPlayer();
-                    curPlayer.getCircle().toFront();
-                }
                 break;
-            case 2:
-                curPlayer.setMoney(curPlayer.getMoney()-50);
-                luckText.setText(curPlayer.getName()+" lose 50 baht");
+            case 7:
+                curPlayer.setMoney(curPlayer.getMoney()-200);
+                luckText.setText(curPlayer.getName()+" paid mhukhata 200 baht");
                 luckText.setVisible(true);
                 checkBankrupt();
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
-                    curPlayer = curPlayer.getNextPlayer();
+                    curPlayer = p.get(iteratorIndex());
                     curPlayer.getCircle().toFront();
                 }
                 break;
-            case 3:
-                randMove = random.nextInt(6)+1;
-                luckText.setText(curPlayer.getName()+" move forward "+randMove+" times");
-                luckText.setVisible(true);
-                try {
-                    moveCircle(randMove);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+            default:
+                if(dice1!= dice2){
+                    curPlayer.setDouble_countToZero();
+                    curPlayer = p.get(iteratorIndex());
+                    curPlayer.getCircle().toFront();
                 }
                 break;
-            case 4:
-                randMove = random.nextInt(6)+1;
-                luckText.setText(curPlayer.getName()+" move backward "+randMove+" times");
-                luckText.setVisible(true);
-                try {
-                    Goback(randMove);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                break;
-            
+            }   
         }
-    }
-    
-    public void checkBankrupt(){
-        if(curPlayer.getMoney()<=0){
-            for(Location lo:locations){
-                if(lo instanceof Property&&((Property)lo).getOwner()== curPlayer){
-                    ///System.out.println(((Property)lo).getOwner());
-                    ((Property)lo).setOwner(null);
-                    ((Property)lo).getRectangle().setFill(Color.WHITE);
-                    ((Property)lo).resetUpgradeC();
-                    
-                }
-            }
-            for(Player o:p){
-                if(o.getNextPlayer()==curPlayer){
-                    curPlayer.getCircle().setVisible(false);
-                    curPlayer.setMoney(0);
-                    o.setNextPlayer(curPlayer.getNextPlayer());
-                    p.remove(curPlayer);
-                    curPlayer = curPlayer.getNextPlayer();
+        public void getLuck() {
+            int rand = random.nextInt(4)+1;
+            int randMove;
+            switch (rand) {
+                case 1:
+                    curPlayer.setMoney(curPlayer.getMoney()+100);
+                    luckText.setText(curPlayer.getName()+" get 100 baht");
+                    luckText.setVisible(true);
+                    if(dice1!= dice2){
+                        curPlayer.setDouble_countToZero();
+                        curPlayer = p.get(iteratorIndex());
+                        curPlayer.getCircle().toFront();
+                    }
                     break;
-                }
-            }
-            if(p.size() == 1){
-                luckText.setText(p.get(0).getName() + " wins");
-                luckText.setVisible(true);
+                case 2:
+                    curPlayer.setMoney(curPlayer.getMoney()-50);
+                    luckText.setText(curPlayer.getName()+" lose 50 baht");
+                    luckText.setVisible(true);
+                    checkBankrupt();
+                    if(dice1!= dice2){
+                        curPlayer.setDouble_countToZero();
+                        curPlayer = p.get(iteratorIndex());
+                        curPlayer.getCircle().toFront();
+                    }
+                    break;
+                case 3:
+                    randMove = random.nextInt(6)+1;
+                    luckText.setText(curPlayer.getName()+" move forward "+randMove+" times");
+                    luckText.setVisible(true);
+                    try {
+                        moveCircle(randMove);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                case 4:
+                    randMove = random.nextInt(6)+1;
+                    luckText.setText(curPlayer.getName()+" move backward "+randMove+" times");
+                    luckText.setVisible(true);
+                    try {
+                        Goback(randMove);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+                
             }
         }
-    }
-
+        
+        public void checkBankrupt(){
+            if(curPlayer.getMoney()<=0){
+                for(Location lo:locations){
+                    if(lo instanceof Property&&((Property)lo).getOwner()== curPlayer){
+                        ///System.out.println(((Property)lo).getOwner());
+                        ((Property)lo).setOwner(null);
+                        ((Property)lo).getRectangle().setFill(Color.WHITE);
+                        ((Property)lo).resetUpgradeC();
+                    }
+                }
+                for(Player o:p){
+                    if(o == curPlayer){
+                        curPlayer.getCircle().setVisible(false);
+                        curPlayer.setMoney(0);
+                        p.remove(curPlayer);
+                        break;
+                    }
+                }
+                if(p.size() == 1){
+                    luckText.setText(p.get(0).getName() + " wins");
+                    luckText.setVisible(true);
+                }
+                else{
+                    curPlayer = p.get(iteratorIndex());
+                }
+            }
+        }
 }
