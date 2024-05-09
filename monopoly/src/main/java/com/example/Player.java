@@ -12,7 +12,6 @@ public class Player {
     private final IntegerProperty money = new SimpleIntegerProperty();
     //private final IntegerProperty step = new SimpleIntegerProperty(0);
     private String name;
-    private Player nextPlayer;
     private Circle circle;
     private int playerPos = 0;
     private int maxTile = 7;
@@ -45,12 +44,6 @@ public class Player {
     }
     public String getName() {
         return name;
-    }
-    public void setNextPlayer(Player n){
-        this.nextPlayer = n;
-    }
-    public Player getNextPlayer(){
-        return nextPlayer;
     }
     public int PlayerPos(){
         return this.playerPos;

@@ -88,9 +88,7 @@ public class Monopoly2 implements Initializable{
     public void init(){
         player1 = new Player(startMoney, "Red");
         player2 = new Player(startMoney,"Green");
-        player1.setNextPlayer(player2);
         player1.setCircle(play1Circle);
-        player2.setNextPlayer(player1);
         player2.setCircle(player2Circle);
         player1.setMaxTile(35);
         player2.setMaxTile(35);
@@ -232,7 +230,7 @@ public class Monopoly2 implements Initializable{
                 movePlayer(9);
                 curPlayer.setWaitinJail(3);
                 curPlayer.setDouble_countToZero();
-                curPlayer = curPlayer.getNextPlayer();
+                curPlayer = p.get(iteratorIndex());
                 //System.out.println(curPlayer.getName()+" is in jailed");
                 luckText.setText(curPlayer.getName()+" is in jailed by get double 3 times");
                 luckText.setVisible(true);
@@ -242,7 +240,7 @@ public class Monopoly2 implements Initializable{
                 luckText.setText(curPlayer.getName()+" didn't get double");
                 luckText.setVisible(true);
                 curPlayer.setWaitinJail(curPlayer.getWaitInjaild()-1);
-                curPlayer = curPlayer.getNextPlayer();
+                curPlayer = p.get(iteratorIndex());
             }
         }
         else{
@@ -357,7 +355,7 @@ public class Monopoly2 implements Initializable{
         checkBankrupt();
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
-            curPlayer = curPlayer.getNextPlayer();
+            curPlayer = p.get(iteratorIndex());
             curPlayer.getCircle().toFront();
         }
         popUpPane.setVisible(false);
@@ -384,7 +382,7 @@ public class Monopoly2 implements Initializable{
         
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
-            curPlayer = curPlayer.getNextPlayer();
+            curPlayer = p.get(iteratorIndex());
             curPlayer.getCircle().toFront();
         }
     }

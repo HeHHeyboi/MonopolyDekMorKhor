@@ -76,6 +76,8 @@ public class PlayerController implements Initializable{
     double posX;
     double posY;
 
+    static int index = 0;
+    int startMoney = 500;
     //#region initialize  
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
@@ -85,9 +87,7 @@ public class PlayerController implements Initializable{
     public void init(){
         player1 = new Player(1000, "Jame");
         player2 = new Player(1000,"Billy");
-        player1.setNextPlayer(player2);
         player1.setCircle(playCircle);
-        player2.setNextPlayer(player1);
         player2.setCircle(player2Circle);
         curPlayer = player1;
         p.add(player1);
@@ -170,6 +170,13 @@ public class PlayerController implements Initializable{
         checkBankrupt();
     }
     //#endregion
+    private int iteratorIndex(){
+        index++;
+        if(index >= p.size()){
+            index = 0;
+        }
+        return index;
+    }
     public void DoubleDice() throws InterruptedException{
         dice1 = 2;
         dice2 =2;
@@ -191,7 +198,7 @@ public class PlayerController implements Initializable{
             }
             else{
                 curPlayer.setWaitinJail(curPlayer.getWaitInjaild()-1);
-                curPlayer = curPlayer.getNextPlayer();
+                curPlayer = p.get(iteratorIndex());
                 //System.out.println("You didn't get double wait in jail for "+curPlayer.getWaitInjaild() + "turn");
             }
         }
@@ -227,7 +234,6 @@ public class PlayerController implements Initializable{
                 else{
                     curPlayer.setWaitinJail(curPlayer.getWaitInjaild()-1);
                     //System.out.println(curPlayer.getName()+" didn't get double wait in jail for "+curPlayer.getWaitInjaild() + "turn");
-                    curPlayer = curPlayer.getNextPlayer();
                 }
             }
             else{
@@ -350,7 +356,7 @@ public class PlayerController implements Initializable{
     public void Exit(ActionEvent event){
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
-            curPlayer = curPlayer.getNextPlayer();
+            curPlayer = p.get(iteratorIndex());
             curPlayer.getCircle().toFront();
         }
         popUpPane.setVisible(false);
@@ -379,7 +385,7 @@ public class PlayerController implements Initializable{
         
         if(dice1!=dice2){
             curPlayer.setDouble_countToZero();
-            curPlayer = curPlayer.getNextPlayer();
+            curPlayer = p.get(iteratorIndex());
             curPlayer.getCircle().toFront();
         }
         popUpPane.setVisible(false);
@@ -411,7 +417,7 @@ public class PlayerController implements Initializable{
             case 2:
                 if(dice1!= dice2){
                 curPlayer.setDouble_countToZero();
-                curPlayer = curPlayer.getNextPlayer();
+                curPlayer = p.get(iteratorIndex());
                 curPlayer.getCircle().toFront();
                 }
                 break;
@@ -449,7 +455,7 @@ public class PlayerController implements Initializable{
                 curPlayer.getCircle().setLayoutY(posY);
                 curPlayer.setWaitinJail(3);
                 //System.out.println(curPlayer.getName()+" is in jailed");
-                curPlayer = curPlayer.getNextPlayer();
+                curPlayer = p.get(iteratorIndex());
                 curPlayer.getCircle().toFront();
                 // popText.setText("You are going to F");
                 // setButton(0);
@@ -483,7 +489,7 @@ public class PlayerController implements Initializable{
             default:
                 if(dice1!= dice2){
                     curPlayer.setDouble_countToZero();
-                    curPlayer = curPlayer.getNextPlayer();
+                    curPlayer = p.get(iteratorIndex());
                     curPlayer.getCircle().toFront();
                 }
                 break;
@@ -516,27 +522,29 @@ public class PlayerController implements Initializable{
         }
     }
     
-    public void checkBankrupt(){
-        if(curPlayer.getMoney()<=0){
-            for(Location lo:locations){
-                if(lo instanceof Property&&((Property)lo).getOwner()== curPlayer){
-                    ///System.out.println(((Property)lo).getOwner());
-                    ((Property)lo).setOwner(null);
-                    tile.get(locations.indexOf(lo)).setFill(Color.WHITE);;
-                    
+    public void checkBankrupt() {
+        if (curPlayer.getMoney() <= 0) {
+            for (Location lo : locations) {
+                if (lo instanceof Property && ((Property) lo).getOwner() == curPlayer) {
+                    /// System.out.println(((Property)lo).getOwner());
+                    ((Property) lo).setOwner(null);
+                    ((Property) lo).getRectangle().setFill(Color.WHITE);
+                    ((Property) lo).resetUpgradeC();
                 }
             }
-            for(Player o:p){
-                if(o.getNextPlayer()==curPlayer){
-                    o.setNextPlayer(curPlayer.getNextPlayer());
+            for (Player o : p) {
+                if (o == curPlayer) {
+                    curPlayer.getCircle().setVisible(false);
+                    curPlayer.setMoney(0);
                     p.remove(curPlayer);
-                    curPlayer = curPlayer.getNextPlayer();
                     break;
                 }
             }
-            if(p.size() == 1){
-                luckText.setVisible(true);
+            if (p.size() == 1) {
                 luckText.setText(p.get(0).getName() + " wins");
+                luckText.setVisible(true);
+            } else {
+                curPlayer = p.get(iteratorIndex());
             }
         }
     }
