@@ -1,3 +1,14 @@
+# Maven target directory
 /target/
-/.vscode
-/monopoly/.vscode
+
+# Eclipse IDE
+/.project
+/.classpath
+/.settings/
+
+# VSCode
+/.vscod
+
+*.jar
+*.war
+*.ear
