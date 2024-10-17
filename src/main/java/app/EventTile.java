@@ -1,4 +1,4 @@
-package com.example;
+package app;
 
 public class EventTile extends Location{
 

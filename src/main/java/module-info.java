@@ -1,4 +1,4 @@
-module com.example {
+module app {
     requires javafx.fxml;
     requires transitive javafx.base;
     requires javafx.controls;
@@ -6,6 +6,6 @@ module com.example {
     requires javafx.media;
     
     
-    opens com.example to javafx.fxml;
-    exports com.example;
+    opens app to javafx.fxml;
+    exports app;
 }

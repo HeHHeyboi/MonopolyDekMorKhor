@@ -1,4 +1,5 @@
-package com.example;
+package app;
+
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
-public class Monopoly3 implements Initializable{
+public class Monopoly2 implements Initializable{
     @FXML
     private Text player1NameDisplay;
     @FXML
@@ -44,10 +45,8 @@ public class Monopoly3 implements Initializable{
     @FXML TextField textField;
     @FXML Text player2NameDisplay;
     @FXML Text player2MoneyDisplay;
+    //@FXML Text player2StepDisplay;
     @FXML Circle player2Circle;
-    @FXML Text player3NameDisplay;
-    @FXML Text player3MoneyDisplay;
-    @FXML Circle player3Circle;
     @FXML private Pane pane;
     @FXML private Pane popUpPane;
     @FXML private Button popCloseButton;
@@ -59,15 +58,14 @@ public class Monopoly3 implements Initializable{
     public List<ImageView> tiles = new ArrayList<>();
     private List<Location> locations = new ArrayList<>();
     private List<Rectangle> box = new ArrayList<>();
+    
     private Player player1;
     private Player player2;
-    private Player player3;
     private static Player curPlayer;
     Random random = new Random();
     private ArrayList<Player> p = new ArrayList<>();
     IntegerProperty Money1;
     IntegerProperty Money2;
-    IntegerProperty Money3;
     IntegerProperty Step = new SimpleIntegerProperty();
     
     int count = 0;
@@ -79,6 +77,7 @@ public class Monopoly3 implements Initializable{
     double posY;
     Rectangle rect;
     static int index = 0;
+
     int startMoney = 500;
     //#region initialize  
     @Override
@@ -89,28 +88,20 @@ public class Monopoly3 implements Initializable{
     public void init(){
         player1 = new Player(startMoney, "Red");
         player2 = new Player(startMoney,"Green");
-        player3 = new Player(startMoney,"Blue");
         player1.setCircle(play1Circle);
         player2.setCircle(player2Circle);
-        player3.setCircle(player3Circle);
         player1.setMaxTile(35);
         player2.setMaxTile(35);
-        player3.setMaxTile(35);
         curPlayer = player1;
         p.add(player1);
         p.add(player2);
-        p.add(player3);
         player1NameDisplay.setText(player1.getName());
         player1MoneyDisplay.setText(""+player1.getMoney());
         player2NameDisplay.setText(player2.getName());
         player2MoneyDisplay.setText(""+player2.getMoney());
-        player3NameDisplay.setText(player3.getName());
-        player3MoneyDisplay.setText(""+player3.getMoney());
         Money1 = player1.moneyProperty();
         Money2 = player2.moneyProperty();
-        Money3 = player3.moneyProperty();
         stepDisplay.setText(""+Step.getValue());
-        //tossButtonCheck.set(false);
         
         /*
         * id   mean
@@ -187,9 +178,6 @@ public class Monopoly3 implements Initializable{
         play1Circle.setLayoutY(posY);
         player2Circle.setLayoutX(posX);
         player2Circle.setLayoutY(posY);
-        player3Circle.setLayoutX(posX);
-        player3Circle.setLayoutY(posY);
-        
 
         URL mediaUrl = getClass().getResource("/BGMusic.mp3");
         try  {
@@ -209,13 +197,12 @@ public class Monopoly3 implements Initializable{
         Money2.addListener((observer,oldval,newval) ->{
             player2MoneyDisplay.setText(String.valueOf(newval.intValue()));
         });
-        Money3.addListener((observer,oldval,newval) ->{
-            player3MoneyDisplay.setText(String.valueOf(newval.intValue()));
-        });
-        Step.addListener((observer,oldval,newval) ->{
+        Step.addListener((obs,oldval,newval) ->{
             stepDisplay.setText(String.valueOf(newval.intValue()));
         });
-
+        // tossButtonCheck.addListener((obs,oldval,newval)->{
+        //     tossButton.setDisable(newval);
+        // });
     }
 //#endregion
     private int iteratorIndex(){

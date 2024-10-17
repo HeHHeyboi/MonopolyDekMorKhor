@@ -1,4 +1,4 @@
-package com.example;
+package app;
 
 import java.net.URL;
 import java.util.ArrayList;
