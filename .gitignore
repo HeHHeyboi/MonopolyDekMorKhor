@@ -7,7 +7,7 @@
 /.settings/
 
 # VSCode
-/.vscod
+/.vscode
 
 *.jar
 *.war
