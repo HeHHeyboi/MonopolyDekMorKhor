@@ -110,6 +110,8 @@ public class Monopoly4 implements Initializable {
     Rectangle rect;
     static int index = 0;
     int startMoney = 500;
+    enum ButtonType { Buy_Upgrade_prop ,}
+    ;
     // #region initialize
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {

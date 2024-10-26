@@ -181,7 +181,7 @@ public class PlayerController implements Initializable{
         dice1 = 2;
         dice2 =2;
         Step.set(dice1+dice2);
-        if(curPlayer.CheckDouble_count() == true){
+        if(curPlayer.CheckDouble_count()){
             curPlayer.PlayerPos(2);
             rect = tile.get(curPlayer.PlayerPos());
             posX = rect.getWidth()/2+rect.getLayoutX();

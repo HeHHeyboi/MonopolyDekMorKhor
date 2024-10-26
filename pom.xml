@@ -14,11 +14,10 @@
     </properties>
 
     <dependencies>
-
         <dependency>
             <groupId>org.openjfx</groupId>
             <artifactId>javafx</artifactId>
-            <version>24-ea+5</version>
+            <version>21</version>
             <type>pom</type>
         </dependency>
         <dependency>
