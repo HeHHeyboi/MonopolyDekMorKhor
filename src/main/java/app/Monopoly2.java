@@ -6,6 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+
+// import javax.print.attribute.standard.Media;
+// import javax.swing.text.html.ImageView;
+import javafx.scene.image.*;
+import javafx.scene.media.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -16,19 +21,21 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
+// import org.w3c.dom.Node;
+// import org.w3c.dom.Text;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 // #endregion
 
 public class Monopoly2 implements Initializable {
+	private static Player curPlayer;
+	static int index = 0;
 	@FXML
 	private Text player1NameDisplay;
 	@FXML
@@ -73,18 +80,17 @@ public class Monopoly2 implements Initializable {
 	@FXML
 	private Text popText;
 	public List<ImageView> tiles = new ArrayList<>();
-	private List<Location> locations = new ArrayList<>();
-	private List<Rectangle> box = new ArrayList<>();
 
+	private final List<Location> locations = new ArrayList<>();
+	private final List<Rectangle> box = new ArrayList<>();
 	private Player player1;
 	private Player player2;
-	private static Player curPlayer;
 	Random random = new Random();
-	private ArrayList<Player> p = new ArrayList<>();
+	private final ArrayList<Player> p = new ArrayList<>();
 	IntegerProperty Money1;
 	IntegerProperty Money2;
-	IntegerProperty Step = new SimpleIntegerProperty();
 
+	IntegerProperty Step = new SimpleIntegerProperty();
 	int count = 0;
 	int dice1;
 	int dice2;
@@ -93,13 +99,12 @@ public class Monopoly2 implements Initializable {
 	double posX;
 	double posY;
 	Rectangle rect;
-	static int index = 0;
 
 	int startMoney = 500;
 
 	// #region initialize
 	@Override
-	public void initialize(URL arg0, ResourceBundle arg1) {
+	public void initialize(final URL arg0, final ResourceBundle arg1) {
 		init();
 		update();
 	}
@@ -170,11 +175,11 @@ public class Monopoly2 implements Initializable {
 		locations.add(new Property(5, 600, 420));
 		locations.add(new Property(1, 650, 460));
 		// #region Add rectangle to list
-		List<Node> nodes = pane.getChildren();
-		for (Node node : nodes) {
+		final List<Node> nodes = pane.getChildren();
+		for (final Node node : nodes) {
 			if (node instanceof ImageView) {
 				if (node != backgroud && node != backgroud2) {
-					ImageView imageView = (ImageView) node;
+					final ImageView imageView = (ImageView) node;
 					tiles.add(imageView);
 				}
 			} else if (node instanceof Rectangle) {
@@ -197,13 +202,13 @@ public class Monopoly2 implements Initializable {
 		player2Circle.setLayoutX(posX);
 		player2Circle.setLayoutY(posY);
 
-		URL mediaUrl = getClass().getResource("/BGMusic.mp3");
+		final URL mediaUrl = getClass().getResource("/BGMusic.mp3");
 		try {
-			Media media = new Media(mediaUrl.toString());
-			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			final Media media = new Media(mediaUrl.toString());
+			final MediaPlayer mediaPlayer = new MediaPlayer(media);
 			mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
 			mediaPlayer.play();
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			System.err.println(e);
 		}
 	}
@@ -224,23 +229,14 @@ public class Monopoly2 implements Initializable {
 		// });
 	}
 
-	// #endregion
-	private int iteratorIndex() {
-		index++;
-		if (index >= p.size()) {
-			index = 0;
-		}
-		return index;
-	}
-
-	public void TossDice(ActionEvent event) throws InterruptedException {
+	public void TossDice(final ActionEvent event) throws InterruptedException {
 		dice1 = random.nextInt(6) + 1;
 		dice2 = random.nextInt(6) + 1;
 		// System.out.println(dice1 + dice2);
 		// System.out.println(stepDisplay.getText());
 		Step.set(dice1 + dice2);
 		if (curPlayer.getWaitInjaild() > 0) {
-			boolean sameDice = dice1 == dice2;
+			final boolean sameDice = dice1 == dice2;
 			if (sameDice) {
 				// System.out.println(curPlayer.getName()+"is geted out of jail");
 				luckText.setText(curPlayer.getName() + "is geted out of jail");
@@ -266,7 +262,7 @@ public class Monopoly2 implements Initializable {
 		}
 	}
 
-	public void movePlayer(int step) {
+	public void movePlayer(final int step) {
 		curPlayer.PlayerPos(step);
 		tile = tiles.get(curPlayer.PlayerPos());
 		posX = tile.getFitWidth() / 2 + tile.getLayoutX();
@@ -276,8 +272,8 @@ public class Monopoly2 implements Initializable {
 	}
 
 	// move player circle with animation 'dice1 +dice' times
-	public void moveCircle(int Sumdice) throws InterruptedException {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), event -> {
+	public void moveCircle(final int Sumdice) throws InterruptedException {
+		final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), event -> {
 			movePlayer(curPlayer.PlayerPos() + 1);
 			count++;
 
@@ -305,8 +301,8 @@ public class Monopoly2 implements Initializable {
 		timeline.play();
 	}
 
-	public void Goback(int Sumdice) throws InterruptedException {
-		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), event -> {
+	public void Goback(final int Sumdice) throws InterruptedException {
+		final Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), event -> {
 			movePlayer(curPlayer.PlayerPos() - 1);
 			count++;
 
@@ -338,7 +334,7 @@ public class Monopoly2 implements Initializable {
 		popUpPane.setVisible(true);
 	}
 
-	public void setButton(int id) {
+	public void setButton(final int id) {
 		switch (id) {
 			case 1:
 				popCloseButton.setVisible(false);
@@ -373,7 +369,7 @@ public class Monopoly2 implements Initializable {
 	}
 
 	// when click button to close popup window
-	public void Exit(ActionEvent event) {
+	public void Exit(final ActionEvent event) {
 		checkBankrupt();
 		if (dice1 != dice2) {
 			curPlayer.setDouble_countToZero();
@@ -384,8 +380,8 @@ public class Monopoly2 implements Initializable {
 		luckText.setVisible(false);
 	}
 
-	public void buyProperty(ActionEvent event) {
-		Player owner = ((Property) l).getOwner();
+	public void buyProperty(final ActionEvent event) {
+		final Player owner = ((Property) l).getOwner();
 		if (owner == null || owner == curPlayer) {
 			curPlayer.setMoney(curPlayer.getMoney() - ((Property) l).getPrice());
 		} else {
@@ -393,7 +389,7 @@ public class Monopoly2 implements Initializable {
 			owner.setMoney(owner.getMoney() + ((Property) l).getPrice());
 		}
 		((Property) l).setOwner(curPlayer);
-		Rectangle rect = ((Property) l).getRectangle();
+		final Rectangle rect = ((Property) l).getRectangle();
 		rect.setFill(curPlayer.getCircle().getFill());
 		if (l.getID() == 1) {
 			((Property) l).UgpradeProp();
@@ -409,7 +405,7 @@ public class Monopoly2 implements Initializable {
 		}
 	}
 
-	public void NextButton(ActionEvent event) {
+	public void NextButton(final ActionEvent event) {
 		if (((Property) l).getUpgradeC() <= 3) {
 			popText.setText("Would you like to buy?\n" + ((Property) l).getPrice() + " baht, with upgrade "
 					+ ((Property) l).getUpgradeC());
@@ -422,7 +418,7 @@ public class Monopoly2 implements Initializable {
 	}
 
 	public void GotoSelectTile() throws InterruptedException {
-		int tileN = Integer.parseInt(textField.getText());
+		final int tileN = Integer.parseInt(textField.getText());
 		moveCircle(tileN);
 		textField.setVisible(false);
 		tossButton.setDisable(false);
@@ -433,7 +429,7 @@ public class Monopoly2 implements Initializable {
 		luckText.setVisible(false);
 	}
 
-	public void checkTile(Location los) {
+	public void checkTile(final Location los) {
 		switch (los.getID()) {
 			case 2:
 				if (dice1 != dice2) {
@@ -442,7 +438,7 @@ public class Monopoly2 implements Initializable {
 				break;
 
 			case 1:
-				Player owner = ((Property) los).getOwner();
+				final Player owner = ((Property) los).getOwner();
 				if (owner == null) {
 					popText.setText("Would you like to buy?\n" + ((Property) l).getPrice() + " baht");
 					setButton(1);
@@ -493,7 +489,7 @@ public class Monopoly2 implements Initializable {
 				popUpwindow();
 				break;
 			case 5:
-				Player o = ((Property) los).getOwner();
+				final Player o = ((Property) los).getOwner();
 				if (o == null) {
 					popText.setText("Would you like to buy?\n" + ((Property) l).getPrice() + " baht");
 					setButton(1);
@@ -539,7 +535,7 @@ public class Monopoly2 implements Initializable {
 	}
 
 	public void getLuck() {
-		int rand = random.nextInt(4) + 1;
+		final int rand = random.nextInt(4) + 1;
 		int randMove;
 		switch (rand) {
 			case 1:
@@ -569,7 +565,7 @@ public class Monopoly2 implements Initializable {
 				luckText.setVisible(true);
 				try {
 					moveCircle(randMove);
-				} catch (InterruptedException e) {
+				} catch (final InterruptedException e) {
 					e.printStackTrace();
 				}
 				break;
@@ -579,7 +575,7 @@ public class Monopoly2 implements Initializable {
 				luckText.setVisible(true);
 				try {
 					Goback(randMove);
-				} catch (InterruptedException e) {
+				} catch (final InterruptedException e) {
 					e.printStackTrace();
 				}
 				break;
@@ -588,7 +584,7 @@ public class Monopoly2 implements Initializable {
 
 	public void checkBankrupt() {
 		if (curPlayer.getMoney() <= 0) {
-			for (Location lo : locations) {
+			for (final Location lo : locations) {
 				if (lo instanceof Property && ((Property) lo).getOwner() == curPlayer) {
 					/// System.out.println(((Property)lo).getOwner());
 					((Property) lo).setOwner(null);
@@ -596,7 +592,7 @@ public class Monopoly2 implements Initializable {
 					((Property) lo).resetUpgradeC();
 				}
 			}
-			for (Player o : p) {
+			for (final Player o : p) {
 				if (o == curPlayer) {
 					curPlayer.getCircle().setVisible(false);
 					curPlayer.setMoney(0);
@@ -611,5 +607,14 @@ public class Monopoly2 implements Initializable {
 				curPlayer = p.get(iteratorIndex());
 			}
 		}
+	}
+
+	// #endregion
+	private int iteratorIndex() {
+		index++;
+		if (index >= p.size()) {
+			index = 0;
+		}
+		return index;
 	}
 }
