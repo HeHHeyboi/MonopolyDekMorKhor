@@ -1,11 +1,13 @@
 package app;
 
+import java.io.IOException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import java.io.IOException;
 
 public class App extends Application {
 
@@ -13,6 +15,7 @@ public class App extends Application {
 
 	@Override
 	public void start(Stage stage) throws IOException {
+		Font.loadFont(getClass().getResourceAsStream("/retro_gaming/Retro Gaming.ttf"), 20);
 		scene = new Scene(loadFXML("StartScene"), 1280, 800);
 		stage.setX(0);
 		stage.setY(0);

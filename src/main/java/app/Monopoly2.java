@@ -7,10 +7,6 @@ import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-// import javax.print.attribute.standard.Media;
-// import javax.swing.text.html.ImageView;
-import javafx.scene.image.*;
-import javafx.scene.media.*;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
@@ -21,13 +17,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
-// import org.w3c.dom.Node;
-// import org.w3c.dom.Text;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 

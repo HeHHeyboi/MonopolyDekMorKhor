@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Monopoly2">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.Monopoly2">
    <children>
       <ImageView fx:id="backgroud2" fitHeight="800.0" fitWidth="577.0" layoutX="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -246,7 +246,7 @@
       </Pane>
       <Text fx:id="luckText" fill="#ff0303" layoutX="133.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="536.5999755859375">
          <font>
-            <Font name="Retro Gaming" size="30.0" />
+            <Font name="Pixelify Sans Regular" size="30.0" />
          </font>
       </Text>
       <Text fx:id="player1NameDisplay" layoutX="867.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
