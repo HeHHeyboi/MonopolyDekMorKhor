@@ -1,4 +1,4 @@
-# Monopoly Dek Mor Khor
+# Monopoly X DekMorKhor
 
 
 ![โลโก้](Picture/logo.png)
