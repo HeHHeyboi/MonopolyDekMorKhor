@@ -1,4 +1,4 @@
-package monopoly;
+package app.monopoly;
 
 public class RandomTile extends Location {
 

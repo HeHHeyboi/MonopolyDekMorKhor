@@ -1,4 +1,4 @@
-package monopoly;
+package app.monopoly;
 
 public abstract class Location {
 	protected int id;

@@ -1,4 +1,4 @@
-package monopoly;
+package app.monopoly;
 
 import javafx.scene.shape.Rectangle;
 

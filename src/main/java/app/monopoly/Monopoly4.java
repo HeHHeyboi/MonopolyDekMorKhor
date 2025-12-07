@@ -1,4 +1,4 @@
-package monopoly;
+package app.monopoly;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class Monopoly3 implements Initializable {
+public class Monopoly4 implements Initializable {
 	@FXML
 	private Text player1NameDisplay;
 	@FXML
@@ -46,18 +46,28 @@ public class Monopoly3 implements Initializable {
 	private Text luckText;
 	@FXML
 	TextField textField;
+
 	@FXML
 	Text player2NameDisplay;
 	@FXML
 	Text player2MoneyDisplay;
 	@FXML
 	Circle player2Circle;
+
 	@FXML
 	Text player3NameDisplay;
 	@FXML
 	Text player3MoneyDisplay;
 	@FXML
 	Circle player3Circle;
+
+	@FXML
+	Text player4NameDisplay;
+	@FXML
+	Text player4MoneyDisplay;
+	@FXML
+	Circle player4Circle;
+
 	@FXML
 	private Pane pane;
 	@FXML
@@ -80,12 +90,14 @@ public class Monopoly3 implements Initializable {
 	private Player player1;
 	private Player player2;
 	private Player player3;
+	private Player player4;
 	private static Player curPlayer;
 	Random random = new Random();
 	private ArrayList<Player> p = new ArrayList<>();
 	IntegerProperty Money1;
 	IntegerProperty Money2;
 	IntegerProperty Money3;
+	IntegerProperty Money4;
 	IntegerProperty Step = new SimpleIntegerProperty();
 
 	int count = 0;
@@ -99,6 +111,10 @@ public class Monopoly3 implements Initializable {
 	static int index = 0;
 	int startMoney = 500;
 
+	enum ButtonType {
+		Buy_Upgrade_prop,
+	};
+
 	// #region initialize
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -110,25 +126,33 @@ public class Monopoly3 implements Initializable {
 		player1 = new Player(startMoney, "Red");
 		player2 = new Player(startMoney, "Green");
 		player3 = new Player(startMoney, "Blue");
+		player4 = new Player(startMoney, "Yellow");
 		player1.setCircle(play1Circle);
 		player2.setCircle(player2Circle);
 		player3.setCircle(player3Circle);
+		player4.setCircle(player4Circle);
 		player1.setMaxTile(35);
 		player2.setMaxTile(35);
 		player3.setMaxTile(35);
+		player4.setMaxTile(35);
 		curPlayer = player1;
 		p.add(player1);
 		p.add(player2);
 		p.add(player3);
+		p.add(player4);
 		player1NameDisplay.setText(player1.getName());
 		player1MoneyDisplay.setText("" + player1.getMoney());
 		player2NameDisplay.setText(player2.getName());
 		player2MoneyDisplay.setText("" + player2.getMoney());
 		player3NameDisplay.setText(player3.getName());
 		player3MoneyDisplay.setText("" + player3.getMoney());
+		player4NameDisplay.setText(player4.getName());
+		player4MoneyDisplay.setText("" + player4.getMoney());
 		Money1 = player1.moneyProperty();
 		Money2 = player2.moneyProperty();
 		Money3 = player3.moneyProperty();
+		Money4 = player4.moneyProperty();
+
 		stepDisplay.setText("" + Step.getValue());
 		// tossButtonCheck.set(false);
 
@@ -208,6 +232,8 @@ public class Monopoly3 implements Initializable {
 		player2Circle.setLayoutY(posY);
 		player3Circle.setLayoutX(posX);
 		player3Circle.setLayoutY(posY);
+		player4Circle.setLayoutX(posX);
+		player4Circle.setLayoutY(posY);
 
 		URL mediaUrl = getClass().getResource("/BGMusic.mp3");
 		try {
@@ -230,6 +256,9 @@ public class Monopoly3 implements Initializable {
 		});
 		Money3.addListener((observer, oldval, newval) -> {
 			player3MoneyDisplay.setText(String.valueOf(newval.intValue()));
+		});
+		Money4.addListener((observer, oldval, newval) -> {
+			player4MoneyDisplay.setText(String.valueOf(newval.intValue()));
 		});
 		Step.addListener((observer, oldval, newval) -> {
 			stepDisplay.setText(String.valueOf(newval.intValue()));

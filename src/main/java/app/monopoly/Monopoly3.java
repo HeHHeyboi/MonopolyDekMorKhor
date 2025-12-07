@@ -1,25 +1,21 @@
-package monopoly;
+package app.monopoly;
 
-import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
-
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -29,17 +25,21 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-public class PlayerController implements Initializable {
+public class Monopoly3 implements Initializable {
 	@FXML
-	private Text nameDisplay;
+	private Text player1NameDisplay;
 	@FXML
-	private Text moneyDisplay;
+	private Text player1MoneyDisplay;
 	@FXML
 	private Text stepDisplay;
 	@FXML
 	private Button tossButton;
 	@FXML
-	private Circle playCircle;
+	private Circle play1Circle;
+	@FXML
+	private ImageView backgroud;
+	@FXML
+	private ImageView backgroud2;
 	@FXML
 	Button getLuckButton;
 	@FXML
@@ -50,9 +50,14 @@ public class PlayerController implements Initializable {
 	Text player2NameDisplay;
 	@FXML
 	Text player2MoneyDisplay;
-	// @FXML Text player2StepDisplay;
 	@FXML
 	Circle player2Circle;
+	@FXML
+	Text player3NameDisplay;
+	@FXML
+	Text player3MoneyDisplay;
+	@FXML
+	Circle player3Circle;
 	@FXML
 	private Pane pane;
 	@FXML
@@ -69,27 +74,28 @@ public class PlayerController implements Initializable {
 	private Button popGoButton;
 	@FXML
 	private Text popText;
-	public List<Rectangle> tile = new ArrayList<>();
+	public List<ImageView> tiles = new ArrayList<>();
 	private List<Location> locations = new ArrayList<>();
+	private List<Rectangle> box = new ArrayList<>();
 	private Player player1;
 	private Player player2;
+	private Player player3;
 	private static Player curPlayer;
 	Random random = new Random();
 	private ArrayList<Player> p = new ArrayList<>();
 	IntegerProperty Money1;
 	IntegerProperty Money2;
+	IntegerProperty Money3;
 	IntegerProperty Step = new SimpleIntegerProperty();
-	StringProperty Player1Name = new SimpleStringProperty();
-	StringProperty Player2Name = new SimpleStringProperty();
 
 	int count = 0;
 	int dice1;
 	int dice2;
 	Location l;
-	Rectangle rect;
+	ImageView tile;
 	double posX;
 	double posY;
-
+	Rectangle rect;
 	static int index = 0;
 	int startMoney = 500;
 
@@ -101,30 +107,30 @@ public class PlayerController implements Initializable {
 	}
 
 	public void init() {
-		player1 = new Player(1000, "Jame");
-		player2 = new Player(1000, "Billy");
-		player1.setCircle(playCircle);
+		player1 = new Player(startMoney, "Red");
+		player2 = new Player(startMoney, "Green");
+		player3 = new Player(startMoney, "Blue");
+		player1.setCircle(play1Circle);
 		player2.setCircle(player2Circle);
+		player3.setCircle(player3Circle);
+		player1.setMaxTile(35);
+		player2.setMaxTile(35);
+		player3.setMaxTile(35);
 		curPlayer = player1;
 		p.add(player1);
 		p.add(player2);
-		nameDisplay.setText(player1.getName());
-		moneyDisplay.setText("" + player1.getMoney());
+		p.add(player3);
+		player1NameDisplay.setText(player1.getName());
+		player1MoneyDisplay.setText("" + player1.getMoney());
 		player2NameDisplay.setText(player2.getName());
 		player2MoneyDisplay.setText("" + player2.getMoney());
+		player3NameDisplay.setText(player3.getName());
+		player3MoneyDisplay.setText("" + player3.getMoney());
 		Money1 = player1.moneyProperty();
 		Money2 = player2.moneyProperty();
+		Money3 = player3.moneyProperty();
 		stepDisplay.setText("" + Step.getValue());
 		// tossButtonCheck.set(false);
-		// #region Add rectangle to list
-		List<Node> nodes = pane.getChildren();
-		for (Node node : nodes) {
-			if (node instanceof Rectangle) {
-				Rectangle rectangle = (Rectangle) node;
-				// rectangle.setDisable(true);
-				tile.add(rectangle);
-			}
-		} // #endregion
 
 		/*
 		 * id mean
@@ -134,56 +140,100 @@ public class PlayerController implements Initializable {
 		 * 3 GoToJail tile
 		 * 4 go to any tile
 		 * 5 Special property tile
+		 * 6 luck
+		 * 7 lose money tile
 		 */
 		locations.add(new EventTile(2));
-		locations.add(new Property(1, 150, 30));
+		locations.add(new Property(1, 50, 25));
+		locations.add(new Property(1, 75, 35));
+		locations.add(new EventTile(6));
+		locations.add(new Property(5, 85, 45));
+		locations.add(new Property(1, 100, 55));
+		locations.add(new EventTile(6));
+		locations.add(new Property(1, 115, 75));
+		locations.add(new Property(1, 130, 85));
 		locations.add(new EventTile(0));
-		locations.add(new Property(1, 250, 50));
+		locations.add(new Property(1, 150, 95));
+		locations.add(new Property(1, 175, 115));
+		locations.add(new Property(1, 200, 130));
+		locations.add(new Property(1, 225, 150));
+		locations.add(new Property(1, 250, 160));
+		locations.add(new EventTile(7));
+		locations.add(new Property(5, 275, 175));
+		locations.add(new Property(1, 300, 190));
 		locations.add(new EventTile(3));
-		locations.add(new Property(5, 350, 70));
+		locations.add(new Property(1, 325, 200));
+		locations.add(new Property(1, 350, 210));
+		locations.add(new Property(1, 375, 230));
+		locations.add(new EventTile(6));
+		locations.add(new Property(1, 400, 250));
+		locations.add(new Property(1, 425, 275));
+		locations.add(new Property(1, 450, 300));
+		locations.add(new Property(1, 475, 315));
 		locations.add(new EventTile(4));
-		locations.add(new Property(1, 450, 90));
-		rect = tile.get(0);
-		posX = rect.getWidth() / 2 + rect.getLayoutX();
-		posY = rect.getHeight() / 2 + rect.getLayoutY();
-		playCircle.setLayoutX(posX);
-		playCircle.setLayoutY(posY);
+		locations.add(new Property(1, 500, 340));
+		locations.add(new Property(1, 530, 360));
+		locations.add(new Property(1, 560, 380));
+		locations.add(new Property(1, 580, 400));
+		locations.add(new EventTile(6));
+		locations.add(new EventTile(7));
+		locations.add(new Property(5, 600, 420));
+		locations.add(new Property(1, 650, 460));
+		// #region Add rectangle to list
+		List<Node> nodes = pane.getChildren();
+		for (Node node : nodes) {
+			if (node instanceof ImageView) {
+				if (node != backgroud && node != backgroud2) {
+					ImageView imageView = (ImageView) node;
+					tiles.add(imageView);
+				}
+			} else if (node instanceof Rectangle) {
+				box.add((Rectangle) node);
+			}
+		}
+		int j = 0;
+		for (int i = 0; i < locations.size(); i++) {
+			if (locations.get(i) instanceof Property) {
+				((Property) locations.get(i)).setRectangle(box.get(j));
+				j++;
+			}
+		}
+		// #endregion
+		tile = tiles.get(0);
+		posX = tile.getFitWidth() / 2 + tile.getLayoutX();
+		posY = tile.getFitHeight() / 2 + tile.getLayoutY();
+		play1Circle.setLayoutX(posX);
+		play1Circle.setLayoutY(posY);
 		player2Circle.setLayoutX(posX);
 		player2Circle.setLayoutY(posY);
+		player3Circle.setLayoutX(posX);
+		player3Circle.setLayoutY(posY);
 
-		String audioFile = "monopoly/src/main/resources/BGMusic.mp3";
-		Media media = new Media(new File(audioFile).toURI().toString());
-		MediaPlayer mediaPlayer = new MediaPlayer(media);
-		mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(javafx.util.Duration.ZERO));
-		mediaPlayer.play();
+		URL mediaUrl = getClass().getResource("/BGMusic.mp3");
+		try {
+			Media media = new Media(mediaUrl.toString());
+			MediaPlayer mediaPlayer = new MediaPlayer(media);
+			mediaPlayer.setOnEndOfMedia(() -> mediaPlayer.seek(Duration.ZERO));
+			mediaPlayer.play();
+		} catch (Exception e) {
+			System.err.println(e);
+		}
 	}
 
 	public void update() {
 
 		Money1.addListener((observer, oldval, newval) -> {
-			moneyDisplay.setText(String.valueOf(newval.intValue()));
+			player1MoneyDisplay.setText(String.valueOf(newval.intValue()));
 		});
 		Money2.addListener((observer, oldval, newval) -> {
 			player2MoneyDisplay.setText(String.valueOf(newval.intValue()));
 		});
-		Step.addListener((obs, oldval, newval) -> {
+		Money3.addListener((observer, oldval, newval) -> {
+			player3MoneyDisplay.setText(String.valueOf(newval.intValue()));
+		});
+		Step.addListener((observer, oldval, newval) -> {
 			stepDisplay.setText(String.valueOf(newval.intValue()));
 		});
-		// tossButtonCheck.addListener((obs,oldval,newval)->{
-		// tossButton.setDisable(newval);
-		// });
-	}
-	// #endregion
-
-	// #region Add and Minus money
-	public void addMoney() {
-		curPlayer.setMoney(curPlayer.getMoney() + 1000);
-		checkBankrupt();
-	}
-
-	public void minusMoney() {
-		curPlayer.setMoney(curPlayer.getMoney() - 1000);
-		checkBankrupt();
 	}
 
 	// #endregion
@@ -195,78 +245,50 @@ public class PlayerController implements Initializable {
 		return index;
 	}
 
-	public void DoubleDice() throws InterruptedException {
-		dice1 = 2;
-		dice2 = 2;
-		Step.set(dice1 + dice2);
-		if (curPlayer.CheckDouble_count()) {
-			curPlayer.PlayerPos(2);
-			rect = tile.get(curPlayer.PlayerPos());
-			posX = rect.getWidth() / 2 + rect.getLayoutX();
-			posY = rect.getHeight() / 2 + rect.getLayoutY();
-			curPlayer.getCircle().setLayoutX(posX);
-			curPlayer.getCircle().setLayoutY(posY);
-			// System.out.println(curPlayer.getName()+" is in jailed");
-		} else if (curPlayer.getWaitInjaild() > 0) {
-			boolean sameDice = dice1 == dice2;
-			if (sameDice) {
-				// System.out.println(curPlayer.getName()+"is geted out of jail");
-				moveCircle(dice1 + dice2);
-			} else {
-				curPlayer.setWaitinJail(curPlayer.getWaitInjaild() - 1);
-				curPlayer = p.get(iteratorIndex());
-				// System.out.println("You didn't get double wait in jail for
-				// "+curPlayer.getWaitInjaild() + "turn");
-			}
-		} else {
-			moveCircle(dice1 + dice2);
-
-		}
-	}
-
 	public void TossDice(ActionEvent event) throws InterruptedException {
 		dice1 = random.nextInt(6) + 1;
 		dice2 = random.nextInt(6) + 1;
 		Step.set(dice1 + dice2);
-		System.out.println(curPlayer.getName() + " turn");
-		// Platform.runLater(()->{
-		// movePlayer.run();
-		// });
-		if (curPlayer.CheckDouble_count()) {
-			curPlayer.PlayerPos(2);
-			rect = tile.get(curPlayer.PlayerPos());
-			posX = rect.getWidth() / 2 + rect.getLayoutX();
-			posY = rect.getHeight() / 2 + rect.getLayoutY();
-			curPlayer.getCircle().setLayoutX(posX);
-			curPlayer.getCircle().setLayoutY(posY);
-			// System.out.println(curPlayer.getName()+" is in jailed");
-		} else if (curPlayer.getWaitInjaild() > 0) {
+		if (curPlayer.getWaitInjaild() > 0) {
 			boolean sameDice = dice1 == dice2;
 			if (sameDice) {
 				// System.out.println(curPlayer.getName()+"is geted out of jail");
-				curPlayer.setDouble_countToZero();
+				luckText.setText(curPlayer.getName() + "is geted out of jail");
+				luckText.setVisible(true);
+
 				moveCircle(dice1 + dice2);
+			} else if (curPlayer.CheckDouble_count() == true) {
+				movePlayer(9);
+				curPlayer.setWaitinJail(3);
+				curPlayer.setDouble_countToZero();
+				curPlayer = p.get(iteratorIndex());
+				// System.out.println(curPlayer.getName()+" is in jailed");
+				luckText.setText(curPlayer.getName() + " is in jailed by get double 3 times");
+				luckText.setVisible(true);
 			} else {
+				luckText.setText(curPlayer.getName() + " didn't get double");
+				luckText.setVisible(true);
 				curPlayer.setWaitinJail(curPlayer.getWaitInjaild() - 1);
-				// System.out.println(curPlayer.getName()+" didn't get double wait in jail for
-				// "+curPlayer.getWaitInjaild() + "turn");
+				curPlayer = p.get(iteratorIndex());
 			}
 		} else {
 			moveCircle(dice1 + dice2);
-
 		}
+	}
 
+	public void movePlayer(int step) {
+		curPlayer.PlayerPos(step);
+		tile = tiles.get(curPlayer.PlayerPos());
+		posX = tile.getFitWidth() / 2 + tile.getLayoutX();
+		posY = tile.getFitHeight() / 2 + tile.getLayoutY();
+		curPlayer.getCircle().setLayoutX(posX);
+		curPlayer.getCircle().setLayoutY(posY);
 	}
 
 	// move player circle with animation 'dice1 +dice' times
 	public void moveCircle(int Sumdice) throws InterruptedException {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), event -> {
-			curPlayer.PlayerPos(curPlayer.PlayerPos() + 1);
-			rect = tile.get(curPlayer.PlayerPos());
-			posX = rect.getWidth() / 2 + rect.getLayoutX();
-			posY = rect.getHeight() / 2 + rect.getLayoutY();
-			curPlayer.getCircle().setLayoutX(posX);
-			curPlayer.getCircle().setLayoutY(posY);
+			movePlayer(curPlayer.PlayerPos() + 1);
 			count++;
 
 			l = locations.get(curPlayer.PlayerPos());
@@ -283,27 +305,19 @@ public class PlayerController implements Initializable {
 			if (count == Sumdice) {
 				if (dice1 == dice2) {
 					curPlayer.Inc_DoubleC();
-					// System.out.println(curPlayer.getDoubleCount());
 				}
 				tossButton.setDisable(false);
-				luckText.setVisible(false);
 				checkTile(l);
 				count = 0;
 			}
 		}));
 		timeline.setCycleCount(Sumdice);
 		timeline.play();
-
 	}
 
 	public void Goback(int Sumdice) throws InterruptedException {
 		Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.25), event -> {
-			curPlayer.PlayerPos(curPlayer.PlayerPos() - 1);
-			rect = tile.get(curPlayer.PlayerPos());
-			posX = rect.getWidth() / 2 + rect.getLayoutX();
-			posY = rect.getHeight() / 2 + rect.getLayoutY();
-			curPlayer.getCircle().setLayoutX(posX);
-			curPlayer.getCircle().setLayoutY(posY);
+			movePlayer(curPlayer.PlayerPos() - 1);
 			count++;
 
 			l = locations.get(curPlayer.PlayerPos());
@@ -311,7 +325,6 @@ public class PlayerController implements Initializable {
 			switch (l.id) {
 				case 2:
 					((EventTile) l).giveMoney(curPlayer);
-
 					break;
 			}
 
@@ -320,18 +333,14 @@ public class PlayerController implements Initializable {
 			if (count == Sumdice) {
 				if (dice1 == dice2) {
 					curPlayer.Inc_DoubleC();
-					// System.out.println(curPlayer.getDoubleCount());
 				}
 				tossButton.setDisable(false);
-				luckText.setVisible(false);
 				checkTile(l);
-
 				count = 0;
 			}
 		}));
 		timeline.setCycleCount(Sumdice);
 		timeline.play();
-
 	}
 
 	// show popup window
@@ -375,20 +384,17 @@ public class PlayerController implements Initializable {
 
 	// when click button to close popup window
 	public void Exit(ActionEvent event) {
+		checkBankrupt();
 		if (dice1 != dice2) {
 			curPlayer.setDouble_countToZero();
 			curPlayer = p.get(iteratorIndex());
 			curPlayer.getCircle().toFront();
 		}
 		popUpPane.setVisible(false);
+		luckText.setVisible(false);
 	}
 
 	public void buyProperty(ActionEvent event) {
-		if (curPlayer.getMoney() < ((Property) l).getPrice()) {
-			popYesButton.setDisable(true);
-		} else {
-			popYesButton.setDisable(false);
-		}
 		Player owner = ((Property) l).getOwner();
 		if (owner == null || owner == curPlayer) {
 			curPlayer.setMoney(curPlayer.getMoney() - ((Property) l).getPrice());
@@ -397,18 +403,20 @@ public class PlayerController implements Initializable {
 			owner.setMoney(owner.getMoney() + ((Property) l).getPrice());
 		}
 		((Property) l).setOwner(curPlayer);
-		Rectangle rect = tile.get(curPlayer.PlayerPos());
+		Rectangle rect = ((Property) l).getRectangle();
 		rect.setFill(curPlayer.getCircle().getFill());
 		if (l.getID() == 1) {
 			((Property) l).UgpradeProp();
 		}
+		checkBankrupt();
+		popUpPane.setVisible(false);
+		luckText.setVisible(false);
 
 		if (dice1 != dice2) {
 			curPlayer.setDouble_countToZero();
 			curPlayer = p.get(iteratorIndex());
 			curPlayer.getCircle().toFront();
 		}
-		popUpPane.setVisible(false);
 	}
 
 	public void NextButton(ActionEvent event) {
@@ -420,7 +428,7 @@ public class PlayerController implements Initializable {
 			popText.setText("upgrade is max can't not purchase");
 			setButton(0);
 		}
-
+		luckText.setVisible(false);
 	}
 
 	public void GotoSelectTile() throws InterruptedException {
@@ -430,17 +438,16 @@ public class PlayerController implements Initializable {
 		tossButton.setDisable(false);
 		popCloseButton.setDisable(false);
 		// checkTile(l);
+		curPlayer.setDouble_countToZero();
 		popUpPane.setVisible(false);
-
+		luckText.setVisible(false);
 	}
 
 	public void checkTile(Location los) {
 		switch (los.getID()) {
 			case 2:
 				if (dice1 != dice2) {
-					curPlayer.setDouble_countToZero();
 					curPlayer = p.get(iteratorIndex());
-					curPlayer.getCircle().toFront();
 				}
 				break;
 
@@ -449,36 +456,43 @@ public class PlayerController implements Initializable {
 				if (owner == null) {
 					popText.setText("Would you like to buy?\n" + ((Property) l).getPrice() + " baht");
 					setButton(1);
+					popUpwindow();
 				} else if (owner == curPlayer) {
 					if (((Property) l).getUpgradeC() <= 3) {
 						popText.setText("Would you like to buy upgrade " + ((Property) l).getUpgradeC() + "\n"
 								+ ((Property) l).getPrice() + " baht");
 						setButton(1);
+						popUpwindow();
 					} else {
 						popText.setText("upgrade is max can't not purchase");
 						setButton(0);
+						popUpwindow();
 					}
 				} else {
 					popText.setText("You paid " + ((Property) l).getPaid() + " to the " + owner.getName());
 					curPlayer.setMoney(curPlayer.getMoney() - ((Property) l).getPaid());
 					owner.setMoney(owner.getMoney() + ((Property) l).getPaid());
-					setButton(2);
+					if (curPlayer.getMoney() <= 0) {
+						checkBankrupt();
+					} else {
+						setButton(2);
+						popUpwindow();
+					}
 				}
-				popUpwindow();
+				if (curPlayer.getMoney() < ((Property) l).getPrice()) {
+					popYesButton.setDisable(true);
+				} else {
+					popYesButton.setDisable(false);
+				}
 				break;
 			case 3:
-				curPlayer.PlayerPos(2);
-				rect = tile.get(curPlayer.PlayerPos());
-				posX = rect.getWidth() / 2 + rect.getLayoutX();
-				posY = rect.getHeight() / 2 + rect.getLayoutY();
-				curPlayer.getCircle().setLayoutX(posX);
-				curPlayer.getCircle().setLayoutY(posY);
+				movePlayer(9);
 				curPlayer.setWaitinJail(3);
-				// System.out.println(curPlayer.getName()+" is in jailed");
 				curPlayer = p.get(iteratorIndex());
 				curPlayer.getCircle().toFront();
-				// popText.setText("You are going to F");
-				// setButton(0);
+				curPlayer.setDouble_countToZero();
+				luckText.setText("You are going to F");
+				luckText.setVisible(true);
 				break;
 			case 4:
 				popText.setText("How much tile do you want to go?");
@@ -503,6 +517,26 @@ public class PlayerController implements Initializable {
 					setButton(0);
 					popUpwindow();
 				}
+				if (curPlayer.getMoney() < ((Property) l).getPrice()) {
+					popYesButton.setDisable(true);
+				} else {
+					popYesButton.setDisable(false);
+				}
+				break;
+			case 6:
+				getLuck();
+
+				break;
+			case 7:
+				curPlayer.setMoney(curPlayer.getMoney() - 200);
+				luckText.setText(curPlayer.getName() + " paid mhukhata 200 baht");
+				luckText.setVisible(true);
+				checkBankrupt();
+				if (dice1 != dice2) {
+					curPlayer.setDouble_countToZero();
+					curPlayer = p.get(iteratorIndex());
+					curPlayer.getCircle().toFront();
+				}
 				break;
 			default:
 				if (dice1 != dice2) {
@@ -514,30 +548,51 @@ public class PlayerController implements Initializable {
 		}
 	}
 
-	public void getLuck() throws InterruptedException {
+	public void getLuck() {
 		int rand = random.nextInt(4) + 1;
+		int randMove;
 		switch (rand) {
 			case 1:
 				curPlayer.setMoney(curPlayer.getMoney() + 100);
 				luckText.setText(curPlayer.getName() + " get 100 baht");
 				luckText.setVisible(true);
+				if (dice1 != dice2) {
+					curPlayer.setDouble_countToZero();
+					curPlayer = p.get(iteratorIndex());
+					curPlayer.getCircle().toFront();
+				}
 				break;
 			case 2:
 				curPlayer.setMoney(curPlayer.getMoney() - 50);
 				luckText.setText(curPlayer.getName() + " lose 50 baht");
 				luckText.setVisible(true);
+				checkBankrupt();
+				if (dice1 != dice2) {
+					curPlayer.setDouble_countToZero();
+					curPlayer = p.get(iteratorIndex());
+					curPlayer.getCircle().toFront();
+				}
 				break;
 			case 3:
-				luckText.setText(curPlayer.getName() + " move forward 2 times");
+				randMove = random.nextInt(6) + 1;
+				luckText.setText(curPlayer.getName() + " move forward " + randMove + " times");
 				luckText.setVisible(true);
-				moveCircle(2);
+				try {
+					moveCircle(randMove);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				break;
 			case 4:
-				luckText.setText(curPlayer.getName() + " move backward 2 times");
+				randMove = random.nextInt(6) + 1;
+				luckText.setText(curPlayer.getName() + " move backward " + randMove + " times");
 				luckText.setVisible(true);
-				Goback(2);
+				try {
+					Goback(randMove);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				break;
-
 		}
 	}
 

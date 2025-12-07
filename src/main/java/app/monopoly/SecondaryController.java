@@ -1,5 +1,6 @@
-package monopoly;
+package app.monopoly;
 
+import app.App;
 import java.io.IOException;
 import javafx.fxml.FXML;
 
