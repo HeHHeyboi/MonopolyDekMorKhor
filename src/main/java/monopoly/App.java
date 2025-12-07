@@ -1,4 +1,4 @@
-package app;
+package monopoly;
 
 import java.io.IOException;
 
