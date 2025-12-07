@@ -2,6 +2,7 @@ package app;
 
 import java.io.IOException;
 
+import app.monopoly2.test.StartTest;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,11 +12,14 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-	private static Scene scene;
+	private Scene scene;
+
+	private static Stage stage;
 
 	@Override
-	public void start(Stage stage) throws IOException {
-		StartScene("test", stage);
+	public void start(Stage s) throws IOException {
+		stage = s;
+		StartScene("test", s);
 	}
 
 	public void StartScene(String title, Stage stage) throws IOException {
@@ -31,6 +35,7 @@ public class App extends Application {
 			case "test":
 				Font.loadFont(getClass().getResourceAsStream("/retro_gaming/Retro Gaming.ttf"), 20);
 				scene = new Scene(loadFXML("StartTest"), 600, 400);
+				StartTest.scene = scene;
 				stage.centerOnScreen();
 				stage.setScene(scene);
 				stage.setTitle("Test");
@@ -41,8 +46,8 @@ public class App extends Application {
 		}
 	}
 
-	public static void setRoot(String fxml) throws IOException {
-		scene.setRoot(loadFXML(fxml));
+	public static void setScene(Scene scene) {
+		stage.setScene(scene);
 	}
 
 	private static Parent loadFXML(String fxml) throws IOException {
