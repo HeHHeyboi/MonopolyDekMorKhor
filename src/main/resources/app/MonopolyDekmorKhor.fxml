@@ -258,7 +258,7 @@
             <Font name="Retro Gaming" size="60.0" />
          </font>
       </Text>
-      <Text fx:id="player1Name" layoutX="867.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="player1Name" fill="RED" layoutX="867.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Red">
          <font>
             <Font name="Retro Gaming" size="35.0" />
          </font>
@@ -268,12 +268,32 @@
             <Font name="Retro Gaming" size="35.0" />
          </font>
       </Text>
-      <Text fx:id="player2Name" layoutX="867.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+      <Text fx:id="player2Name" fill="#06d128" layoutX="854.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green">
          <font>
             <Font name="Retro Gaming" size="35.0" />
          </font>
       </Text>
       <Text fx:id="player2Money" layoutX="1105.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player3Name" fill="#2f12ea" layoutX="870.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blue" visible="false">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player3Money" layoutX="1108.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player4Name" fill="#b9c700" layoutX="852.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Yellow" visible="false">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player4Money" layoutX="1108.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
          <font>
             <Font name="Retro Gaming" size="35.0" />
          </font>
@@ -297,26 +317,7 @@
             </Lighting>
          </effect>
       </Button>
-      <Text fx:id="player3Name" layoutX="870.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
-         <font>
-            <Font name="Retro Gaming" size="35.0" />
-         </font>
-      </Text>
-      <Text fx:id="player3Money" layoutX="1108.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
-         <font>
-            <Font name="Retro Gaming" size="35.0" />
-         </font>
-      </Text>
-      <Text fx:id="player4Name" layoutX="870.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
-         <font>
-            <Font name="Retro Gaming" size="35.0" />
-         </font>
-      </Text>
-      <Text fx:id="player4Money" layoutX="1108.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
-         <font>
-            <Font name="Retro Gaming" size="35.0" />
-         </font>
-      </Text>
-      <Button fx:id="back_Button" layoutX="994.0" layoutY="543.0" mnemonicParsing="false" onAction="#on_back_button_pressed" text="Back" />
+      <Button fx:id="back_Button" layoutX="1017.0" layoutY="570.0" mnemonicParsing="false" onAction="#on_back_button_pressed" text="Back" />
+      <Button layoutX="841.0" layoutY="570.0" mnemonicParsing="false" onAction="#increaseMoney" text="Increase Money" />
    </children>
 </Pane>
