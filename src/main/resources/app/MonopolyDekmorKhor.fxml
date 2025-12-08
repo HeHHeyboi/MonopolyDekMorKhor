@@ -27,188 +27,189 @@
       </ImageView>
       <Pane fx:id="board" prefHeight="800.0" prefWidth="801.0" scaleY="0.95">
          <children>
-            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="681.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="start" fitHeight="140.0" fitWidth="120.0" layoutX="681.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/START%20(1).png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="611.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="611.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/Artboard%201.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="541.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="541.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/2.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="471.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="random" fitHeight="110.0" fitWidth="70.0" layoutX="471.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/3.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="401.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="special" fitHeight="110.0" fitWidth="70.0" layoutX="401.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/4.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="331.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="331.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/5.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="261.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="random" fitHeight="110.0" fitWidth="70.0" layoutX="261.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/6.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="191.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="191.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/32.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="120.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="120.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/7.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="120.0" fitWidth="120.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="jail" fitHeight="120.0" fitWidth="120.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/F++.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../pic/ตาราง/8.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../pic/ตาราง/9.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../pic/ตาราง/10.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../pic/ตาราง/11.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../pic/ตาราง/12.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <ImageView id="lose" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../pic/ตาราง/13.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <ImageView id="special" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../pic/ตาราง/14.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
                <image>
                   <Image url="@../pic/ตาราง/15.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="146.0" fitWidth="126.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="goToJail" fitHeight="146.0" fitWidth="126.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/F+.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="120.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="120.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/16.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="191.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="191.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/17.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="261.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="261.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/18.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="331.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="random" fitHeight="110.0" fitWidth="70.0" layoutX="331.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/19.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="401.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="401.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/20.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="471.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="471.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/21.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="541.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="541.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/22.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="611.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="611.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/23.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="127.0" fitWidth="126.0" layoutX="681.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView id="bus" fitHeight="127.0" fitWidth="126.0" layoutX="681.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../pic/ตาราง/sutterbus.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
                   <Image url="@../pic/ตาราง/24.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
                   <Image url="@../pic/ตาราง/25.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
                   <Image url="@../pic/ตาราง/26.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
                   <Image url="@../pic/ตาราง/27.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <ImageView id="random" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
                   <Image url="@../pic/ตาราง/28.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <ImageView id="lose" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
                   <Image url="@../pic/ตาราง/29.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <ImageView id="special" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
                   <Image url="@../pic/ตาราง/30.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
                <image>
                   <Image url="@../pic/ตาราง/31.png" />
                </image>
             </ImageView>
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="610.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="537.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="400.0" layoutY="675.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="328.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="190.0" layoutY="675.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="119.0" layoutY="675.0" stroke="BLACK" strokeType="INSIDE" width="68.0" />
@@ -230,6 +231,7 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="218.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="292.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="358.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="644.0" layoutY="567.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="635.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
          </children>
       </Pane>

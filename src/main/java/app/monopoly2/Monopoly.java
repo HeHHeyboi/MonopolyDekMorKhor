@@ -9,6 +9,7 @@ import app.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,8 @@ import javafx.scene.text.Text;
 public class Monopoly implements Initializable {
 	@FXML
 	Pane pane;
+	@FXML
+	Pane board;
 	@FXML
 	ImageView background2;
 	@FXML
@@ -47,6 +50,18 @@ public class Monopoly implements Initializable {
 	final double xSpawn = 721;
 	final double ySpawn = 732;
 	final double playerSize = 10;
+
+	// NOTE: Id for each tile in board. Use for create Object of each type
+	// This is for CSS ID
+	final String startTileId = "start";
+	final String jailTileId = "jail";
+	final String goToJailTileId = "goToJail";
+	final String busTileId = "bus";
+	final String propertyTileId = "property";
+	final String specialPropertyTileId = "special";
+	final String randomTileId = "random";
+	final String loseTileId = "lose";
+
 	final int startMoney = 500;
 	ArrayList<Player> players = new ArrayList<>();
 	// ArrayList<Text> nameTexts = new ArrayList<>();
@@ -108,7 +123,7 @@ public class Monopoly implements Initializable {
 			// nText.setText(color.toString());
 			// nText.setFill(p);
 			Text mText = moneyTexts.get(i);
-			Player player = new Player(startMoney, c);
+			Player player = new Player(startMoney, c, i + 1);
 
 			// NOTE: Bind TextProperty from Text to player Money Property
 			mText.textProperty().bind(player.getMoneyProperty().asString());
@@ -118,6 +133,39 @@ public class Monopoly implements Initializable {
 			pane.getChildren().add(player.getPlayer_char());
 			players.addLast(player);
 		}
+
+		for (Node n : board.getChildren()) {
+			if (n.getId() == null) {
+				continue;
+			}
+			switch (n.getId()) {
+				case startTileId:
+					System.out.println("start");
+					break;
+				case jailTileId:
+					System.out.println("jail");
+					break;
+				case goToJailTileId:
+					System.out.println("go to jail");
+					break;
+				case busTileId:
+					System.out.println("bus");
+					break;
+				case propertyTileId:
+					System.out.println("property");
+					break;
+				case specialPropertyTileId:
+					System.out.println("special");
+					break;
+				case randomTileId:
+					System.out.println("random");
+					break;
+				case loseTileId:
+					System.out.println("lose");
+					break;
+			}
+		}
+
 	}
 
 	public void on_back_button_pressed() {
