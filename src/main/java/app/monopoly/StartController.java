@@ -7,17 +7,17 @@ import javafx.fxml.FXML;
 
 public class StartController {
 	@FXML
-	private void switchTo2Player() throws IOException {
+	private void switchTo2Player() throws Exception {
 		App.setRoot("MonopolyDekmorKhor2");
 	}
 
 	@FXML
-	private void switchTo3Player() throws IOException {
+	private void switchTo3Player() throws Exception {
 		App.setRoot("MonopolyDekmorkhor3");
 	}
 
 	@FXML
-	private void switchTo4Player() throws IOException {
+	private void switchTo4Player() throws Exception {
 		App.setRoot("MonopolyDekmorkhor4");
 	}
 }

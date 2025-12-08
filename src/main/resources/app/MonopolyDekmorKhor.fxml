@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.monopoly.Monopoly2">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.monopoly2.Monopoly">
    <children>
       <ImageView fx:id="backgroud2" fitHeight="800.0" fitWidth="577.0" layoutX="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -26,209 +26,214 @@
             <Image url="@../pic/ตาราง/main%20screen.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="680.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/START%20(1).png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="610.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/Artboard%201.png" />
-         </image></ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="540.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/2.png" />
-         </image></ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="470.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/3.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="400.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/4.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="330.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/5.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="260.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/6.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="190.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/32.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="120.0" layoutY="691.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/7.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="-1.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/F++.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/8.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="19.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/9.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="19.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/10.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/11.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/12.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/13.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/14.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/15.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="120.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/F+.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="120.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/16.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="190.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/17.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="260.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/18.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="330.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/19.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="400.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/20.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="470.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/21.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="540.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/22.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="610.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/23.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="120.0" fitWidth="120.0" layoutX="680.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../pic/ตาราง/sutterbus.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="710.0" layoutY="100.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/24.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="710.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/25.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="710.0" layoutY="240.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/26.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="710.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/27.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="710.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/28.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="710.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/29.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="710.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/30.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="710.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
-         <image>
-            <Image url="@../pic/ตาราง/31.png" />
-         </image></ImageView>
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="610.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="540.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="400.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="330.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="190.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="10.0" layoutX="120.0" layoutY="792.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="100.0" layoutY="608.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="100.0" layoutY="539.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="100.0" layoutY="469.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="100.0" layoutY="399.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="100.0" layoutY="329.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="100.0" layoutY="189.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="100.0" layoutY="119.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="9.0" layoutX="120.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="9.0" layoutX="190.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="9.0" layoutX="260.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="9.0" layoutX="400.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="9.0" layoutX="470.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="9.0" layoutX="540.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="9.0" layoutX="610.0" layoutY="101.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="70.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="71.0" layoutX="791.0" layoutY="120.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="791.0" layoutY="191.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="791.0" layoutY="261.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="791.0" layoutY="331.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="791.0" layoutY="541.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
-      <Rectangle arcWidth="5.0" fill="#ff4217" height="70.0" layoutX="791.0" layoutY="610.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="10.0" />
+      <Pane fx:id="board" prefHeight="800.0" prefWidth="801.0">
+         <children>
+            <ImageView fitHeight="140.0" fitWidth="120.0" layoutX="681.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/START%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="611.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/Artboard%201.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="541.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/2.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="471.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/3.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="401.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/4.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="331.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/5.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="261.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/6.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="191.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/32.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="120.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/7.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="120.0" fitWidth="120.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/F++.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/8.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/9.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/10.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/11.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/12.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/13.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/14.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/15.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="146.0" fitWidth="126.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/F+.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/16.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="191.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/17.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="261.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/18.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="331.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/19.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="401.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/20.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="471.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/21.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="541.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/22.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="611.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/23.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="127.0" fitWidth="126.0" layoutX="681.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/sutterbus.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/24.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/25.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/26.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/27.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/28.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/29.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/30.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/31.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="610.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="537.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="328.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="190.0" layoutY="675.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="119.0" layoutY="675.0" stroke="BLACK" strokeType="INSIDE" width="68.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="87.0" layoutY="641.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="86.0" layoutY="567.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="85.0" layoutY="497.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="84.0" layoutY="428.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="84.0" layoutY="356.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="85.0" layoutY="219.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="86.0" layoutY="153.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="118.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="191.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="258.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="405.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="471.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="541.0" layoutY="111.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="612.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="150.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="218.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="292.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="358.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="635.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+         </children>
+      </Pane>
       <Pane fx:id="popUpPane" layoutX="231.0" layoutY="439.0" prefHeight="154.0" prefWidth="339.0" style="-fx-background-color: #00FFB6;" visible="false">
          <children>
             <Text fx:id="popText" layoutX="7.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="322.8052062988281">
@@ -247,6 +252,11 @@
       <Text fx:id="luckText" fill="#ff0303" layoutX="133.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="536.5999755859375">
          <font>
             <Font name="Pixelify Sans Regular" size="30.0" />
+         </font>
+      </Text>
+      <Text fx:id="stepDisplay" layoutX="367.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Retro Gaming" size="60.0" />
          </font>
       </Text>
       <Text fx:id="player1NameDisplay" layoutX="867.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
@@ -271,11 +281,6 @@
       </Text>
       <Circle fx:id="play1Circle" fill="#f70000" layoutX="938.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
       <Circle fx:id="player2Circle" fill="#29ff50" layoutX="1054.0" layoutY="545.0" radius="20.0" stroke="BLACK" strokeType="INSIDE" />
-      <Text fx:id="stepDisplay" layoutX="367.0" layoutY="337.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
-         <font>
-            <Font name="Retro Gaming" size="60.0" />
-         </font>
-      </Text>
       <Button fx:id="tossButton" layoutX="952.0" layoutY="610.0" mnemonicParsing="false" onAction="#TossDice" prefHeight="71.0" prefWidth="176.0" style="-fx-background-color: red;" text="LOL">
          <font>
             <Font name="Retro Gaming" size="36.0" />

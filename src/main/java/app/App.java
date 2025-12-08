@@ -12,14 +12,14 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-	private Scene scene;
+	private static Scene scene;
 
 	private static Stage stage;
 
 	@Override
 	public void start(Stage s) throws IOException {
 		stage = s;
-		StartScene("test", s);
+		StartScene("main", s);
 	}
 
 	public void StartScene(String title, Stage stage) throws IOException {
@@ -48,6 +48,10 @@ public class App extends Application {
 
 	public static void setScene(Scene scene) {
 		stage.setScene(scene);
+	}
+
+	public static void setRoot(String fxml) throws Exception {
+		scene.setRoot(loadFXML(fxml));
 	}
 
 	private static Parent loadFXML(String fxml) throws IOException {
