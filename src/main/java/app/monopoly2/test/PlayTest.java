@@ -57,7 +57,7 @@ public class PlayTest implements Initializable {
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/StartTest.fxml"));
 		try {
 			Scene scene = new Scene(fxmlLoader.load());
-			App.setScene(scene);
+			App.setAppScene(scene);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
