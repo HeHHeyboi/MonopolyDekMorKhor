@@ -19,7 +19,7 @@ public class App extends Application {
 	@Override
 	public void start(Stage s) throws IOException {
 		AppStage = s;
-		StartScene("main", s);
+		StartScene("test", s);
 	}
 
 	public void StartScene(String title, Stage stage) throws IOException {

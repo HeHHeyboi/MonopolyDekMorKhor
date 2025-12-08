@@ -7,9 +7,9 @@ public class EventTile extends Tile {
 
 	EventType type;
 
-	public EventTile(EventType type, int id, double x,
+	public EventTile(EventType type, double x,
 			double y, double width, double height) {
-		super(id, x, y, width, height);
+		super(x, y, width, height);
 		this.type = type;
 	}
 

@@ -13,16 +13,16 @@ public class PropertyTile extends Tile {
 	public PropertyTile() {
 	}
 
-	public PropertyTile(int price, int id, double x, double y,
+	public PropertyTile(int price, double x, double y,
 			double width, double height) {
-		super(id, x, y, width, height);
+		super(x, y, width, height);
 		this.price = price;
 	}
 
 	@Override
 	public String toString() {
 		return String.format("Price: %d, Rect: %s,Pos: %f,%f ,Size: %f,%f, Special: %b",
-				this.price, this.rect.toString(), this.x, this.y, this.width, this.height, this.isSpecial);
+				this.price, this.rect, this.x, this.y, this.width, this.height, this.isSpecial);
 	}
 
 	public Rectangle getRect() {

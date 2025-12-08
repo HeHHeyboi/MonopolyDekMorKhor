@@ -155,45 +155,45 @@ public class Monopoly implements Initializable {
 			ImageView tile = (ImageView) n;
 			switch (n.getId()) {
 				case startTileId:
-					EventTile start_tile = new EventTile(EventType.START, i, tile.getLayoutX(), tile.getLayoutY(),
+					EventTile start_tile = new EventTile(EventType.START, tile.getLayoutX(), tile.getLayoutY(),
 							tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(start_tile);
 					break;
 				case jailTileId:
-					EventTile jail_tile = new EventTile(EventType.JAIL, i, tile.getLayoutX(), tile.getLayoutY(),
+					EventTile jail_tile = new EventTile(EventType.JAIL, tile.getLayoutX(), tile.getLayoutY(),
 							tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(jail_tile);
 					break;
 				case goToJailTileId:
-					EventTile goToJailTile = new EventTile(EventType.GO_TO_JAIL, i, tile.getLayoutX(),
+					EventTile goToJailTile = new EventTile(EventType.GO_TO_JAIL, tile.getLayoutX(),
 							tile.getLayoutY(), tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(goToJailTile);
 					break;
 				case busTileId:
-					EventTile busTile = new EventTile(EventType.BUS, i, tile.getLayoutX(), tile.getLayoutY(),
+					EventTile busTile = new EventTile(EventType.BUS, tile.getLayoutX(), tile.getLayoutY(),
 							tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(busTile);
 					break;
 				case randomTileId:
-					EventTile randomTile = new EventTile(EventType.RANDOM, i, tile.getLayoutX(), tile.getLayoutY(),
+					EventTile randomTile = new EventTile(EventType.RANDOM, tile.getLayoutX(), tile.getLayoutY(),
 							tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(randomTile);
 					break;
 				case loseTileId:
-					EventTile loseTile = new EventTile(EventType.LOSE, i, tile.getLayoutX(), tile.getLayoutY(),
+					EventTile loseTile = new EventTile(EventType.LOSE, tile.getLayoutX(), tile.getLayoutY(),
 							tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(loseTile);
 					break;
 				case propertyTileId:
 					int price = (i == 0) ? basePrice : basePrice + incrementPrice;
-					PropertyTile propertyTile = new PropertyTile(price, i, tile.getLayoutX(), tile.getLayoutY(),
+					PropertyTile propertyTile = new PropertyTile(price, tile.getLayoutX(), tile.getLayoutY(),
 							tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(propertyTile);
 					properties.add(propertyTile);
 					break;
 				case specialPropertyTileId:
 					int special_price = (i == 0) ? basePrice : basePrice + incrementPrice;
-					PropertyTile specialTile = new PropertyTile(special_price, i, tile.getLayoutX(), tile.getLayoutY(),
+					PropertyTile specialTile = new PropertyTile(special_price, tile.getLayoutX(), tile.getLayoutY(),
 							tile.getFitWidth(), tile.getFitHeight());
 					specialTile.isSpecial = true;
 					tileList.add(specialTile);
@@ -201,14 +201,14 @@ public class Monopoly implements Initializable {
 					break;
 			}
 		}
-		// System.out.println("---- Tile List ----");
-		// for (var t : tileList) {
-		// System.out.println(t.toString());
-		// }
-		// System.out.println("---- Properties ----");
-		// for (var t : properties) {
-		// System.out.println(t.toString());
-		// }
+		System.out.println("---- Tile List ----");
+		for (var t : tileList) {
+			System.out.println(t.toString());
+		}
+		System.out.println("---- Properties ----");
+		for (var t : properties) {
+			System.out.println(t.toString());
+		}
 	}
 
 	public void on_back_button_pressed() {

@@ -15,15 +15,7 @@ public class StartTest {
 
 	public void on_2playerPressed() {
 		long start = System.nanoTime();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/MonopolyDekmorKhor.fxml"));
-		try {
-			Scene scene = new Scene(fxmlLoader.load());
-			App.setAppScene(scene);
-			App.AppStage.centerOnScreen();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		Monopoly controller = fxmlLoader.getController();
+		Monopoly controller = loadScene();
 		try {
 			controller.GameInit(2);
 		} catch (Exception e) {
@@ -36,16 +28,8 @@ public class StartTest {
 
 	public void on_3playerPressed() {
 		long start = System.nanoTime();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/MonopolyDekmorKhor.fxml"));
-		try {
-			Scene scene = new Scene(fxmlLoader.load());
-			App.setAppScene(scene);
-			App.AppStage.centerOnScreen();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
 
-		Monopoly controller = fxmlLoader.getController();
+		Monopoly controller = loadScene();
 		try {
 			controller.GameInit(3);
 		} catch (Exception e) {
@@ -58,15 +42,8 @@ public class StartTest {
 
 	public void on_4playerPressed() {
 		long start = System.nanoTime();
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/MonopolyDekmorKhor.fxml"));
-		try {
-			Scene scene = new Scene(fxmlLoader.load());
-			App.setAppScene(scene);
-			App.AppStage.centerOnScreen();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-		}
-		Monopoly controller = fxmlLoader.getController();
+
+		Monopoly controller = loadScene();
 		try {
 			controller.GameInit(4);
 		} catch (Exception e) {
@@ -75,5 +52,18 @@ public class StartTest {
 		long end = System.nanoTime();
 		double ms = (end - start) / 1_000_000.0;
 		System.out.println("test took: " + ms + " ms");
+	}
+
+	private Monopoly loadScene() {
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/MonopolyDekmorKhor.fxml"));
+		try {
+			Scene scene = new Scene(fxmlLoader.load());
+			App.setAppScene(scene);
+			App.AppStage.centerOnScreen();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		return fxmlLoader.getController();
 	}
 }
