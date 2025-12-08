@@ -22,7 +22,11 @@ public class StartTest {
 			System.out.println(e.getMessage());
 		}
 		PlayTest controller = fxmlLoader.getController();
-		controller.InitGame(2);
+		try {
+			controller.InitGame(2);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		count += 1;
 		displayText.setText("Count: " + count);
 	}
@@ -35,8 +39,13 @@ public class StartTest {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+
 		PlayTest controller = fxmlLoader.getController();
-		controller.InitGame(3);
+		try {
+			controller.InitGame(3);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		count += 1;
 		displayText.setText("Count: " + count);
 	}
@@ -50,7 +59,11 @@ public class StartTest {
 			System.out.println(e.getMessage());
 		}
 		PlayTest controller = fxmlLoader.getController();
-		controller.InitGame(4);
+		try {
+			controller.InitGame(4);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
 		count += 1;
 		displayText.setText("Count: " + count);
 	}
