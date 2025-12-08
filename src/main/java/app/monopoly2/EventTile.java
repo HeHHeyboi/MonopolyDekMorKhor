@@ -18,6 +18,12 @@ public class EventTile extends Tile {
 		}
 	}
 
+	@Override
+	public String toString() {
+		return String.format("Type: %s,Pos: %f,%f ,Size: %f,%f",
+				type.name(), this.x, this.y, this.width, this.height);
+	}
+
 	public EventType getEventType() {
 		return type;
 	}

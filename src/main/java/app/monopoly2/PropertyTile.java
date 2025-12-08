@@ -1,11 +1,14 @@
 package app.monopoly2;
 
+import javafx.scene.shape.Rectangle;
+
 public class PropertyTile extends Tile {
 	final int maxLevel = 3;
 	int price = 0;
 	int owner = 0;
 	int level = 1;
 	boolean isSpecial = false;
+	Rectangle rect;
 
 	public PropertyTile() {
 	}
@@ -14,6 +17,20 @@ public class PropertyTile extends Tile {
 			double width, double height) {
 		super(id, x, y, width, height);
 		this.price = price;
+	}
+
+	@Override
+	public String toString() {
+		return String.format("Price: %d, Rect: %s,Pos: %f,%f ,Size: %f,%f, Special: %b",
+				this.price, this.rect.toString(), this.x, this.y, this.width, this.height, this.isSpecial);
+	}
+
+	public Rectangle getRect() {
+		return rect;
+	}
+
+	public void setRect(Rectangle rect) {
+		this.rect = rect;
 	}
 
 	public int getPrice() {
@@ -46,6 +63,10 @@ public class PropertyTile extends Tile {
 
 	public void setSpecial(boolean isSpecial) {
 		this.isSpecial = isSpecial;
+	}
+
+	public int getMaxLevel() {
+		return maxLevel;
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.EnumMap;
 import java.util.ResourceBundle;
 
 import app.App;
+import app.monopoly2.EventTile.EventType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 
 public class Monopoly implements Initializable {
@@ -62,10 +64,15 @@ public class Monopoly implements Initializable {
 	final String randomTileId = "random";
 	final String loseTileId = "lose";
 
+	final int basePrice = 25;
+	final int incrementPrice = 10;
+
 	final int startMoney = 500;
 	ArrayList<Player> players = new ArrayList<>();
 	// ArrayList<Text> nameTexts = new ArrayList<>();
 	ArrayList<Text> moneyTexts = new ArrayList<>();
+	ArrayList<PropertyTile> properties = new ArrayList<>();
+	ArrayList<Tile> tileList = new ArrayList<>();
 
 	static EnumMap<PlayerColor, String> colorMap = new EnumMap<>(PlayerColor.class);
 
@@ -134,38 +141,74 @@ public class Monopoly implements Initializable {
 			players.addLast(player);
 		}
 
+		int rectIndex = 0;
+		int i = -1;
 		for (Node n : board.getChildren()) {
-			if (n.getId() == null) {
+			i += 1;
+			if (n.getId() == null && n instanceof Rectangle) {
+				PropertyTile p = properties.get(rectIndex);
+				Rectangle r = (Rectangle) n;
+				p.setRect(r);
+				rectIndex += 1;
 				continue;
 			}
+			ImageView tile = (ImageView) n;
 			switch (n.getId()) {
 				case startTileId:
-					System.out.println("start");
+					EventTile start_tile = new EventTile(EventType.START, i, tile.getLayoutX(), tile.getLayoutY(),
+							tile.getFitWidth(), tile.getFitHeight());
+					tileList.add(start_tile);
 					break;
 				case jailTileId:
-					System.out.println("jail");
+					EventTile jail_tile = new EventTile(EventType.JAIL, i, tile.getLayoutX(), tile.getLayoutY(),
+							tile.getFitWidth(), tile.getFitHeight());
+					tileList.add(jail_tile);
 					break;
 				case goToJailTileId:
-					System.out.println("go to jail");
+					EventTile goToJailTile = new EventTile(EventType.GO_TO_JAIL, i, tile.getLayoutX(),
+							tile.getLayoutY(), tile.getFitWidth(), tile.getFitHeight());
+					tileList.add(goToJailTile);
 					break;
 				case busTileId:
-					System.out.println("bus");
-					break;
-				case propertyTileId:
-					System.out.println("property");
-					break;
-				case specialPropertyTileId:
-					System.out.println("special");
+					EventTile busTile = new EventTile(EventType.BUS, i, tile.getLayoutX(), tile.getLayoutY(),
+							tile.getFitWidth(), tile.getFitHeight());
+					tileList.add(busTile);
 					break;
 				case randomTileId:
-					System.out.println("random");
+					EventTile randomTile = new EventTile(EventType.RANDOM, i, tile.getLayoutX(), tile.getLayoutY(),
+							tile.getFitWidth(), tile.getFitHeight());
+					tileList.add(randomTile);
 					break;
 				case loseTileId:
-					System.out.println("lose");
+					EventTile loseTile = new EventTile(EventType.LOSE, i, tile.getLayoutX(), tile.getLayoutY(),
+							tile.getFitWidth(), tile.getFitHeight());
+					tileList.add(loseTile);
+					break;
+				case propertyTileId:
+					int price = (i == 0) ? basePrice : basePrice + incrementPrice;
+					PropertyTile propertyTile = new PropertyTile(price, i, tile.getLayoutX(), tile.getLayoutY(),
+							tile.getFitWidth(), tile.getFitHeight());
+					tileList.add(propertyTile);
+					properties.add(propertyTile);
+					break;
+				case specialPropertyTileId:
+					int special_price = (i == 0) ? basePrice : basePrice + incrementPrice;
+					PropertyTile specialTile = new PropertyTile(special_price, i, tile.getLayoutX(), tile.getLayoutY(),
+							tile.getFitWidth(), tile.getFitHeight());
+					specialTile.isSpecial = true;
+					tileList.add(specialTile);
+					properties.add(specialTile);
 					break;
 			}
 		}
-
+		// System.out.println("---- Tile List ----");
+		// for (var t : tileList) {
+		// System.out.println(t.toString());
+		// }
+		// System.out.println("---- Properties ----");
+		// for (var t : properties) {
+		// System.out.println(t.toString());
+		// }
 	}
 
 	public void on_back_button_pressed() {

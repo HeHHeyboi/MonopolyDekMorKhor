@@ -14,6 +14,7 @@ public class StartTest {
 	public static Scene scene;
 
 	public void on_2playerPressed() {
+		long start = System.nanoTime();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/MonopolyDekmorKhor.fxml"));
 		try {
 			Scene scene = new Scene(fxmlLoader.load());
@@ -28,9 +29,13 @@ public class StartTest {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		long end = System.nanoTime();
+		double ms = (end - start) / 1_000_000.0;
+		System.out.println("test took: " + ms + " ms");
 	}
 
 	public void on_3playerPressed() {
+		long start = System.nanoTime();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/MonopolyDekmorKhor.fxml"));
 		try {
 			Scene scene = new Scene(fxmlLoader.load());
@@ -46,11 +51,13 @@ public class StartTest {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-		count += 1;
-		displayText.setText("Count: " + count);
+		long end = System.nanoTime();
+		double ms = (end - start) / 1_000_000.0;
+		System.out.println("test took: " + ms + " ms");
 	}
 
 	public void on_4playerPressed() {
+		long start = System.nanoTime();
 		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/MonopolyDekmorKhor.fxml"));
 		try {
 			Scene scene = new Scene(fxmlLoader.load());
@@ -65,5 +72,8 @@ public class StartTest {
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
+		long end = System.nanoTime();
+		double ms = (end - start) / 1_000_000.0;
+		System.out.println("test took: " + ms + " ms");
 	}
 }
