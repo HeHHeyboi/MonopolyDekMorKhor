@@ -55,7 +55,6 @@ public class Player {
 	}
 
 	public void PlayerPos(int i) {
-
 		this.playerPos = i;
 		if (playerPos > maxTile) {
 			this.playerPos = 0;

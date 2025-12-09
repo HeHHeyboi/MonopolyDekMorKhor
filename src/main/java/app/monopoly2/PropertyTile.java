@@ -1,11 +1,16 @@
 package app.monopoly2;
 
+import app.monopoly2.Monopoly.PlayerColor;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
 public class PropertyTile extends Tile {
 	final int maxLevel = 3;
 	int price = 0;
-	int owner = 0;
+	int paid = 0;
+	IntegerProperty owner = new SimpleIntegerProperty(-1);
 	int level = 1;
 	boolean isSpecial = false;
 	Rectangle rect;
@@ -13,16 +18,15 @@ public class PropertyTile extends Tile {
 	public PropertyTile() {
 	}
 
-	public PropertyTile(int price, double x, double y,
+	public PropertyTile(double x, double y,
 			double width, double height) {
 		super(x, y, width, height);
-		this.price = price;
 	}
 
 	@Override
 	public String toString() {
-		return String.format("Price: %d, Rect: %s,Pos: %f,%f ,Size: %f,%f, Special: %b",
-				this.price, this.rect, this.x, this.y, this.width, this.height, this.isSpecial);
+		return String.format("Price: %d, Paid: %d, Rect: %s,Pos: %f,%f ,Size: %f,%f, Special: %b",
+				this.price, this.paid, this.rect, this.x, this.y, this.width, this.height, this.isSpecial);
 	}
 
 	public Rectangle getRect() {
@@ -31,6 +35,15 @@ public class PropertyTile extends Tile {
 
 	public void setRect(Rectangle rect) {
 		this.rect = rect;
+		owner.addListener((obs, oldval, newval) -> {
+			String color;
+			if (newval.intValue() < 0) {
+				color = "#FFFFFF";
+			} else {
+				color = Monopoly.colorMap.get(PlayerColor.values()[newval.intValue()]);
+			}
+			rect.setFill(Paint.valueOf(color));
+		});
 	}
 
 	public int getPrice() {
@@ -41,12 +54,20 @@ public class PropertyTile extends Tile {
 		this.price = price;
 	}
 
+	public void setPaid(int paid) {
+		this.paid = paid;
+	}
+
+	public int getPaid() {
+		return paid;
+	}
+
 	public int getOwner() {
-		return owner;
+		return owner.get();
 	}
 
 	public void setOwner(int owner) {
-		this.owner = owner;
+		this.owner.set(owner);
 	}
 
 	public int getLevel() {

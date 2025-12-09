@@ -115,7 +115,6 @@ public class Monopoly4 implements Initializable {
 		Buy_Upgrade_prop,
 	};
 
-	// #region initialize
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		init();
@@ -222,7 +221,6 @@ public class Monopoly4 implements Initializable {
 				j++;
 			}
 		}
-		// #endregion
 		tile = tiles.get(0);
 		posX = tile.getFitWidth() / 2 + tile.getLayoutX();
 		posY = tile.getFitHeight() / 2 + tile.getLayoutY();

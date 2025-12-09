@@ -1,5 +1,7 @@
 package app.monopoly2;
 
+import java.util.ArrayList;
+
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.shape.Circle;
@@ -9,6 +11,10 @@ public class Player {
 	private Circle player_char;
 	private int player_pos = 0;
 	private int playerId;
+	int maxTile = 0;
+	boolean isInJail = false;
+	int waitInJail = 0;
+	ArrayList<PropertyTile> ownedProperty = new ArrayList<>();
 
 	public Player(int money, Circle circle, int id) {
 		this.money.set(money);
@@ -17,6 +23,10 @@ public class Player {
 		// text.setText(newvalue.toString());
 		// });
 		this.player_char = circle;
+	}
+
+	public void setMaxTile(int maxTile) {
+		this.maxTile = maxTile - 1;
 	}
 
 	public int getPlayerId() {
@@ -28,7 +38,12 @@ public class Player {
 	}
 
 	public void setPlayer_pos(int pos) {
-		this.player_pos = pos;
+		player_pos = pos;
+		if (player_pos > maxTile) {
+			player_pos = 0;
+		} else if (player_pos < 0) {
+			player_pos = maxTile;
+		}
 	}
 
 	public int getMoney() {
