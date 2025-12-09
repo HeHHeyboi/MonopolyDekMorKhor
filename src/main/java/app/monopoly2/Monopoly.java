@@ -1,5 +1,6 @@
 package app.monopoly2;
 
+import java.awt.TextField;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.EnumMap;
@@ -58,9 +59,31 @@ public class Monopoly implements Initializable {
 	Text stepDisplay;
 	@FXML
 	Button tossButton;
+	@FXML
+	Pane popUpPane;
+	@FXML
+	Text popText;
+	@FXML
+	Button popCloseButton;
+	@FXML
+	Button popNextButton;
+	@FXML
+	Button popYesButton;
+	@FXML
+	Button popNoButton;
+	@FXML
+	Button popGoButton;
+	@FXML
+	Text luckText;
+	@FXML
+	TextField textField;
 
 	enum PlayerColor {
 		RED, GREEN, BLUE, YELLOW;
+	}
+
+	enum PopUpType {
+		BuyProperty, UpgradeProperty, BusSelectTile, Notify, Hide
 	}
 
 	final double xSpawn = 721;
@@ -94,6 +117,8 @@ public class Monopoly implements Initializable {
 	IntegerProperty StepCount = new SimpleIntegerProperty(0);
 	Random random = new Random();
 
+	int jailIndex;
+
 	static EnumMap<PlayerColor, String> colorMap = new EnumMap<>(PlayerColor.class);
 
 	@Override
@@ -119,19 +144,19 @@ public class Monopoly implements Initializable {
 		double startPosY = ySpawn;
 		switch (numPlayer) {
 			case 2:
-				image = new Image("/pic/2Player.png");
+				image = new Image("/pic/2player.png");
 				background2.setImage(image);
 				startPosY -= playerSize * 2;
 				break;
 			case 3:
-				image = new Image("/pic/3Player.png");
+				image = new Image("/pic/3player.png");
 				background2.setImage(image);
 				player3Name.setVisible(true);
 				player3Money.setVisible(true);
 				startPosY -= playerSize * 2 + playerSize;
 				break;
 			case 4:
-				image = new Image("/pic/4Player.png");
+				image = new Image("/pic/4player.png");
 				background2.setImage(image);
 				player3Name.setVisible(true);
 				player3Money.setVisible(true);
@@ -161,6 +186,7 @@ public class Monopoly implements Initializable {
 					EventTile jail_tile = new EventTile(EventType.JAIL, tile.getLayoutX(), tile.getLayoutY(),
 							tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(jail_tile);
+					jailIndex = tileList.size() - 1;
 					break;
 				case goToJailTileId:
 					EventTile goToJailTile = new EventTile(EventType.GO_TO_JAIL, tile.getLayoutX(),
@@ -233,7 +259,7 @@ public class Monopoly implements Initializable {
 			pane.getChildren().add(player.getPlayer_char());
 			players.addLast(player);
 		}
-
+		System.out.println(players.toString());
 		curPlayer = players.getFirst();
 		stepDisplay.textProperty().bind(StepCount.asString());
 	}
@@ -278,9 +304,9 @@ public class Monopoly implements Initializable {
 		// }
 	}
 
-	public KeyFrame movePlayer(double currentTime, int step) {
+	public KeyFrame createKeyFrame(double currentTime, int step) {
 		// curPlayer.setPlayer_pos(step);
-		Tile tile = tileList.get(curPlayer.getPlayer_pos());
+		Tile tile = tileList.get(curPlayer.getPlayerPos());
 		double posX = tile.getX() + tile.getWidth() / 2;
 		double posY = tile.getY() + tile.getHeight() / 2;
 
@@ -291,13 +317,12 @@ public class Monopoly implements Initializable {
 		return new KeyFrame(Duration.seconds(currentTime), x, y);
 	}
 
-	public void moveCircle(int dice1, int dice2) throws InterruptedException {
+	public void movePlayer(int step) {
 		tossButton.setDisable(true);
-		int sumDice = dice1 + dice2;
 		ArrayList<KeyFrame> keyframes = new ArrayList<>();
-		for (int i = 1; i <= sumDice; i++) {
-			curPlayer.setPlayer_pos(curPlayer.getPlayer_pos() + 1);
-			KeyFrame keyFrame = movePlayer(0.25 * i, curPlayer.getPlayer_pos());
+		for (int i = 1; i <= step; i++) {
+			curPlayer.setPlayerPos(curPlayer.getPlayerPos() + 1);
+			KeyFrame keyFrame = createKeyFrame(0.25 * i, curPlayer.getPlayerPos());
 			keyframes.add(keyFrame);
 		}
 		Timeline timeline = new Timeline(60, keyframes.toArray(new KeyFrame[0]));
@@ -305,6 +330,82 @@ public class Monopoly implements Initializable {
 			tossButton.setDisable(false);
 		});
 		timeline.play();
+	}
+
+	public void moveCircle(int dice1, int dice2) throws InterruptedException {
+		tossButton.setDisable(true);
+		int sumDice = dice1 + dice2;
+		ArrayList<KeyFrame> keyframes = new ArrayList<>();
+		for (int i = 1; i <= sumDice; i++) {
+			curPlayer.setPlayerPos(curPlayer.getPlayerPos() + 1);
+			KeyFrame keyFrame = createKeyFrame(0.25 * i, curPlayer.getPlayerPos());
+			keyframes.add(keyFrame);
+		}
+		Timeline timeline = new Timeline(60, keyframes.toArray(new KeyFrame[0]));
+		timeline.setOnFinished(event -> {
+			tossButton.setDisable(false);
+			Tile t = tileList.get(curPlayer.getPlayerPos());
+			checkEvent(t);
+		});
+		timeline.play();
+	}
+
+	public void checkEvent(Tile t) {
+		if (t instanceof EventTile) {
+			EventTile e = (EventTile) t;
+			switch (e.type) {
+				case BUS:
+					setPopUpButton(PopUpType.BusSelectTile);
+					break;
+				case GO_TO_JAIL:
+					break;
+				case JAIL:
+					break;
+				case LOSE:
+					break;
+				case RANDOM:
+					break;
+				case START:
+					break;
+			}
+		} else {
+		}
+	}
+
+	public void setPopUpButton(PopUpType type) {
+		switch (type) {
+			case BuyProperty, UpgradeProperty:
+				popCloseButton.setVisible(false);
+				popYesButton.setVisible(true);
+				popNoButton.setVisible(true);
+				popNextButton.setVisible(false);
+				popGoButton.setVisible(false);
+				break;
+
+			case Notify:
+				popCloseButton.setVisible(false);
+				popYesButton.setVisible(false);
+				popNoButton.setVisible(false);
+				popNextButton.setVisible(true);
+				popGoButton.setVisible(false);
+				break;
+			case BusSelectTile:
+				popCloseButton.setVisible(false);
+				popYesButton.setVisible(false);
+				popNoButton.setVisible(false);
+				popNextButton.setVisible(false);
+				textField.setVisible(true);
+				popGoButton.setVisible(true);
+				break;
+			case Hide:
+				popCloseButton.setVisible(true);
+				popYesButton.setVisible(false);
+				popNoButton.setVisible(false);
+				popNextButton.setVisible(false);
+				popGoButton.setVisible(false);
+				break;
+		}
+
 	}
 
 	public void on_back_button_pressed() {

@@ -33,11 +33,11 @@ public class Player {
 		return this.playerId;
 	}
 
-	public int getPlayer_pos() {
+	public int getPlayerPos() {
 		return player_pos;
 	}
 
-	public void setPlayer_pos(int pos) {
+	public void setPlayerPos(int pos) {
 		player_pos = pos;
 		if (player_pos > maxTile) {
 			player_pos = 0;
