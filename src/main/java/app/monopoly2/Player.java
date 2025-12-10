@@ -13,7 +13,7 @@ public class Player {
 	private int playerId;
 
 	enum PlayerState {
-		Normal, OnBus, InJailed, OffBus
+		Normal, OnBus, InJailed, MoveByRandom
 	}
 
 	String name;
