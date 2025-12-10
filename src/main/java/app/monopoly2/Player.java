@@ -11,9 +11,14 @@ public class Player {
 	private Circle player_char;
 	private int player_pos = 0;
 	private int playerId;
+
+	enum PlayerState {
+		Normal, OnBus, InJailed, OffBus
+	}
+
 	String name;
 	int maxTile = 0;
-	boolean isInJail = false;
+	PlayerState state = PlayerState.Normal;
 	int waitInJail = 0;
 	ArrayList<PropertyTile> ownedProperty = new ArrayList<>();
 

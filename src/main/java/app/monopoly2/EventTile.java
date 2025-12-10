@@ -13,11 +13,6 @@ public class EventTile extends Tile {
 		this.type = type;
 	}
 
-	public void action() {
-		switch (type) {
-		}
-	}
-
 	@Override
 	public String toString() {
 		return String.format("Type: %s,Pos: %f,%f ,Size: %f,%f",

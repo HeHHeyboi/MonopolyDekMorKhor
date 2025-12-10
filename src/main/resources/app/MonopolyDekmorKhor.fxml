@@ -247,6 +247,11 @@
             <Button fx:id="popNoButton" layoutX="253.0" layoutY="109.0" mnemonicParsing="false" text="No" visible="false" />
          </children>
       </Pane>
+      <Text fx:id="doubleText" layoutX="212.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="356.4001159667968">
+         <font>
+            <Font name="Retro Gaming" size="24.0" />
+         </font>
+      </Text>
       <Text fx:id="stepDisplay" layoutX="367.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font name="Retro Gaming" size="60.0" />
@@ -320,5 +325,6 @@
       <Button fx:id="back_Button" layoutX="1021.0" layoutY="567.0" mnemonicParsing="false" onAction="#on_back_button_pressed" text="Back" />
       <Button layoutX="852.0" layoutY="541.0" mnemonicParsing="false" onAction="#on_toss_9_pressed" text="Toss9" />
       <Button layoutX="986.0" layoutY="529.0" mnemonicParsing="false" onAction="#on_toBusTile_pressed" text="ToBusTile" />
+      <Button layoutX="1102.0" layoutY="548.0" mnemonicParsing="false" onAction="#on_get_double_pressed" text="get double" />
    </children>
 </Pane>

@@ -6,10 +6,9 @@ import java.util.EnumMap;
 import java.util.Random;
 import java.util.ResourceBundle;
 
-import javax.swing.text.html.HTMLDocument.HTMLReader.IsindexAction;
-
 import app.App;
 import app.monopoly2.EventTile.EventType;
+import app.monopoly2.Player.PlayerState;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -80,6 +79,8 @@ public class Monopoly implements Initializable {
 	@FXML
 	Text luckText;
 	@FXML
+	Text doubleText;
+	@FXML
 	TextField textField;
 
 	enum PlayerColor {
@@ -88,10 +89,6 @@ public class Monopoly implements Initializable {
 
 	enum PopUpType {
 		BuyProperty, UpgradeProperty, BusSelectTile, Notify, Hide
-	}
-
-	enum GameState {
-		Normal, BusSelect
 	}
 
 	final double xSpawn = 721;
@@ -127,8 +124,9 @@ public class Monopoly implements Initializable {
 
 	int jailIndex;
 	int busIndex;
+	int goToJailIndex;
 	boolean getDouble = false;
-	GameState gameState = GameState.Normal;
+	int doubleCount = 0;
 
 	static EnumMap<PlayerColor, String> colorMap = new EnumMap<>(PlayerColor.class);
 
@@ -203,6 +201,7 @@ public class Monopoly implements Initializable {
 					EventTile goToJailTile = new EventTile(EventType.GO_TO_JAIL, tile.getLayoutX(),
 							tile.getLayoutY(), tile.getFitWidth(), tile.getFitHeight());
 					tileList.add(goToJailTile);
+					goToJailIndex = tileList.size() - 1;
 					break;
 				case busTileId:
 					EventTile busTile = new EventTile(EventType.BUS, tile.getLayoutX(), tile.getLayoutY(),
@@ -276,130 +275,128 @@ public class Monopoly implements Initializable {
 		stepDisplay.textProperty().bind(StepCount.asString());
 	}
 
-	private Player iteratorPlayer() {
+	private void nextPlayer() {
 		curPlayerIndex++;
 		if (curPlayerIndex >= players.size()) {
 			curPlayerIndex = 0;
 		}
-		return players.get(curPlayerIndex);
+		curPlayer = players.get(curPlayerIndex);
+		curPlayer.getPlayer_char().toFront();
+		if (curPlayer.state == PlayerState.OnBus) {
+			setPopUpButton(PopUpType.BusSelectTile);
+			tossButton.setDisable(true);
+		}
 	}
 
-	public void setLuckText(String text) {
+	public void setLuckText(Player player, String text) {
 		luckText.setText(text);
 		luckText.setVisible(true);
-		luckText.setFill(curPlayer.getPlayer_char().getFill());
+		luckText.setFill(player.getPlayer_char().getFill());
 	}
 
 	public void TossDice(ActionEvent event) throws InterruptedException {
 		int dice1 = random.nextInt(6) + 1;
 		int dice2 = random.nextInt(6) + 1;
-		System.out.println("Dice 1: " + dice1 + ", Dice 2: " + dice2);
 		StepCount.set(dice2 + dice1);
 		luckText.setVisible(false);
 		if (dice1 == dice2) {
 			getDouble = true;
-			luckText.setText(String.format("%s get Double!!!", curPlayer.name));
-			luckText.setVisible(true);
-			luckText.setFill(curPlayer.getPlayer_char().getFill());
+			doubleCount += 1;
+			if (doubleCount >= 3) {
+				doubleCount = 0;
+				curPlayer.state = PlayerState.InJailed;
+				curPlayer.waitInJail = 3;
+				curPlayer.setPlayerPos(jailIndex);
+				setLuckText(curPlayer, String.format("%s get Double 3 times. Get F!", curPlayer.name));
+				Tile tile = tileList.get(jailIndex);
+				Circle c = curPlayer.getPlayer_char();
+				double posX = tile.getX() + tile.getWidth() / 2;
+				double posY = tile.getY() + tile.getHeight() / 2;
+				c.setLayoutX(posX);
+				c.setLayoutY(posY);
+				nextPlayer();
+				doubleText.setText("");
+				return;
+			}
+			doubleText.setText(String.format("Get Double: %d", doubleCount));
+			// setLuckText(String.format("%s get Double!!!", curPlayer.name));
 		} else {
 			getDouble = false;
+			doubleCount = 0;
+			doubleText.setText("");
 		}
 
-		if (curPlayer.isInJail) {
+		if (curPlayer.state == PlayerState.InJailed) {
 			if (curPlayer.waitInJail <= 0) {
-				curPlayer.isInJail = false;
-				setLuckText(String.format("%s wait 3 Turn and Doesn't get F anymore", curPlayer.name));
-				movePlayer(dice1 + dice2);
+				curPlayer.state = PlayerState.Normal;
+				setLuckText(curPlayer, String.format("%s wait 3 Turn and Doesn't get F anymore", curPlayer.name));
+				movePlayerByStep(dice1 + dice2);
 			} else if (getDouble) {
-				curPlayer.isInJail = false;
-				setLuckText(String.format("%s get Double, Doesn't get F anymore", curPlayer.name));
-				movePlayer(dice1 + dice2);
+				curPlayer.state = PlayerState.Normal;
+				setLuckText(curPlayer, String.format("%s get Double, Doesn't get F anymore", curPlayer.name));
+				movePlayerByStep(dice1 + dice2);
 			} else {
-				setLuckText(String.format("%s still get F because Doesn't get double wait %d turn", curPlayer.name,
-						curPlayer.waitInJail));
+				setLuckText(curPlayer,
+						String.format("%s still get F because Doesn't get double wait %d turn",
+								curPlayer.name, curPlayer.waitInJail));
 				curPlayer.waitInJail -= 1;
-				curPlayer = iteratorPlayer();
-				curPlayer.getPlayer_char().toFront();
+				nextPlayer();
 			}
 		} else {
-			movePlayer(dice1 + dice2);
+			movePlayerByStep(dice1 + dice2);
 		}
 	}
 
-	// public void moveCircle(int dice1, int dice2) throws InterruptedException {
-	// tossButton.setDisable(true);
-	// int sumDice = dice1 + dice2;
-	// ArrayList<KeyFrame> keyframes = new ArrayList<>();
-	// for (int i = 1; i <= sumDice; i++) {
-	// curPlayer.setPlayerPos(curPlayer.getPlayerPos() + 1);
-	// int playerPos = curPlayer.getPlayerPos();
-	// Tile t = tileList.get(curPlayer.getPlayerPos());
-	// // checkEvent(t, true);
-	// KeyFrame keyFrame = createKeyFrame(t, 0.25 * i, playerPos);
-	// keyframes.add(keyFrame);
-	// }
-	// Timeline timeline = new Timeline(60, keyframes.toArray(new KeyFrame[0]));
-	// timeline.setOnFinished(event -> {
-	// tossButton.setDisable(false);
-	// Tile t = tileList.get(curPlayer.getPlayerPos());
-	// checkEvent(t);
-	// });
-	// timeline.play();
-	// }
-	//
-	public void moveToTile(int tileIndex) {
+	public void movePlayerToTile(Player player, int tileIndex) {
 		tossButton.setDisable(true);
 		ArrayList<KeyFrame> keyframes = new ArrayList<>();
 		int animCount = 0;
-		while (curPlayer.getPlayerPos() != tileIndex) {
-			curPlayer.setPlayerPos(curPlayer.getPlayerPos() + 1);
-			int playerPos = curPlayer.getPlayerPos();
-			Tile t = tileList.get(curPlayer.getPlayerPos());
+		// final Player player = curPlayer;
+
+		while (player.getPlayerPos() != tileIndex) {
+			player.setPlayerPos(player.getPlayerPos() + 1);
+			int playerPos = player.getPlayerPos();
+			Tile t = tileList.get(player.getPlayerPos());
 			// checkEvent(t, true);
-			KeyFrame keyFrame = createKeyFrame(t, 0.25 * animCount, playerPos);
+			KeyFrame keyFrame = createKeyFrame(player, t, 0.25 * animCount, playerPos);
 			keyframes.add(keyFrame);
 			animCount += 1;
 		}
 		Timeline timeline = new Timeline(60, keyframes.toArray(new KeyFrame[0]));
 		timeline.setOnFinished(event -> {
-			Tile t = tileList.get(curPlayer.getPlayerPos());
+			Tile t = tileList.get(player.getPlayerPos());
 			tossButton.setDisable(false);
-			checkEvent(t);
+			checkPlayerEvent(player, t);
 		});
 		timeline.play();
 	}
 
-	public void movePlayer(int step) {
+	public void movePlayerByStep(int step) {
 		tossButton.setDisable(true);
 		ArrayList<KeyFrame> keyframes = new ArrayList<>();
+		final Player player = curPlayer;
 		for (int i = 1; i <= step; i++) {
-			curPlayer.setPlayerPos(curPlayer.getPlayerPos() + 1);
-			int playerPos = curPlayer.getPlayerPos();
-			Tile t = tileList.get(curPlayer.getPlayerPos());
+			player.setPlayerPos(player.getPlayerPos() + 1);
+			int playerPos = player.getPlayerPos();
+			Tile t = tileList.get(player.getPlayerPos());
 			// checkEvent(t, true);
-			KeyFrame keyFrame = createKeyFrame(t, 0.25 * i, playerPos);
+			KeyFrame keyFrame = createKeyFrame(player, t, 0.25 * i, playerPos);
 			keyframes.add(keyFrame);
 		}
 		Timeline timeline = new Timeline(60, keyframes.toArray(new KeyFrame[0]));
 		timeline.setOnFinished(event -> {
-			Tile t = tileList.get(curPlayer.getPlayerPos());
+			Tile t = tileList.get(player.getPlayerPos());
 			tossButton.setDisable(false);
-			checkEvent(t);
+			checkPlayerEvent(player, t);
 		});
 		timeline.play();
 	}
 
-	// EventHandler<ActionEvent> stepOnStart = new EventHandler<ActionEvent>() {
-	// @Override
-	// public void handle(ActionEvent event) {
-	// curPlayer.setMoney(curPlayer.getMoney() + 200);
-	// }
-	// };
-	public KeyFrame createKeyFrame(Tile tile, double currentTime, int step) {
+	public KeyFrame createKeyFrame(Player player, Tile tile, double currentTime, int step) {
 		double posX = tile.getX() + tile.getWidth() / 2;
 		double posY = tile.getY() + tile.getHeight() / 2;
 
-		Circle c = curPlayer.getPlayer_char();
+		Circle c = player.getPlayer_char();
 		KeyValue x = new KeyValue(c.layoutXProperty(), posX);
 		KeyValue y = new KeyValue(c.layoutYProperty(), posY);
 
@@ -407,24 +404,29 @@ public class Monopoly implements Initializable {
 			EventTile e = (EventTile) tile;
 			if (e.type == EventType.START)
 				return new KeyFrame(Duration.seconds(currentTime), event -> {
-					curPlayer.setMoney(curPlayer.getMoney() + 200);
-					setLuckText(String.format("%s get 200 Baht", curPlayer.name));
+					player.setMoney(player.getMoney() + 200);
+					setLuckText(player, String.format("%s get 200 Baht", player.name));
 				}, x, y);
 		}
 		return new KeyFrame(Duration.seconds(currentTime), x, y);
 	}
 
-	public void checkEvent(Tile t) {
+	public void checkPlayerEvent(Player player, Tile t) {
 		if (t instanceof EventTile) {
 			EventTile e = (EventTile) t;
 			switch (e.type) {
-				case START:
-					curPlayer.setMoney(curPlayer.getMoney() + 200);
-					setLuckText(String.format("%s get 200 Baht", curPlayer.name));
-					break;
+				// case START:
+				// player.setMoney(player.getMoney() + 200);
+				// setLuckText(String.format("%s get 200 Baht", player.name));
+				// if (player.state == PlayerState.OffBus) {
+				// player.state = PlayerState.Normal;
+				// nextPlayer();
+				// return;
+				// }
+				// break;
 				case GO_TO_JAIL:
-					curPlayer.setPlayerPos(jailIndex);
-					Circle c = curPlayer.getPlayer_char();
+					player.setPlayerPos(jailIndex);
+					Circle c = player.getPlayer_char();
 					Tile tile = tileList.get(jailIndex);
 					double posX = tile.getX() + tile.getWidth() / 2;
 					double posY = tile.getY() + tile.getHeight() / 2;
@@ -432,27 +434,78 @@ public class Monopoly implements Initializable {
 					c.setLayoutY(posY);
 					// NOTE: GO_TO_JAIL Case Fallthrough to JAIL Case
 				case JAIL:
-					curPlayer.isInJail = true;
-					curPlayer.waitInJail = 3;
-					setLuckText(String.format("%s get F", curPlayer.name));
-					curPlayer = iteratorPlayer();
-					curPlayer.getPlayer_char().toFront();
+					player.state = PlayerState.InJailed;
+					player.waitInJail = 3;
+					setLuckText(player, String.format("%s get F", player.name));
+					nextPlayer();
 					return;
 				case BUS:
-					setPopUpButton(PopUpType.BusSelectTile);
-					gameState = GameState.BusSelect;
+					player.state = PlayerState.OnBus;
+					nextPlayer();
 					return;
 				case LOSE:
+					player.setMoney(player.getMoney() - 100);
+					setLuckText(player, String.format("%s lose 100 Baht to Mukata", player.name));
+					if (player.state == PlayerState.OffBus) {
+						player.state = PlayerState.Normal;
+						nextPlayer();
+						return;
+					}
 					break;
 				case RANDOM:
-					break;
+					RandomEvent re = randomEvent(player);
+					if (player.state == PlayerState.OffBus) {
+						player.state = PlayerState.Normal;
+						nextPlayer();
+					}
+					return;
 			}
 		} else {
+			if (!getDouble) {
+				nextPlayer();
+			}
 		}
-		if (!getDouble) {
-			curPlayer = iteratorPlayer();
-			curPlayer.getPlayer_char().toFront();
+	}
+
+	enum RandomEvent {
+		GoToStart, GoToJailed, GoToBus, LoseMoney, GetMoney
+	}
+
+	public RandomEvent randomEvent(Player player) {
+		int choice = random.nextInt(0, 5);
+		RandomEvent re = RandomEvent.values()[choice];
+		switch (re) {
+			case GetMoney:
+				curPlayer.setMoney(curPlayer.getMoney() + 50);
+				setLuckText(player, String.format("Random: %s get 50 baht", player.name));
+				break;
+			case LoseMoney:
+				curPlayer.setMoney(curPlayer.getMoney() - 50);
+				setLuckText(player, String.format("Random: %s lose 50 baht", player.name));
+				break;
+			case GoToBus:
+				setLuckText(player, String.format("Random: %s go to Bus", player.name));
+				movePlayerToTile(player, busIndex);
+				break;
+			case GoToJailed:
+				setLuckText(player, String.format("Random: %s go to F", curPlayer.name));
+				curPlayer.setPlayerPos(jailIndex);
+				Circle c = curPlayer.getPlayer_char();
+				Tile tile = tileList.get(jailIndex);
+				double posX = tile.getX() + tile.getWidth() / 2;
+				double posY = tile.getY() + tile.getHeight() / 2;
+				c.setLayoutX(posX);
+				c.setLayoutY(posY);
+				curPlayer.state = PlayerState.InJailed;
+				curPlayer.waitInJail = 3;
+				nextPlayer();
+				break;
+			case GoToStart:
+				setLuckText(player, String.format("Random: %s go to Start", curPlayer.name));
+				movePlayerToTile(player, 0);
+				break;
 		}
+		return re;
 	}
 
 	public void setPopUpButton(PopUpType type) {
@@ -477,6 +530,7 @@ public class Monopoly implements Initializable {
 				popYesButton.setVisible(false);
 				popNoButton.setVisible(false);
 				popNextButton.setVisible(false);
+				popUpPane.setVisible(true);
 				break;
 			case Hide:
 				popCloseButton.setVisible(false);
@@ -490,16 +544,16 @@ public class Monopoly implements Initializable {
 	}
 
 	public void on_toss_9_pressed() {
-		movePlayer(9);
+		movePlayerByStep(9);
 	}
 
 	public void on_toBusTile_pressed() {
-		movePlayer(27);
+		movePlayerToTile(curPlayer, busIndex);
 	}
 
 	public void on_mouse_click_on_pane(MouseEvent event) {
 		if (event.getButton() == MouseButton.PRIMARY
-				&& gameState == GameState.BusSelect) {
+				&& curPlayer.state == PlayerState.OnBus) {
 			double mPosX = event.getX();
 			double mPosY = event.getY();
 			int tileIndex = -1;
@@ -515,10 +569,15 @@ public class Monopoly implements Initializable {
 			if (tileIndex == busIndex) {
 				return;
 			}
+			curPlayer.state = PlayerState.OffBus;
 			setPopUpButton(PopUpType.Hide);
-			gameState = GameState.Normal;
-			moveToTile(tileIndex);
+			final Player player = curPlayer;
+			movePlayerToTile(player, tileIndex);
 		}
+	}
+
+	public void on_get_double_pressed() throws Exception {
+		doubleCount += 1;
 	}
 
 	public void on_back_button_pressed() {
