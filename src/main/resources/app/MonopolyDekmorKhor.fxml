@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.Light.Distant?>
 <?import javafx.scene.effect.Lighting?>
 <?import javafx.scene.effect.Shadow?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.monopoly2.Monopoly">
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#on_mouse_click_on_pane" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.monopoly2.Monopoly">
    <children>
       <ImageView fx:id="background2" fitHeight="800.0" fitWidth="577.0" layoutX="800.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -237,24 +236,17 @@
       </Pane>
       <Pane fx:id="popUpPane" layoutX="231.0" layoutY="439.0" prefHeight="154.0" prefWidth="339.0" style="-fx-background-color: #00FFB6;" visible="false">
          <children>
-            <Text fx:id="popText" layoutX="7.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="322.8052062988281">
+            <Text fx:id="popText" layoutX="8.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="322.8052062988281">
                <font>
                   <Font name="Retro Gaming" size="16.0" />
                </font>
             </Text>
-            <TextField fx:id="textField" layoutX="143.0" layoutY="43.0" prefHeight="25.0" prefWidth="53.0" visible="false" />
             <Button fx:id="popCloseButton" layoutX="153.0" layoutY="109.0" mnemonicParsing="false" text="OK" visible="false" />
             <Button fx:id="popNextButton" layoutX="149.0" layoutY="109.0" mnemonicParsing="false" text="Next" visible="false" />
             <Button fx:id="popYesButton" layoutX="41.0" layoutY="109.0" mnemonicParsing="false" text="Yes" visible="false" />
             <Button fx:id="popNoButton" layoutX="253.0" layoutY="109.0" mnemonicParsing="false" text="No" visible="false" />
-            <Button fx:id="popGoButton" layoutX="153.0" layoutY="77.0" mnemonicParsing="false" text="Go" visible="false" />
          </children>
       </Pane>
-      <Text fx:id="luckText" fill="#ff0303" layoutX="133.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" visible="false" wrappingWidth="536.5999755859375">
-         <font>
-            <Font name="Pixelify Sans Regular" size="30.0" />
-         </font>
-      </Text>
       <Text fx:id="stepDisplay" layoutX="367.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font name="Retro Gaming" size="60.0" />
@@ -320,6 +312,13 @@
          </effect>
       </Button>
       <Button layoutX="841.0" layoutY="570.0" mnemonicParsing="false" onAction="#increaseMoney" text="Increase Money" />
+      <Text fx:id="luckText" fill="#fafafa" layoutX="113.0" layoutY="571.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="3.0" textAlignment="CENTER" wrappingWidth="574.1367416381836">
+         <font>
+            <Font name="Retro Gaming" size="30.0" />
+         </font>
+      </Text>
       <Button fx:id="back_Button" layoutX="1021.0" layoutY="567.0" mnemonicParsing="false" onAction="#on_back_button_pressed" text="Back" />
+      <Button layoutX="852.0" layoutY="541.0" mnemonicParsing="false" onAction="#on_toss_9_pressed" text="Toss9" />
+      <Button layoutX="986.0" layoutY="529.0" mnemonicParsing="false" onAction="#on_toBusTile_pressed" text="ToBusTile" />
    </children>
 </Pane>

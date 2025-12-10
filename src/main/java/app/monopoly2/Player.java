@@ -11,14 +11,16 @@ public class Player {
 	private Circle player_char;
 	private int player_pos = 0;
 	private int playerId;
+	String name;
 	int maxTile = 0;
 	boolean isInJail = false;
 	int waitInJail = 0;
 	ArrayList<PropertyTile> ownedProperty = new ArrayList<>();
 
-	public Player(int money, Circle circle, int id) {
+	public Player(String name, int money, Circle circle, int id) {
 		this.money.set(money);
 		this.playerId = id;
+		this.name = name;
 		// this.money.addListener((obs, oldvalue, newvalue) -> {
 		// text.setText(newvalue.toString());
 		// });

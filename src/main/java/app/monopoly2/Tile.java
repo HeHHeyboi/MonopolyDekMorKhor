@@ -13,6 +13,23 @@ public abstract class Tile {
 		this.height = height;
 	}
 
+	public boolean isInside(double pX, double pY) {
+		if (pX < this.x) {
+			return false;
+		}
+		if (pX > this.x + this.width) {
+			return false;
+		}
+		if (pY < this.y) {
+			return false;
+		}
+		if (pY > this.y + height) {
+			return false;
+		}
+
+		return true;
+	}
+
 	public double getX() {
 		return x;
 	}
