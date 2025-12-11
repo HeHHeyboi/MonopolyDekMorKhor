@@ -234,25 +234,12 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="635.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
          </children>
       </Pane>
-      <Pane fx:id="popUpPane" layoutX="231.0" layoutY="439.0" prefHeight="154.0" prefWidth="339.0" style="-fx-background-color: #00FFB6;" visible="false">
-         <children>
-            <Text fx:id="popText" layoutX="8.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="322.8052062988281">
-               <font>
-                  <Font name="Retro Gaming" size="16.0" />
-               </font>
-            </Text>
-            <Button fx:id="popCloseButton" layoutX="153.0" layoutY="109.0" mnemonicParsing="false" text="OK" visible="false" />
-            <Button fx:id="popNextButton" layoutX="149.0" layoutY="109.0" mnemonicParsing="false" text="Next" visible="false" />
-            <Button fx:id="popYesButton" layoutX="41.0" layoutY="109.0" mnemonicParsing="false" text="Yes" visible="false" />
-            <Button fx:id="popNoButton" layoutX="253.0" layoutY="109.0" mnemonicParsing="false" text="No" visible="false" />
-         </children>
-      </Pane>
-      <Text fx:id="doubleText" layoutX="212.0" layoutY="333.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="356.4001159667968">
+      <Text fx:id="doubleText" layoutX="212.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="356.4001159667968">
          <font>
             <Font name="Retro Gaming" size="24.0" />
          </font>
       </Text>
-      <Text fx:id="stepDisplay" layoutX="367.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+      <Text fx:id="stepDisplay" layoutX="367.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font name="Retro Gaming" size="60.0" />
          </font>
@@ -322,6 +309,19 @@
             <Font name="Retro Gaming" size="30.0" />
          </font>
       </Text>
+      <Pane fx:id="popUpPane" layoutX="185.0" layoutY="364.0" prefHeight="120.0" prefWidth="411.0" style="-fx-background-color: #00FFB6;" visible="false">
+         <children>
+            <Text fx:id="popText" layoutX="9.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="392.40011596679676">
+               <font>
+                  <Font name="Retro Gaming" size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="popCloseButton" layoutX="153.0" layoutY="109.0" mnemonicParsing="false" text="OK" visible="false" />
+            <Button fx:id="popNextButton" layoutX="149.0" layoutY="109.0" mnemonicParsing="false" text="Next" visible="false" />
+            <Button fx:id="popYesButton" layoutX="91.0" layoutY="77.0" mnemonicParsing="false" onAction="#on_yes_button_pressed" text="Yes" visible="false" />
+            <Button fx:id="popNoButton" layoutX="216.0" layoutY="77.0" mnemonicParsing="false" onAction="#on_no_button_pressed" text="No" visible="false" />
+         </children>
+      </Pane>
       <Button fx:id="back_Button" layoutX="1021.0" layoutY="567.0" mnemonicParsing="false" onAction="#on_back_button_pressed" text="Back" />
       <Button layoutX="852.0" layoutY="541.0" mnemonicParsing="false" onAction="#on_toss_9_pressed" text="Toss9" />
       <Button layoutX="986.0" layoutY="529.0" mnemonicParsing="false" onAction="#on_toBusTile_pressed" text="ToBusTile" />

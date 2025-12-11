@@ -3,8 +3,6 @@ package app.monopoly2;
 import app.monopoly2.Monopoly.PlayerColor;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.property.StringProperty;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -13,9 +11,10 @@ public class PropertyTile extends Tile {
 	int price = 0;
 	int paid = 0;
 	int upgradePrice;
+	int upgradePaid;
 
 	enum PropertyState {
-		NotOwn, Owned, MaxLevel, Upgrade
+		NotOwn, Owned, MaxLevel
 	}
 
 	PropertyState state = PropertyState.NotOwn;
@@ -41,9 +40,11 @@ public class PropertyTile extends Tile {
 
 	public void upgrade() {
 		level += 1;
+		state = (level >= 3) ? PropertyState.MaxLevel : PropertyState.Owned;
 		price += price * 0.2;
-		upgradePrice = price + (int) (price * 0.2);
 		paid = (int) (price * 0.6);
+		upgradePrice = price + (int) (price * 0.2);
+		upgradePaid = (int) (upgradePrice * 0.6);
 	}
 
 	public Rectangle getRect() {
@@ -75,6 +76,7 @@ public class PropertyTile extends Tile {
 
 	public void setPaid(int paid) {
 		this.paid = paid;
+		upgradePaid = (int) (upgradePrice * 0.6);
 	}
 
 	public int getPaid() {

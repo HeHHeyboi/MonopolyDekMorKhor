@@ -26,7 +26,6 @@ public abstract class Tile {
 		if (pY > this.y + height) {
 			return false;
 		}
-
 		return true;
 	}
 

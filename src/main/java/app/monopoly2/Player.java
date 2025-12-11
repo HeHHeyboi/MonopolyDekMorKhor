@@ -13,7 +13,16 @@ public class Player {
 	int id;
 
 	enum PlayerState {
-		Normal, OnBus, InJailed, MoveByRandom
+		Normal,
+		WaitBus,
+		InJailed,
+		SelectTile,
+		MoveByBus,
+		MoveByRandom,
+		ArriveByBus,
+		ArriveByRandom,
+		ArriveNormal,
+		EndTurn,
 	}
 
 	String name;
@@ -66,11 +75,11 @@ public class Player {
 	}
 
 	public void increaseMoney(int money) {
-		this.money.add(money);
+		this.money.set(this.money.get() + money);
 	}
 
 	public void decreaseMoney(int money) {
-		this.money.subtract(money);
+		this.money.set(this.money.get() - money);
 	}
 
 	public Circle getPlayer_char() {
