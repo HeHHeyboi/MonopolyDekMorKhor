@@ -17,6 +17,7 @@ public class Player {
 		WaitBus,
 		InJailed,
 		SelectTile,
+		WaitForDecision,
 		MoveByBus,
 		MoveByRandom,
 		ArriveByBus,
@@ -28,6 +29,7 @@ public class Player {
 	String name;
 	int maxTile = 0;
 	PlayerState state = PlayerState.Normal;
+	PlayerState prev_state = PlayerState.Normal;
 	int waitInJail = 0;
 	ArrayList<PropertyTile> ownedProperty = new ArrayList<>();
 

@@ -82,6 +82,8 @@ public class Monopoly implements Initializable {
 	@FXML
 	Text luckText;
 	@FXML
+	Text turnText;
+	@FXML
 	Text doubleText;
 	@FXML
 	TextField textField;
@@ -268,6 +270,7 @@ public class Monopoly implements Initializable {
 			players.addLast(player);
 		}
 		curPlayer = players.getFirst();
+		setTurnText(curPlayer);
 		stepDisplay.textProperty().bind(StepCount.asString());
 	}
 
@@ -275,12 +278,14 @@ public class Monopoly implements Initializable {
 		getDouble = false;
 		doubleCount = 0;
 		doubleText.setText("");
+		stepDisplay.setVisible(false);
 		curPlayerIndex++;
 		if (curPlayerIndex >= players.size()) {
 			curPlayerIndex = 0;
 		}
 		curPlayer = players.get(curPlayerIndex);
 		curPlayer.getPlayer_char().toFront();
+		setTurnText(curPlayer);
 		tossButton.setDisable(false);
 		if (curPlayer.state == PlayerState.WaitBus) {
 			curPlayer.state = PlayerState.SelectTile;
@@ -295,7 +300,13 @@ public class Monopoly implements Initializable {
 		luckText.setFill(player.getPlayer_char().getFill());
 	}
 
+	public void setTurnText(Player player) {
+		turnText.setText(player.name + " turn");
+		turnText.setFill(player.getPlayer_char().getFill());
+	}
+
 	public void TossDice(ActionEvent event) throws InterruptedException {
+		stepDisplay.setVisible(true);
 		int dice1 = random.nextInt(6) + 1;
 		int dice2 = random.nextInt(6) + 1;
 		StepCount.set(dice2 + dice1);
@@ -425,9 +436,10 @@ public class Monopoly implements Initializable {
 
 	public void checkPlayerState(Player player) {
 		switch (player.state) {
-			// case WaitForDecision:
-			// player.state = player.prev_state;
-			// break;
+			// NOTE: flush animation
+			case WaitForDecision:
+				player.state = player.prev_state;
+				break;
 			case InJailed, WaitBus:
 				nextPlayer();
 				break;
@@ -446,22 +458,16 @@ public class Monopoly implements Initializable {
 				break;
 			case EndTurn:
 				break;
-			// case ArriveNormal:
 			default:
 				player.state = PlayerState.Normal;
 				if (!getDouble) {
 					nextPlayer();
 				}
 				break;
-			// case SelectTile:
-			// break;
 		}
 	}
 
 	public void checkPlayerEvent(Player player, Tile t) {
-		if (player.state == PlayerState.MoveByRandom) {
-			player.state = PlayerState.Normal;
-		}
 		if (t instanceof EventTile) {
 			EventTile e = (EventTile) t;
 			switch (e.type) {
@@ -493,14 +499,15 @@ public class Monopoly implements Initializable {
 			}
 		} else {
 			PropertyTile property = (PropertyTile) t;
-			// player.state = PlayerState.WaitForDecision;
+			player.prev_state = player.state;
+			player.state = PlayerState.WaitForDecision;
 			if (player.getMoney() < property.price) {
 				popYesButton.setDisable(true);
 			} else {
 				popYesButton.setDisable(false);
 			}
+			System.out.println(property.level);
 			checkPropertyState(player, property);
-			System.out.println("Property Tile");
 		}
 	}
 
@@ -522,9 +529,9 @@ public class Monopoly implements Initializable {
 					owner.increaseMoney(property.paid);
 					setLuckText(player, String.format("%s paid %d to %s",
 							player.name, property.paid, owner.name));
-					nextPlayer();
+					checkPlayerState(player);
 				} else {
-					nextPlayer();
+					checkPlayerState(player);
 				}
 				break;
 			case Owned:
