@@ -9,6 +9,7 @@ import java.util.ResourceBundle;
 import app.App;
 import app.monopoly2.EventTile.EventType;
 import app.monopoly2.Player.PlayerState;
+import app.monopoly2.PropertyTile.PropertyState;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -128,6 +129,7 @@ public class Monopoly implements Initializable {
 	int goToJailIndex;
 	boolean getDouble = false;
 	int doubleCount = 0;
+	PropertyTile processingProperty;
 
 	static EnumMap<PlayerColor, String> colorMap = new EnumMap<>(PlayerColor.class);
 
@@ -193,47 +195,39 @@ public class Monopoly implements Initializable {
 			double hight = b.getHeight();
 			switch (n.getId()) {
 				case startTileId:
-					EventTile start_tile = new EventTile(EventType.START, x, y,
-							width, hight);
+					EventTile start_tile = new EventTile(EventType.START, x, y, width, hight);
 					tileList.add(start_tile);
 					break;
 				case jailTileId:
-					EventTile jail_tile = new EventTile(EventType.JAIL, x, y,
-							width, hight);
+					EventTile jail_tile = new EventTile(EventType.JAIL, x, y, width, hight);
 					tileList.add(jail_tile);
 					jailIndex = tileList.size() - 1;
 					break;
 				case goToJailTileId:
-					EventTile goToJailTile = new EventTile(EventType.GO_TO_JAIL, x,
-							y, width, hight);
+					EventTile goToJailTile = new EventTile(EventType.GO_TO_JAIL, x, y, width, hight);
 					tileList.add(goToJailTile);
 					goToJailIndex = tileList.size() - 1;
 					break;
 				case busTileId:
-					EventTile busTile = new EventTile(EventType.BUS, x, y,
-							width, hight);
+					EventTile busTile = new EventTile(EventType.BUS, x, y, width, hight);
 					tileList.add(busTile);
 					busIndex = tileList.size() - 1;
 					break;
 				case randomTileId:
-					EventTile randomTile = new EventTile(EventType.RANDOM, x, y,
-							width, hight);
+					EventTile randomTile = new EventTile(EventType.RANDOM, x, y, width, hight);
 					tileList.add(randomTile);
 					break;
 				case loseTileId:
-					EventTile loseTile = new EventTile(EventType.LOSE, x, y,
-							width, hight);
+					EventTile loseTile = new EventTile(EventType.LOSE, x, y, width, hight);
 					tileList.add(loseTile);
 					break;
 				case propertyTileId:
-					PropertyTile propertyTile = new PropertyTile(x, y,
-							width, hight);
+					PropertyTile propertyTile = new PropertyTile(x, y, width, hight);
 					tileList.add(propertyTile);
 					properties.add(propertyTile);
 					break;
 				case specialPropertyTileId:
-					PropertyTile specialTile = new PropertyTile(x, y,
-							width, hight);
+					PropertyTile specialTile = new PropertyTile(x, y, width, hight);
 					specialTile.isSpecial = true;
 					tileList.add(specialTile);
 					properties.add(specialTile);
@@ -271,12 +265,10 @@ public class Monopoly implements Initializable {
 
 			c.setLayoutX(xSpawn);
 			c.setLayoutY(startPosY + 20 * i);
-			System.out.println(c.getTranslateX() + "," + c.getTranslateY());
 			player.setMaxTile(tileList.size());
 			pane.getChildren().add(player.getPlayer_char());
 			players.addLast(player);
 		}
-		System.out.println(players.toString());
 		curPlayer = players.getFirst();
 		stepDisplay.textProperty().bind(StepCount.asString());
 	}
@@ -368,7 +360,7 @@ public class Monopoly implements Initializable {
 			EventTile e = (EventTile) tile;
 			if (e.type == EventType.START)
 				return new KeyFrame(Duration.seconds(currentTime), event -> {
-					player.setMoney(player.getMoney() + 200);
+					player.increaseMoney(200);
 					setLuckText(player, String.format("%s get 200 Baht", player.name));
 				}, x, y);
 		}
@@ -433,11 +425,7 @@ public class Monopoly implements Initializable {
 						nextPlayer();
 					} else {
 						if (!getDouble) {
-							System.out.println("From checkPlayerEvent, case START");
-							System.out.println(player.state);
-							System.out.println(curPlayer.name);
 							nextPlayer();
-							System.out.println(curPlayer.name);
 						}
 					}
 					break;
@@ -454,45 +442,72 @@ public class Monopoly implements Initializable {
 					player.state = PlayerState.InJailed;
 					player.waitInJail = 3;
 					setLuckText(player, String.format("%s get F", player.name));
-					System.out.println("From checkPlayerEvent, case JAIL");
-					System.out.println(curPlayer.name);
 					nextPlayer();
-					System.out.println(curPlayer.name);
 					return;
 				case BUS:
 					player.state = PlayerState.OnBus;
 					setLuckText(player, "Wait 1 Turn");
-					System.out.println("From checkPlayerEvent, case BUS");
-					System.out.println(curPlayer.name);
 					nextPlayer();
-					System.out.println(curPlayer.name);
 					return;
 				case LOSE:
-					player.setMoney(player.getMoney() - 100);
+					player.decreaseMoney(100);
 					setLuckText(player, String.format("%s lose 100 Baht to Mukata", player.name));
 					if (!getDouble) {
-						System.out.println("From checkPlayerEvent, case LOSE");
-						System.out.println(curPlayer.name);
 						nextPlayer();
-						System.out.println(curPlayer.name);
 					}
 					return;
 				case RANDOM:
-					RandomEvent re = randomEvent(player);
-					System.out.println("From checkPlayerEvent, case Random");
-					System.out.println(player.state);
+					randomEvent(player);
 					if (player.state == PlayerState.Normal) {
 						if (!getDouble) {
-							System.out.println(curPlayer.name);
 							nextPlayer();
-							System.out.println(curPlayer.name);
 						}
 					}
 					return;
 			}
 		} else {
-			if (!getDouble) {
-				nextPlayer();
+			PropertyTile property = (PropertyTile) t;
+			switch (property.state) {
+				case NotOwn:
+					setPopUpButton(PopUpType.BuyProperty);
+					popText.setText(String.format("Do you want to buy this Property\n Price: %d, Paid: %d",
+							property.price, property.paid));
+					property.state = PropertyState.Owned;
+					processingProperty = property;
+					break;
+				case MaxLevel:
+					if (property.getOwner() != player.id) {
+						int ownerIndex = property.getOwner();
+						player.decreaseMoney(property.paid);
+						Player owner = players.get(ownerIndex);
+						owner.increaseMoney(property.paid);
+						setLuckText(player, String.format("%s paid %d to %s",
+								player.name, property.paid, property.getOwner()));
+						nextPlayer();
+					} else {
+						nextPlayer();
+					}
+					break;
+				case Owned:
+					if (property.getOwner() != player.id) {
+						int ownerIndex = property.getOwner();
+						player.decreaseMoney(property.paid);
+						Player owner = players.get(ownerIndex);
+						owner.increaseMoney(property.paid);
+						setLuckText(player, String.format("%s paid %d to %s",
+								player.name, property.paid, property.getOwner()));
+						processingProperty = property;
+					} else {
+						if (property.level < property.maxLevel && !property.isSpecial) {
+							setPopUpButton(PopUpType.UpgradeProperty);
+							popText.setText(
+									String.format("Would you like to upgrade this property\n Price: %d, Paid: %d",
+											property.price, property.paid));
+							property.state = PropertyState.Upgrade;
+							processingProperty = property;
+						}
+					}
+					break;
 			}
 		}
 	}
@@ -506,14 +521,14 @@ public class Monopoly implements Initializable {
 		RandomEvent re = RandomEvent.values()[choice];
 		switch (re) {
 			case GetMoney:
-				player.setMoney(curPlayer.getMoney() + 50);
+				player.increaseMoney(50);
 				setLuckText(player, String.format("Random: %s get 50 baht", player.name));
 				if (player.state == PlayerState.OnBus) {
 					player.state = PlayerState.Normal;
 				}
 				break;
 			case LoseMoney:
-				player.setMoney(player.getMoney() - 50);
+				player.decreaseMoney(50);
 				setLuckText(player, String.format("Random: %s lose 50 baht", player.name));
 				if (player.state == PlayerState.OnBus) {
 					player.state = PlayerState.Normal;
@@ -535,18 +550,12 @@ public class Monopoly implements Initializable {
 				c.setLayoutY(posY);
 				player.state = PlayerState.InJailed;
 				player.waitInJail = 3;
-				System.out.println("From randomEvent case GoToJailed");
-				System.out.println(curPlayer.name);
 				nextPlayer();
-				System.out.println(curPlayer.name);
 				break;
 			case GoToStart:
 				setLuckText(player, String.format("Random: %s go to Start", player.name));
-				System.out.println("From randomEvent case GoToStart");
 				player.state = PlayerState.MoveByRandom;
-				System.out.println(player.state);
 				movePlayerToTile(player, 0);
-				System.out.println(player.state);
 				break;
 		}
 		return re;
@@ -555,13 +564,21 @@ public class Monopoly implements Initializable {
 	public void setPopUpButton(PopUpType type) {
 		popUpPane.setVisible(true);
 		switch (type) {
-			case BuyProperty, UpgradeProperty:
+			case BuyProperty:
 				popCloseButton.setVisible(false);
 				popYesButton.setVisible(true);
 				popNoButton.setVisible(true);
 				popNextButton.setVisible(false);
+				popUpPane.setVisible(true);
 				break;
 
+			case UpgradeProperty:
+				popCloseButton.setVisible(false);
+				popYesButton.setVisible(true);
+				popNoButton.setVisible(true);
+				popNextButton.setVisible(false);
+				popUpPane.setVisible(true);
+				break;
 			case Notify:
 				popCloseButton.setVisible(false);
 				popYesButton.setVisible(false);
@@ -618,6 +635,14 @@ public class Monopoly implements Initializable {
 			final Player player = curPlayer;
 			movePlayerToTile(player, tileIndex);
 		}
+	}
+
+	public void on_yes_button_pressed() {
+
+	}
+
+	public void on_no_button_pressed() {
+
 	}
 
 	public void on_get_double_pressed() throws Exception {

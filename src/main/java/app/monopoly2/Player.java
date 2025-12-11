@@ -10,7 +10,7 @@ public class Player {
 	private IntegerProperty money = new SimpleIntegerProperty();
 	private Circle player_char;
 	private int player_pos = 0;
-	private int playerId;
+	int id;
 
 	enum PlayerState {
 		Normal, OnBus, InJailed, MoveByRandom
@@ -24,7 +24,7 @@ public class Player {
 
 	public Player(String name, int money, Circle circle, int id) {
 		this.money.set(money);
-		this.playerId = id;
+		this.id = id;
 		this.name = name;
 		// this.money.addListener((obs, oldvalue, newvalue) -> {
 		// text.setText(newvalue.toString());
@@ -37,7 +37,7 @@ public class Player {
 	}
 
 	public int getPlayerId() {
-		return this.playerId;
+		return this.id;
 	}
 
 	public int getPlayerPos() {
@@ -63,6 +63,14 @@ public class Player {
 
 	public void setMoney(int money) {
 		this.money.set(money);
+	}
+
+	public void increaseMoney(int money) {
+		this.money.add(money);
+	}
+
+	public void decreaseMoney(int money) {
+		this.money.subtract(money);
 	}
 
 	public Circle getPlayer_char() {

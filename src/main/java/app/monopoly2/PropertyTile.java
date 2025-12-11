@@ -3,6 +3,8 @@ package app.monopoly2;
 import app.monopoly2.Monopoly.PlayerColor;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
@@ -10,6 +12,14 @@ public class PropertyTile extends Tile {
 	final int maxLevel = 3;
 	int price = 0;
 	int paid = 0;
+	int upgradePrice;
+
+	enum PropertyState {
+		NotOwn, Owned, MaxLevel, Upgrade
+	}
+
+	PropertyState state = PropertyState.NotOwn;
+
 	IntegerProperty owner = new SimpleIntegerProperty(-1);
 	int level = 1;
 	boolean isSpecial = false;
@@ -29,6 +39,13 @@ public class PropertyTile extends Tile {
 				this.price, this.paid, this.rect, this.x, this.y, this.width, this.height, this.isSpecial);
 	}
 
+	public void upgrade() {
+		level += 1;
+		price += price * 0.2;
+		upgradePrice = price + (int) (price * 0.2);
+		paid = (int) (price * 0.6);
+	}
+
 	public Rectangle getRect() {
 		return rect;
 	}
@@ -36,11 +53,12 @@ public class PropertyTile extends Tile {
 	public void setRect(Rectangle rect) {
 		this.rect = rect;
 		owner.addListener((obs, oldval, newval) -> {
-			String color;
-			if (newval.intValue() < 0) {
-				color = "#FFFFFF";
-			} else {
-				color = Monopoly.colorMap.get(PlayerColor.values()[newval.intValue()]);
+			String color = "#ffffff";
+			int ownerIndex = newval.intValue();
+			if (ownerIndex > -1) {
+				// WARN: Need to handle this case
+				PlayerColor c = PlayerColor.values()[ownerIndex];
+				color = Monopoly.colorMap.get(c);
 			}
 			rect.setFill(Paint.valueOf(color));
 		});
@@ -52,6 +70,7 @@ public class PropertyTile extends Tile {
 
 	public void setPrice(int price) {
 		this.price = price;
+		this.upgradePrice = price + (int) (price * 0.2);
 	}
 
 	public void setPaid(int paid) {
