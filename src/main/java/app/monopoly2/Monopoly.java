@@ -493,7 +493,6 @@ public class Monopoly implements Initializable {
 			}
 		} else {
 			PropertyTile property = (PropertyTile) t;
-			player.prev_state = player.state;
 			// player.state = PlayerState.WaitForDecision;
 			if (player.getMoney() < property.price) {
 				popYesButton.setDisable(true);
