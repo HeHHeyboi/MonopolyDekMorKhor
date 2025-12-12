@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<Pane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.monopoly2.test.PlayTest">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="113.0" layoutY="191.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="113.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="113.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="198.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="283.0" layoutY="35.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="283.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="283.0" layoutY="191.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="78.0" layoutX="198.0" layoutY="191.0" stroke="BLACK" strokeType="INSIDE" width="85.0" />
+      <Button layoutX="446.0" layoutY="166.0" mnemonicParsing="false" onAction="#on_back_pressed" text="Back" />
+   </children>
+</Pane>

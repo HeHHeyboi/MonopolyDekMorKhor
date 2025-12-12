@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.effect.Light.Distant?>
+<?import javafx.scene.effect.Lighting?>
+<?import javafx.scene.effect.Shadow?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<Pane fx:id="pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#on_mouse_click_on_pane" prefHeight="800.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/21.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.monopoly2.Monopoly">
+   <children>
+      <ImageView fx:id="background2" fitHeight="800.0" fitWidth="577.0" layoutX="800.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/4player.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="background" fitHeight="585.0" fitWidth="581.0" layoutX="110.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../pic/ตาราง/main%20screen.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="board" prefHeight="800.0" prefWidth="801.0">
+         <children>
+            <ImageView id="start" fitHeight="140.0" fitWidth="120.0" layoutX="681.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/START%20(1).png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="611.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/Artboard%201.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="541.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/2.png" />
+               </image>
+            </ImageView>
+            <ImageView id="random" fitHeight="110.0" fitWidth="70.0" layoutX="471.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/3.png" />
+               </image>
+            </ImageView>
+            <ImageView id="special" fitHeight="110.0" fitWidth="70.0" layoutX="401.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/4.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="331.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/5.png" />
+               </image>
+            </ImageView>
+            <ImageView id="random" fitHeight="110.0" fitWidth="70.0" layoutX="261.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/6.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="191.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/32.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="120.0" layoutY="690.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/7.png" />
+               </image>
+            </ImageView>
+            <ImageView id="jail" fitHeight="120.0" fitWidth="120.0" layoutY="680.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/F++.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/8.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/9.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/10.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/11.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/12.png" />
+               </image>
+            </ImageView>
+            <ImageView id="lose" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/13.png" />
+               </image>
+            </ImageView>
+            <ImageView id="special" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/14.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="20.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="90.0">
+               <image>
+                  <Image url="@../pic/ตาราง/15.png" />
+               </image>
+            </ImageView>
+            <ImageView id="goToJail" fitHeight="146.0" fitWidth="126.0" layoutY="-2.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/F+.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/16.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="191.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/17.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="261.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/18.png" />
+               </image>
+            </ImageView>
+            <ImageView id="random" fitHeight="110.0" fitWidth="70.0" layoutX="331.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/19.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="401.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/20.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="471.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/21.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="541.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/22.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="611.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/23.png" />
+               </image>
+            </ImageView>
+            <ImageView id="bus" fitHeight="127.0" fitWidth="126.0" layoutX="681.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../pic/ตาราง/sutterbus.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/24.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/25.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="242.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/26.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="310.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/27.png" />
+               </image>
+            </ImageView>
+            <ImageView id="random" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="380.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/28.png" />
+               </image>
+            </ImageView>
+            <ImageView id="lose" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/29.png" />
+               </image>
+            </ImageView>
+            <ImageView id="special" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="520.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/30.png" />
+               </image>
+            </ImageView>
+            <ImageView id="property" fitHeight="110.0" fitWidth="70.0" layoutX="711.0" layoutY="590.0" pickOnBounds="true" preserveRatio="true" rotate="270.0">
+               <image>
+                  <Image url="@../pic/ตาราง/31.png" />
+               </image>
+            </ImageView>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="610.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="537.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="400.0" layoutY="675.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="328.0" layoutY="676.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="190.0" layoutY="675.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="119.0" layoutY="675.0" stroke="BLACK" strokeType="INSIDE" width="68.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="87.0" layoutY="641.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="86.0" layoutY="567.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="85.0" layoutY="497.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="84.0" layoutY="428.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="84.0" layoutY="356.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="85.0" layoutY="219.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="86.0" layoutY="153.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="118.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="191.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="258.0" layoutY="113.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="405.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="471.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="541.0" layoutY="111.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="612.0" layoutY="112.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="150.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="218.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="292.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="358.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="644.0" layoutY="567.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="74.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#efefef" height="14.0" layoutX="650.0" layoutY="635.0" rotate="90.0" stroke="BLACK" strokeType="INSIDE" width="63.0" />
+         </children>
+      </Pane>
+      <Text fx:id="doubleText" layoutX="212.0" layoutY="290.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="356.4001159667968">
+         <font>
+            <Font name="Retro Gaming" size="24.0" />
+         </font>
+      </Text>
+      <Button fx:id="back_Button" layoutX="1042.0" layoutY="701.0" mnemonicParsing="false" onAction="#on_back_button_pressed" prefHeight="85.0" prefWidth="228.0" style="-fx-background-color: red;" text="Back">
+         <font>
+            <Font name="Retro Gaming" size="40.0" />
+         </font>
+         <effect>
+            <Lighting diffuseConstant="1.42" specularConstant="0.47" surfaceScale="3.89">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Text fx:id="stepDisplay" layoutX="367.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
+         <font>
+            <Font name="Retro Gaming" size="60.0" />
+         </font>
+      </Text>
+      <Text fx:id="player1Name" fill="RED" layoutX="867.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Red">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player1Money" layoutX="1105.0" layoutY="221.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player2Name" fill="#06d128" layoutX="854.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Green">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player2Money" layoutX="1105.0" layoutY="315.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player3Name" fill="#2f12ea" layoutX="870.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Blue" visible="false">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player3Money" layoutX="1108.0" layoutY="414.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player4Name" fill="#b9c700" layoutX="852.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Yellow" visible="false">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Text fx:id="player4Money" layoutX="1108.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" visible="false">
+         <font>
+            <Font name="Retro Gaming" size="35.0" />
+         </font>
+      </Text>
+      <Button fx:id="tossButton" layoutX="952.0" layoutY="610.0" mnemonicParsing="false" onAction="#TossDice" prefHeight="71.0" prefWidth="176.0" style="-fx-background-color: red;" text="LOL">
+         <font>
+            <Font name="Retro Gaming" size="36.0" />
+         </font>
+         <effect>
+            <Lighting diffuseConstant="1.5" specularConstant="0.81" specularExponent="18.53" surfaceScale="2.42">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant>
+                     <color>
+                        <Color red="1.0" green="0.9800000190734863" blue="0.9800000190734863" />
+                     </color>
+                  </Light.Distant>
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
+      <Text fx:id="luckText" fill="#fafafa" layoutX="113.0" layoutY="571.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="3.0" textAlignment="CENTER" wrappingWidth="574.1367416381836">
+         <font>
+            <Font name="Retro Gaming" size="30.0" />
+         </font>
+      </Text>
+      <Pane fx:id="popUpPane" layoutX="185.0" layoutY="364.0" prefHeight="120.0" prefWidth="411.0" style="-fx-background-color: #00FFB6;" visible="false">
+         <children>
+            <Text fx:id="popText" layoutX="9.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="392.40011596679676">
+               <font>
+                  <Font name="Retro Gaming" size="16.0" />
+               </font>
+            </Text>
+            <Button fx:id="popCloseButton" layoutX="153.0" layoutY="109.0" mnemonicParsing="false" text="OK" visible="false" />
+            <Button fx:id="popNextButton" layoutX="149.0" layoutY="109.0" mnemonicParsing="false" text="Next" visible="false" />
+            <Button fx:id="popYesButton" layoutX="91.0" layoutY="77.0" mnemonicParsing="false" onAction="#on_yes_button_pressed" text="Yes" visible="false" />
+            <Button fx:id="popNoButton" layoutX="216.0" layoutY="77.0" mnemonicParsing="false" onAction="#on_no_button_pressed" text="No" visible="false" />
+         </children>
+      </Pane>
+      <Text fx:id="turnText" layoutX="185.0" layoutY="339.0" stroke="BLACK" strokeType="OUTSIDE" text="turnText" textAlignment="CENTER" wrappingWidth="157.04681396484375">
+         <font>
+            <Font name="Retro Gaming" size="24.0" />
+         </font>
+      </Text>
+   </children>
+</Pane>

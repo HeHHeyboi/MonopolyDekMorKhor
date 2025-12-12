@@ -2,6 +2,7 @@ package app;
 
 import java.io.IOException;
 
+import app.monopoly2.test.StartTest;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -11,21 +12,46 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-	private static Scene scene;
+	public static Scene AppScene;
+
+	public static Stage AppStage;
 
 	@Override
-	public void start(Stage stage) throws IOException {
-		Font.loadFont(getClass().getResourceAsStream("/retro_gaming/Retro Gaming.ttf"), 20);
-		scene = new Scene(loadFXML("StartScene"), 1280, 800);
-		stage.setX(0);
-		stage.setY(0);
-		stage.setScene(scene);
-		stage.setTitle("PlayerScene");
-		stage.show();
+	public void start(Stage s) throws IOException {
+		AppStage = s;
+		StartScene("monopoly2", s);
 	}
 
-	static void setRoot(String fxml) throws IOException {
-		scene.setRoot(loadFXML(fxml));
+	public void StartScene(String title, Stage stage) throws IOException {
+		switch (title) {
+			case "monopoly":
+				Font.loadFont(getClass().getResourceAsStream("/retro_gaming/Retro Gaming.ttf"), 20);
+				AppScene = new Scene(loadFXML("StartScene"), 1280, 800);
+				stage.centerOnScreen();
+				stage.setScene(AppScene);
+				stage.setTitle("PlayerScene");
+				stage.show();
+				break;
+			case "monopoly2":
+				Font.loadFont(getClass().getResourceAsStream("/retro_gaming/Retro Gaming.ttf"), 20);
+				AppScene = new Scene(loadFXML("StartScene"), 1280, 800);
+				StartTest.scene = AppScene;
+				stage.centerOnScreen();
+				stage.setScene(AppScene);
+				stage.setTitle("Monopoly");
+				stage.show();
+				break;
+			default:
+				throw new IOException("Can't find title name");
+		}
+	}
+
+	public static void setAppScene(Scene scene) {
+		AppStage.setScene(scene);
+	}
+
+	public static void setRoot(String fxml) throws Exception {
+		AppScene.setRoot(loadFXML(fxml));
 	}
 
 	private static Parent loadFXML(String fxml) throws IOException {
