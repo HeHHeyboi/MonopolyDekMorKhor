@@ -10,6 +10,8 @@ public class PropertyTile extends Tile {
 	final int maxLevel = 3;
 	int price = 0;
 	int paid = 0;
+	int startPrice;
+	int startPaid;
 	int upgradePrice;
 	int upgradePaid;
 
@@ -71,11 +73,13 @@ public class PropertyTile extends Tile {
 
 	public void setPrice(int price) {
 		this.price = price;
+		this.startPrice = price;
 		this.upgradePrice = price + (int) (price * 0.2);
 	}
 
 	public void setPaid(int paid) {
 		this.paid = paid;
+		this.startPaid = paid;
 		upgradePaid = (int) (upgradePrice * 0.6);
 	}
 
@@ -109,6 +113,14 @@ public class PropertyTile extends Tile {
 
 	public int getMaxLevel() {
 		return maxLevel;
+	}
+
+	public void resetProperty() {
+		this.setOwner(-1);
+		this.level = 1;
+		this.state = PropertyState.NotOwn;
+		this.setPrice(startPrice);
+		this.setPaid(startPaid);
 	}
 
 }

@@ -239,6 +239,21 @@
             <Font name="Retro Gaming" size="24.0" />
          </font>
       </Text>
+      <Button fx:id="back_Button" layoutX="1042.0" layoutY="701.0" mnemonicParsing="false" onAction="#on_back_button_pressed" prefHeight="85.0" prefWidth="228.0" style="-fx-background-color: red;" text="Back">
+         <font>
+            <Font name="Retro Gaming" size="40.0" />
+         </font>
+         <effect>
+            <Lighting diffuseConstant="1.42" specularConstant="0.47" surfaceScale="3.89">
+               <bumpInput>
+                  <Shadow />
+               </bumpInput>
+               <light>
+                  <Light.Distant />
+               </light>
+            </Lighting>
+         </effect>
+      </Button>
       <Text fx:id="stepDisplay" layoutX="367.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0">
          <font>
             <Font name="Retro Gaming" size="60.0" />
@@ -303,7 +318,6 @@
             </Lighting>
          </effect>
       </Button>
-      <Button layoutX="841.0" layoutY="570.0" mnemonicParsing="false" onAction="#increaseMoney" text="Increase Money" />
       <Text fx:id="luckText" fill="#fafafa" layoutX="113.0" layoutY="571.0" stroke="BLACK" strokeType="OUTSIDE" strokeWidth="3.0" textAlignment="CENTER" wrappingWidth="574.1367416381836">
          <font>
             <Font name="Retro Gaming" size="30.0" />
@@ -322,14 +336,10 @@
             <Button fx:id="popNoButton" layoutX="216.0" layoutY="77.0" mnemonicParsing="false" onAction="#on_no_button_pressed" text="No" visible="false" />
          </children>
       </Pane>
-      <Button fx:id="back_Button" layoutX="1021.0" layoutY="567.0" mnemonicParsing="false" onAction="#on_back_button_pressed" text="Back" />
-      <Button layoutX="852.0" layoutY="541.0" mnemonicParsing="false" onAction="#on_toss_9_pressed" text="Toss9" />
       <Text fx:id="turnText" layoutX="185.0" layoutY="339.0" stroke="BLACK" strokeType="OUTSIDE" text="turnText" textAlignment="CENTER" wrappingWidth="157.04681396484375">
          <font>
             <Font name="Retro Gaming" size="24.0" />
          </font>
       </Text>
-      <Button layoutX="986.0" layoutY="529.0" mnemonicParsing="false" onAction="#on_toBusTile_pressed" text="ToBusTile" />
-      <Button layoutX="1102.0" layoutY="548.0" mnemonicParsing="false" onAction="#on_get_double_pressed" text="get double" />
    </children>
 </Pane>

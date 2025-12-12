@@ -30,6 +30,7 @@ public class Player {
 	int maxTile = 0;
 	PlayerState state = PlayerState.Normal;
 	PlayerState prev_state = PlayerState.Normal;
+	boolean isBankrupt = false;
 	int waitInJail = 0;
 	ArrayList<PropertyTile> ownedProperty = new ArrayList<>();
 
