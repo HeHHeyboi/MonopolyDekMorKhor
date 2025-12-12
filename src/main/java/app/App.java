@@ -19,12 +19,12 @@ public class App extends Application {
 	@Override
 	public void start(Stage s) throws IOException {
 		AppStage = s;
-		StartScene("test", s);
+		StartScene("monopoly2", s);
 	}
 
 	public void StartScene(String title, Stage stage) throws IOException {
 		switch (title) {
-			case "main":
+			case "monopoly":
 				Font.loadFont(getClass().getResourceAsStream("/retro_gaming/Retro Gaming.ttf"), 20);
 				AppScene = new Scene(loadFXML("StartScene"), 1280, 800);
 				stage.centerOnScreen();
@@ -32,13 +32,13 @@ public class App extends Application {
 				stage.setTitle("PlayerScene");
 				stage.show();
 				break;
-			case "test":
+			case "monopoly2":
 				Font.loadFont(getClass().getResourceAsStream("/retro_gaming/Retro Gaming.ttf"), 20);
-				AppScene = new Scene(loadFXML("StartTest"), 600, 400);
+				AppScene = new Scene(loadFXML("StartScene"), 1280, 800);
 				StartTest.scene = AppScene;
 				stage.centerOnScreen();
 				stage.setScene(AppScene);
-				stage.setTitle("Test");
+				stage.setTitle("Monopoly");
 				stage.show();
 				break;
 			default:

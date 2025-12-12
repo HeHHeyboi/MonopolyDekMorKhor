@@ -859,7 +859,7 @@ public class Monopoly implements Initializable {
 	}
 
 	public void on_back_button_pressed() {
-		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/StartTest.fxml"));
+		FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/app/StartScene.fxml"));
 		try {
 			Scene scene = new Scene(fxmlLoader.load());
 			App.setAppScene(scene);
