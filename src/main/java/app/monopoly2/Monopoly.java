@@ -167,19 +167,19 @@ public class Monopoly implements Initializable {
 		double startPosY = ySpawn;
 		switch (numPlayer) {
 			case 2:
-				image = new Image("/pic/2player.png");
+				image = new Image(App.class.getResourceAsStream("/pic/2player.png"));
 				background2.setImage(image);
 				startPosY -= playerSize * 2;
 				break;
 			case 3:
-				image = new Image("/pic/3player.png");
+				image = new Image(App.class.getResourceAsStream("/pic/3player.png"));
 				background2.setImage(image);
 				player3Name.setVisible(true);
 				player3Money.setVisible(true);
 				startPosY -= playerSize * 2 + playerSize;
 				break;
 			case 4:
-				image = new Image("/pic/4player.png");
+				image = new Image(App.class.getResourceAsStream("/pic/4player.png"));
 				background2.setImage(image);
 				player3Name.setVisible(true);
 				player3Money.setVisible(true);
